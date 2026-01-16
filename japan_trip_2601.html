@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2601 日本之旅 🇯🇵 | Japan Trip 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Noto+Sans+TC:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --bg: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.5);
+        }
+
+        body {
+            font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg);
+            background-image:
+                radial-gradient(at 0% 0%, hsla(210, 100%, 98%, 1) 0, transparent 50%),
+                radial-gradient(at 50% 0%, hsla(220, 100%, 95%, 1) 0, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(230, 100%, 98%, 1) 0, transparent 50%);
+            min-height: 100vh;
+            padding-bottom: 6rem;
+            padding-top: 90px;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* New Card Style - Icon Background Accent */
+        .activity-card {
+            background: white;
+            border-radius: 16px;
+            border: 1.5px solid #f1f5f9;
+            /* Default border width increased slightly */
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: visible;
+            margin-bottom: 1rem;
+        }
+
+        /* Category Border Colors - Bold */
+        .activity-card.cat-移動 {
+            border-color: #60a5fa;
+            border-width: 2px;
+        }
+
+        /* Blue-400 */
+        .activity-card.cat-景點 {
+            border-color: #34d399;
+            border-width: 2px;
+        }
+
+        /* Emerald-400 */
+        .activity-card.cat-吃喝 {
+            border-color: #fbbf24;
+            border-width: 2px;
+        }
+
+        /* Amber-400 */
+        .activity-card.cat-住宿 {
+            border-color: #a78bfa;
+            border-width: 2px;
+        }
+
+        /* Violet-400 */
+        .activity-card.cat-購物 {
+            border-color: #f472b6;
+            border-width: 2px;
+        }
+
+        /* Pink-400 */
+        .activity-card.cat-作業 {
+            border-color: #9ca3af;
+            border-width: 2px;
+        }
+
+        /* Gray-400 */
+
+        /* Gray-200 */
+
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            transition: transform 0.2s;
+        }
+
+        .cat-移動 .icon-box {
+            background: #eff6ff;
+            color: #3b82f6;
+        }
+
+        /* Blue */
+        .cat-景點 .icon-box {
+            background: #ecfdf5;
+            color: #10b981;
+        }
+
+        /* Emerald */
+        .cat-吃喝 .icon-box {
+            background: #fffbeb;
+            color: #f59e0b;
+        }
+
+        /* Amber */
+        .cat-住宿 .icon-box {
+            background: #f5f3ff;
+            color: #8b5cf6;
+        }
+
+        /* Violet */
+        .cat-購物 .icon-box {
+            background: #fdf2f8;
+            color: #ec4899;
+        }
+
+        /* Pink */
+        .cat-作業 .icon-box {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        /* Gray */
+
+        /* Google Maps Button */
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 9999px;
+            color: #475569;
+            font-size: 12px;
+            font-weight: 700;
+            transition: all 0.2s;
+            text-decoration: none;
+            margin-top: 12px;
+        }
+
+        .map-btn:hover {
+            background: #eff6ff;
+            color: #2563eb;
+            border-color: #bfdbfe;
+            transform: translateY(-1px);
+        }
+
+        .card-detail {
+            display: block;
+            margin-top: 10px;
+            padding-top: 0;
+            /* Remove padding as it's cleaner without divider sometimes */
+            border-top: none;
+            /* Cleaner look */
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-btn {
+            color: #94a3b8;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-btn.active {
+            color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        .day-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .day-btn.active {
+            background-color: var(--primary);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .strikethrough {
+            text-decoration: line-through;
+            opacity: 0.5;
+            color: #94a3b8;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Smart Header & Editable Styles */
+        header {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body.header-hidden header {
+            transform: translateY(-100%);
+        }
+
+        /* Day Selector Smart Positioning */
+        #day-selector {
+            position: sticky;
+            top: 85px;
+            /* Default below header */
+            z-index: 30;
+            transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid transparent;
+            cursor: grab;
+            /* Drag cursor */
+            user-select: none;
+            /* Prevent text selection */
+        }
+
+        #day-selector.active {
+            cursor: grabbing;
+            cursor: -webkit-grabbing;
+        }
+
+        /* When header is hidden, move up */
+        body.header-hidden #day-selector {
+            top: 15px;
+            /* Stick near top with padding */
+            background: rgba(248, 250, 252, 0.9);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Editing Mode - Premium Style */
+        [contenteditable]:focus {
+            outline: none;
+        }
+
+        .activity-card.editing {
+            background: #ffffff;
+            box-shadow: 0 0 0 2px #3b82f6, 0 12px 24px -6px rgba(59, 130, 246, 0.25);
+            transform: translateY(-2px);
+            z-index: 20;
+        }
+
+        /* Input Fields */
+        .editable-field[contenteditable="true"] {
+            transition: all 0.2s ease;
+            border-radius: 6px;
+            padding: 2px 6px;
+            margin: 0 -6px;
+            /* Touch area expansion */
+            border: 1px solid transparent;
+        }
+
+        .editable-field[contenteditable="true"]:hover {
+            background: #f1f5f9;
+        }
+
+        .editable-field[contenteditable="true"]:focus {
+            background: #fff;
+            box-shadow: 0 0 0 2px #bfdbfe;
+            border-color: #3b82f6;
+            color: #1e293b;
+        }
+
+        /* Cycle Hints for Icon/Cat */
+        .editing .cycle-hint {
+            position: relative;
+            cursor: pointer;
+            animation: bounce-gentle 2s infinite;
+        }
+
+        .editing .cycle-hint::after {
+            content: '⇄';
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background: #3b82f6;
+            color: white;
+            font-size: 10px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            pointer-events: none;
+            border: 1px solid white;
+        }
+
+        @keyframes bounce-gentle {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        /* Action Buttons - Always Visible */
+        .card-actions {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            display: flex;
+            gap: 8px;
+            z-index: 5;
+            /* Ensure above content */
+        }
+
+        /* Drag Handle */
+        .drag-handle {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: move;
+            color: #94a3b8;
+            font-size: 20px;
+            touch-action: none;
+            /* Critical for mobile drag */
+            z-index: 4;
+            opacity: 0.5;
+        }
+
+        .activity-card:hover .drag-handle {
+            opacity: 1;
+        }
+
+        .activity-card.dragging {
+            opacity: 0.5;
+            background: #f8fafc;
+            border: 2px dashed #94a3b8;
+            transform: scale(0.98);
+        }
+
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            /* Add subtle shadow */
+        }
+
+        .edit-btn {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .edit-btn:hover {
+            background: #dbeafe;
+            color: #3b82f6;
+        }
+
+        .delete-btn-static {
+            background: #fef2f2;
+            color: #ef4444;
+        }
+
+        .delete-btn-static:hover {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        /* Editing State for Card */
+        /* .activity-card.editing {
+            box-shadow: 0 0 0 2px #3b82f6;
+            background: #eff6ff;
+        } */
+
+        .activity-card.editing .card-actions {
+            display: none;
+        }
+
+        /* Hide edit/del buttons */
+
+        .done-btn {
+            display: none;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 6px 16px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+            cursor: pointer;
+            z-index: 20;
+        }
+
+        .done-btn:hover {
+            background: #2563eb;
+        }
+
+        .activity-card.editing .done-btn {
+            display: block;
+        }
+
+        /* Animation for clickable elements in edit mode */
+        .hover-pulse {
+            animation: pulse 2s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Custom Modal Styles */
+        #custom-modal {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        #custom-modal.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #custom-modal .modal-card {
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        #custom-modal.show .modal-card {
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body class="text-slate-800">
+
+    <!-- Detail Modal (New) -->
+    <div id="detail-modal"
+        class="fixed inset-0 z-[70] flex items-end sm:items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeDetailModal()"></div>
+        <div
+            class="detail-card bg-white w-full sm:max-w-md sm:rounded-3xl rounded-t-3xl p-0 relative shadow-2xl max-h-[90vh] overflow-y-auto transform translate-y-full transition-transform duration-300 ease-out flex flex-col">
+
+            <!-- Cover Image Area -->
+            <div id="detail-img-container" class="w-full h-48 bg-slate-100 relative hidden">
+                <img id="detail-img" src="" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+            </div>
+
+            <div class="p-6">
+                <!-- Header -->
+                <div class="flex items-start gap-4 mb-4">
+                    <div id="detail-icon" class="text-4xl filter drop-shadow-md"></div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span id="detail-cat"
+                                class="text-xs px-2 py-0.5 rounded-full bg-slate-100 font-bold text-slate-600"></span>
+                            <span id="detail-time" class="text-xs text-slate-400 font-mono"></span>
+                        </div>
+                        <h2 id="detail-title" class="text-2xl font-black text-slate-800 leading-tight"></h2>
+                    </div>
+                </div>
+
+                <!-- Body -->
+                <div id="detail-desc" class="text-base text-slate-600 leading-7 whitespace-pre-line mb-6"></div>
+
+                <!-- Actions -->
+                <a id="detail-map" href="#" target="_blank"
+                    class="flex items-center justify-center gap-2 w-full py-4 bg-blue-50 text-blue-600 rounded-xl font-bold hover:bg-blue-100 transition mb-4 hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    開啟 Google Maps
+                </a>
+
+                <button onclick="closeDetailModal()"
+                    class="w-full py-4 bg-slate-100 text-slate-800 rounded-xl font-bold">關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        #detail-modal.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #detail-modal.show .detail-card {
+            transform: translateY(0);
+        }
+    </style>
+
+    <!-- Custom Modal -->
+    <div id="custom-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div
+            class="modal-card glass-card bg-white/95 p-6 w-full max-w-xs relative z-10 text-center shadow-2xl border-white/50">
+            <div
+                class="w-12 h-12 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+                !</div>
+            <h3 class="text-lg font-black mb-2 text-slate-800">確認操作</h3>
+            <p id="modal-msg" class="text-sm text-slate-500 mb-6 font-bold leading-relaxed"></p>
+            <div class="flex gap-3 justify-center">
+                <button onclick="closeModal()"
+                    class="flex-1 px-4 py-3 rounded-xl bg-slate-100 text-slate-500 font-bold hover:bg-slate-200 transition-colors text-sm">取消</button>
+                <button id="modal-confirm-btn"
+                    class="flex-1 px-4 py-3 rounded-xl bg-blue-500 text-white font-bold hover:bg-blue-600 shadow-lg shadow-blue-500/30 transition-all text-sm">確定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Header -->
+    <header id="main-header"
+        class="fixed top-0 left-0 right-0 z-40 bg-white/60 backdrop-blur-md border-b border-slate-100 px-6 py-4">
+        <div class="max-w-md mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold tracking-tight">2601 日本之旅 🇯🇵</h1>
+                <p class="text-[10px] text-slate-500 font-semibold uppercase tracking-widest leading-none mt-1">Winter
+                    Expedition 2026</p>
+            </div>
+            <div class="text-right flex items-center gap-2">
+                <button onclick="resetData()"
+                    class="text-[10px] text-slate-400 font-bold hover:text-red-500 transition-colors">重置</button>
+                <span
+                    class="text-[10px] font-black text-blue-600 bg-blue-50 px-2 py-1 rounded-full border border-blue-100 italic">10
+                    DAYS</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-md mx-auto px-4 py-6">
+
+        <!-- Main Tab: Itinerary -->
+        <div id="itinerary" class="tab-content active space-y-6">
+
+            <!-- Horizontal Day Selector -->
+            <div class="flex overflow-x-auto gap-3 pb-4 no-scrollbar -mx-4 px-4 sticky top-[73px] z-30 bg-transparent"
+                id="day-selector">
+                <button onclick="switchDay(1)"
+                    class="day-btn flex-none w-14 h-14 glass-card flex flex-col items-center justify-center active"
+                    data-day="1">
+                    <span class="text-[8px] font-bold uppercase opacity-60">Jan</span>
+                    <span class="text-lg font-black leading-none">27</span>
+                </button>
+                <button onclick="switchDay(2)"
+                    class="day-btn flex-none w-14 h-14 glass-card flex flex-col items-center justify-center"
+                    data-day="2">
+                    <span class="text-[8px] font-bold uppercase opacity-60">Jan</span>
+                    <span class="text-lg font-black leading-none">28</span>
+                </button>
+                <button onclick="switchDay(3)"
+                    class="day-btn flex-none w-14 h-14 glass-card flex flex-col items-center justify-center"
+                    data-day="3">
+                    <span class="text-[8px] font-bold uppercase opacity-60">Jan</span>
+                    <span class="text-lg font-black leading-none">29</span>
+                </button>
+                <button onclick="switchDay(4)"
+                    class="day-btn flex-none w-14 h-14 glass-card flex flex-col items-center justify-center"
+                    data-day="4">
+                    <span class="text-[8px] font-bold uppercase opacity-60">Jan</span>
+                    <span class="text-lg font-black leading-none">30</span>
+                </button>
+                <button onclick="switchDay(5)"
+                    class="day-btn flex-none w-14 h-14 glass-card flex flex-col items-center justify-center"
+                    data-day="5">
+                    <span class="text-[8px] font-bold uppercase opacity-60">Jan</span>
+                    <span class="text-lg font-black leading-none">31</span>
+                </button>
+                <button onclick="switchDay(6)"
+                    class="day-btn flex-none w-14 h-14 glass-card flex flex-col items-center justify-center"
+                    data-day="6">
+                    <span class="text-[8px] font-bold uppercase opacity-60">Feb</span>
+                    <span class="text-lg font-black leading-none">01</span>
+                </button>
+                <button onclick="switchDay(7)"
+                    class="day-btn flex-none w-14 h-14 glass-card flex flex-col items-center justify-center"
+                    data-day="7">
+                    <span class="text-[8px] font-bold uppercase opacity-60">Feb</span>
+                    <span class="text-lg font-black leading-none">02</span>
+                </button>
+                <button onclick="switchDay(8)"
+                    class="day-btn flex-none w-14 h-14 glass-card flex flex-col items-center justify-center"
+                    data-day="8">
+                    <span class="text-[8px] font-bold uppercase opacity-60">Feb</span>
+                    <span class="text-lg font-black leading-none">03</span>
+                </button>
+                <button onclick="switchDay(9)"
+                    class="day-btn flex-none w-14 h-14 glass-card flex flex-col items-center justify-center"
+                    data-day="9">
+                    <span class="text-[8px] font-bold uppercase opacity-60">Feb</span>
+                    <span class="text-lg font-black leading-none">04</span>
+                </button>
+                <button onclick="switchDay(10)"
+                    class="day-btn flex-none w-14 h-14 glass-card flex flex-col items-center justify-center"
+                    data-day="10">
+                    <span class="text-[8px] font-bold uppercase opacity-60">Feb</span>
+                    <span class="text-lg font-black leading-none">05</span>
+                </button>
+            </div>
+
+            <!-- Day Container -->
+            <div id="day-container" class="space-y-3"></div>
+
+            <button onclick="addNewCard()"
+                class="w-full py-3 rounded-2xl border-2 border-dashed border-slate-300 text-slate-400 font-bold hover:border-blue-400 hover:text-blue-500 hover:bg-blue-50 transition-all mt-4">
+                + 新增行程
+            </button>
+        </div>
+
+        <!-- Tab: Shopping -->
+        <div id="shopping" class="tab-content space-y-6">
+            <div class="glass-card p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-black">🛒 購物清單</h2>
+                    <span id="shopProgress"
+                        class="text-xs font-black text-blue-500 bg-blue-50 px-3 py-1 rounded-full">0/10</span>
+                </div>
+                <div class="space-y-2">
+                    <label
+                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
+                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
+                        <span class="text-sm font-bold">唐吉訶德：定型噴霧、襪子</span>
+                    </label>
+                    <label
+                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
+                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
+                        <span class="text-sm font-bold">Kose Q10 護手霜</span>
+                    </label>
+                    <label
+                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
+                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
+                        <span class="text-sm font-bold">護唇膏</span>
+                    </label>
+                    <label
+                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
+                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
+                        <span class="text-sm font-bold">SUGAR BUTTER TREE</span>
+                    </label>
+                    <label
+                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
+                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
+                        <span class="text-sm font-bold">Beams Life 橫濱</span>
+                    </label>
+                    <label
+                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
+                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
+                        <span class="text-sm font-bold">H BEAUTY&YOUTH</span>
+                    </label>
+                    <label
+                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
+                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
+                        <span class="text-sm font-bold">Graphpaper 青山</span>
+                    </label>
+                    <label
+                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
+                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
+                        <span class="text-sm font-bold">J-Scent 香水 (蔦屋書店)</span>
+                    </label>
+                    <label
+                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
+                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
+                        <span class="text-sm font-bold">Coverchord (A.PRESSE, COMOLI)</span>
+                    </label>
+                    <label
+                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
+                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
+                        <span class="text-sm font-bold">NUMBER SUGAR (焦糖)</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Packing -->
+        <div id="packing" class="tab-content space-y-4">
+            <div class="glass-card p-6">
+                <h2 class="text-2xl font-black mb-6">🎒 行李清單</h2>
+                <div class="space-y-3">
+                    <div class="p-4 bg-blue-50 rounded-2xl">
+                        <p class="text-[10px] font-black text-blue-400 uppercase">衣物</p>
+                        <p class="text-xs font-bold mt-1">• 發熱衣、羊毛襪、圍巾、手套、毛帽</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl">
+                        <p class="text-[10px] font-black text-slate-400 uppercase">文件</p>
+                        <p class="text-xs font-bold mt-1">• 護照、JR Pass QR、演唱會門票</p>
+                    </div>
+                    <div class="p-4 bg-indigo-50 rounded-2xl">
+                        <p class="text-[10px] font-black text-indigo-400 uppercase">電子設備</p>
+                        <p class="text-xs font-bold mt-1">• 行動電源、相機、充電器</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: To-Do -->
+        <div id="todo" class="tab-content space-y-4">
+            <div class="glass-card p-6">
+                <h2 class="text-2xl font-black mb-6">✅ 待辦事項</h2>
+                <div class="space-y-4">
+                    <label
+                        class="flex items-center justify-between p-4 bg-green-50/50 rounded-2xl border border-green-100">
+                        <span class="text-sm font-bold">Visit Japan Web 完成</span>
+                        <input type="checkbox" checked class="w-6 h-6 rounded-full">
+                    </label>
+                    <label
+                        class="flex items-center justify-between p-4 bg-white/50 rounded-2xl border border-slate-100">
+                        <span class="text-sm font-bold">7-11 領取 Lady Gaga 演唱會票</span>
+                        <input type="checkbox" class="w-6 h-6 rounded-full border-slate-300">
+                    </label>
+                    <label
+                        class="flex items-center justify-between p-4 bg-white/50 rounded-2xl border border-slate-100">
+                        <span class="text-sm font-bold">取新幹線票 (QR code)</span>
+                        <input type="checkbox" class="w-6 h-6 rounded-full border-slate-300">
+                    </label>
+                    <label
+                        class="flex items-center justify-between p-4 bg-green-50/50 rounded-2xl border border-green-100">
+                        <span class="text-sm font-bold">保險申請 (東京海上日動)</span>
+                        <input type="checkbox" checked class="w-6 h-6 rounded-full">
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 p-4 z-50">
+        <div class="max-w-md mx-auto glass-card flex justify-around items-center px-4 py-3">
+            <button onclick="changeTab('itinerary')" class="nav-btn flex flex-col items-center gap-1 active"
+                data-tab="itinerary">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                </svg>
+                <span class="text-[9px] font-black uppercase tracking-tighter">行程</span>
+            </button>
+            <button onclick="changeTab('shopping')" class="nav-btn flex flex-col items-center gap-1"
+                data-tab="shopping">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                </svg>
+                <span class="text-[9px] font-black uppercase tracking-tighter">購物</span>
+            </button>
+            <button onclick="changeTab('packing')" class="nav-btn flex flex-col items-center gap-1" data-tab="packing">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175 4.835-.729 9.945-.9 15.326 0-1.07.16-1.837 1.094-1.837 2.175v3.783a2.18 2.18 0 01-.75 1.661M9 20.25v-1.5m6 1.5v-1.5m-9-15.75h12m-12 0L6 3m12 1.5L15 3" />
+                </svg>
+                <span class="text-[9px] font-black uppercase tracking-tighter">行李</span>
+            </button>
+            <button onclick="changeTab('todo')" class="nav-btn flex flex-col items-center gap-1" data-tab="todo">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span class="text-[9px] font-black uppercase tracking-tighter">待辦</span>
+            </button>
+        </div>
+    </nav>
+
+    <script>
+        // Strictly verified itinerary data (Default)
+        const defaultItinerary = {
+            1: [ // 01/27(二) 台北-東京
+                { cat: '移動', icon: '🚗', title: '家 → 桃園機場', time: '', desc: 'Daryl: 09:00 搭車\nJoseph: 10:26 搭機捷\n10:50 Check in', map: 'https://www.google.com/maps/search/?api=1&query=桃園國際機場' },
+                { cat: '移動', icon: '✈️', title: '航班 CX450', time: '12:50', desc: '12:50 桃園第一航廈\n16:50 成田 🇯🇵第二航廈', map: 'https://www.google.com/maps/search/?api=1&query=桃園國際機場' },
+                { cat: '作業', icon: '📋', title: '東京海上日動旅平險', time: '', desc: '到了境內才可以保 (VJW內)' },
+                { cat: '移動', icon: '🚆', title: 'Skyliner: 49分', time: '17:59', desc: '17:59-18:48 到上野\n轉山手線到神田站(20分)', map: 'https://www.google.com/maps/search/?api=1&query=Keisei+Ueno+Station' },
+                { cat: '住宿', icon: '🏨', title: 'ホテルSUI神田 by ABEST', time: '19:00', desc: '預計 19:00 Check in\n樂天旅遊', map: 'https://www.google.com/maps/search/?api=1&query=Hotel+SUI+Kanda+by+ABEST' },
+                { cat: '吃喝', icon: '🍜', title: '晚餐 - 沾麵 六厘舍 東京站店', time: '', desc: '23:00 打烊\n無公休、無法預約', map: 'https://www.google.com/maps/search/?api=1&query=六厘舍+東京站' },
+                { cat: '景點', icon: '✨', title: '丸之內2025燈光秀', time: '16:00', desc: '16:00-23:00\n至2026/02/15', map: 'https://www.google.com/maps/search/?api=1&query=丸之內燈光秀' },
+                { cat: '景點', icon: '🏢', title: '新丸之內大廈', time: '', desc: '7F免費觀景台看東京車站\n11:00-23:00', map: 'https://www.google.com/maps/search/?api=1&query=新丸之內大廈' },
+                { cat: '作業', icon: '🚄', title: '取新幹線票', time: '', desc: 'QRCode在內頁' },
+                { cat: '購物', icon: '⭐', title: '超商 吃宵夜 or 藥妝唐吉訶德', time: '', desc: '記得去7-11換Gaga演唱會票 (參考)\n-\n唐吉訶德 秋葉原店(map)\n買定型噴霧、定妝、襪子、護手霜(Kose coen rich Q10)、護唇膏', map: 'https://www.google.com/maps/search/?api=1&query=Don+Quijote+Akihabara' }
+            ],
+            2: [ // 01/28(三) 橫濱 原宿 涉谷
+                { cat: '吃喝', icon: '☕', title: '早餐 - 繁邦', time: '', desc: '惠比壽站\n09:00-15:00\n早餐時段無法預約', map: 'https://www.google.com/maps/search/?api=1&query=繁邦+Ebisu' },
+                { cat: '移動', icon: '🚃', title: '惠比壽 → 橫濱', time: '10:09', desc: 'JR湘南新宿快速\n約23-30分\n10:09→10:32\n10:23→10:45' },
+                { cat: '購物', icon: '🍰', title: 'SUGAR BUTTER TREE Sogo橫濱', time: '', desc: '10:00-20:00', map: 'https://www.google.com/maps/search/?api=1&query=SUGAR+BUTTER+TREE+Sogo+Yokohama' },
+                { cat: '購物', icon: '👔', title: 'Beams Life 橫濱', time: '', desc: '10:00-21:00', map: 'https://www.google.com/maps/search/?api=1&query=Beams+Life+Yokohama' },
+                { cat: '移動', icon: '🚃', title: '橫濱 → 表參道', time: '12:03', desc: '需換一次車', map: 'https://www.google.com/maps/search/?api=1&query=Omotesando+Station' },
+                { cat: '購物', icon: '👕', title: 'H BEAUTY&YOUTH', time: '', desc: '12:00-20:00', map: 'https://www.google.com/maps/search/?api=1&query=H+BEAUTY%26YOUTH' },
+                { cat: '吃喝', icon: '🍜', title: 'BASO 表參道 鴨肉蕎麥麵', time: '', desc: '11:30-21:00', map: 'https://www.google.com/maps/search/?api=1&query=BASO+Omotesando' },
+                { cat: '購物', icon: '🛍️', title: '3COINS 原宿旗艦店', time: '', desc: '包含原宿限定商品', map: 'https://www.google.com/maps/search/?api=1&query=3COINS+Harajuku+Flagship+Store' },
+                { cat: '購物', icon: '🧥', title: 'Nanamica Mountain', time: '', desc: '11:00-20:00', map: 'https://www.google.com/maps/search/?api=1&query=nanamica+MOUNTAIN' },
+                { cat: '購物', icon: '👕', title: 'HUMAN MADE OFFLINE STORE', time: '', desc: '11:00-19:00', map: 'https://www.google.com/maps/search/?api=1&query=HUMAN+MADE+OFFLINE+STORE' },
+                { cat: '購物', icon: '👟', title: 'On Flagship Store Harajuku', time: '', desc: '全球第二間旗艦店', map: 'https://www.google.com/maps/search/?api=1&query=On+Flagship+Store+Harajuku' },
+                { cat: '購物', icon: '🛹', title: 'Supreme Harajuku', time: '', desc: '11:00-20:00', map: 'https://www.google.com/maps/search/?api=1&query=Supreme+Harajuku' },
+                { cat: '購物', icon: '🧥', title: 'NEIGHBORHOOD HARAJUKU', time: '', desc: '12:00-19:00', map: 'https://www.google.com/maps/search/?api=1&query=NEIGHBORHOOD+HARAJUKU' },
+                { cat: '購物', icon: '👕', title: 'KITH Tokyo', time: '', desc: 'MIYASHITA PARK 1F', map: 'https://www.google.com/maps/search/?api=1&query=KITH+Tokyo' },
+                { cat: '購物', icon: '👟', title: 'HOKA Harajuku', time: '', desc: '11:00-20:00', map: 'https://www.google.com/maps/search/?api=1&query=HOKA+Harajuku' },
+                { cat: '購物', icon: '👟', title: 'atmos Sendagaya', time: '', desc: '11:00-20:00', map: 'https://www.google.com/maps/search/?api=1&query=atmos+Sendagaya' },
+                { cat: '購物', icon: '👕', title: 'Graphpaper AOYAMA', time: '', desc: '12:00-19:00 週一休', map: 'https://www.google.com/maps/search/?api=1&query=Graphpaper+AOYAMA' },
+                { cat: '吃喝', icon: '🍣', title: '晚餐 - 活美登利 西武涉谷店', time: '', desc: '迴轉壽司\n11:00-22:00', map: 'https://www.google.com/maps/search/?api=1&query=Katsu+Midori+Seibu+Shibuya' },
+                { cat: '吃喝', icon: '🍚', title: '晚餐 - 挽肉と米 涉谷', time: '', desc: '需現場領號碼牌或線上預約', map: 'https://www.google.com/maps/search/?api=1&query=Hikiniku+to+Come+Shibuya' }
+            ],
+            3: [ // 01/29(四) 麻布台 演唱會
+                { cat: '吃喝', icon: '🥐', title: '08:00 Balcony by 6th', time: '08:00', desc: 'Tabelog已訂位', map: 'https://www.google.com/maps/search/?api=1&query=Balcony+by+6th' },
+                { cat: '景點', icon: '🎨', title: 'teamLab Borderless', time: '09:00', desc: '09:00-21:00\n已購票\n預留2.5小時', map: 'https://maps.app.goo.gl/teamlab' },
+                { cat: '購物', icon: '👕', title: 'HOMME PLISSÉ ISSEY MIYAKE', time: '', desc: '代官山', map: 'https://www.google.com/maps/search/?api=1&query=HOMME+PLISSE+ISSEY+MIYAKE+Daikanyama' },
+                { cat: '購物', icon: '📚', title: '蔦屋書店 代官山', time: '', desc: 'J-Scent香水', map: 'https://www.google.com/maps/search/?api=1&query=Daikanyama+T-Site' },
+                { cat: '購物', icon: '🧥', title: 'Nanamica Daikanyama', time: '', desc: '11:00-20:00', map: 'https://www.google.com/maps/search/?api=1&query=nanamica+Daikanyama' },
+                { cat: '購物', icon: '👕', title: 'Okura', time: '', desc: '藍染服飾', map: 'https://www.google.com/maps/search/?api=1&query=Okura+Daikanyama' },
+                { cat: '吃喝', icon: '🍱', title: '午餐 - 和食 惠比壽', time: '', desc: '11:30開門\n需先排隊', map: 'https://www.google.com/maps/search/?api=1&query=和食+一芯+代官山' },
+                { cat: '購物', icon: '☕', title: 'neel 中目黑', time: '', desc: '', map: 'https://www.google.com/maps/search/?api=1&query=neel+Nakameguro' },
+                { cat: '購物', icon: '🍩', title: 'I\'m donut? 中目黑', time: '', desc: '人氣甜甜圈', map: 'https://www.google.com/maps/search/?api=1&query=Im+donut+Nakameguro' },
+                { cat: '購物', icon: '👖', title: 'Kapital, Visvim, 1LDK', time: '', desc: '中目黑逛街', map: 'https://www.google.com/maps/search/?api=1&query=1LDK+Nakameguro' },
+                { cat: '景點', icon: '🎤', title: 'Lady Gaga 演唱會', time: '19:00', desc: '埼玉超級體育場\n重點行程\n17:00 開放入場', map: 'https://maps.app.goo.gl/karena' }
+            ],
+            4: [ // 01/30(五) 東京 - 銀山溫泉
+                { cat: '移動', icon: '🚄', title: '上野 → 大石田', time: '', desc: '山形新幹線\n預計10:00班次', map: 'https://www.google.com/maps/search/?api=1&query=Oishida+Station' },
+                { cat: '購物', icon: '🛒', title: '超市 MaxValu', time: '', desc: '大石田站附近', map: 'https://www.google.com/maps/search/?api=1&query=MaxValu+Oishida' },
+                { cat: '住宿', icon: '♨️', title: '古勢起屋 本館', time: '', desc: '銀山溫泉\n包含懷石料理晚餐', map: 'https://www.google.com/maps/search/?api=1&query=Kosekiya+Honkan' }
+            ],
+            5: [ // 01/31(六) 銀山溫泉 - 山形
+                { cat: '移動', icon: '🚌', title: '大石田 → 山形', time: '', desc: '接駁車轉乘JR', map: 'https://www.google.com/maps/search/?api=1&query=Yamagata+Station' },
+                { cat: '景點', icon: '⛰️', title: '山寺 (立石寺)', time: '', desc: '1000階梯', map: 'https://www.google.com/maps/search/?api=1&query=Yamadera' },
+                { cat: '購物', icon: '🧥', title: 'Montbell 山形', time: '', desc: '', map: 'https://www.google.com/maps/search/?api=1&query=Montbell+Yamagata' },
+                { cat: '購物', icon: '👕', title: 'Workman', time: '', desc: '平價機能服', map: 'https://www.google.com/maps/search/?api=1&query=Workman+Yamagata' },
+                { cat: '吃喝', icon: '🇮🇹', title: 'Al-che-cciano', time: '', desc: '義式料理音樂會', map: 'https://www.google.com/maps/search/?api=1&query=Al-che-cciano' }
+            ],
+            6: [ // 02/01(日)
+                { cat: '景點', icon: '🧊', title: '藏王纜車看樹冰', time: '', desc: '停留2-3小時', map: 'https://www.google.com/maps/search/?api=1&query=Zao+Ropeway' },
+                { cat: '移動', icon: '🚌', title: '山形→藏王', time: '', desc: '巴士40-50分\n單程660日圓', map: 'https://www.google.com/maps/search/?api=1&query=Zao+Onsen+Bus+Terminal' },
+                { cat: '住宿', icon: '🏨', title: 'Onsen & Stay OakHill', time: '', desc: '藏王溫泉', map: 'https://www.google.com/maps/search/?api=1&query=Onsen+%26+Stay+OakHill' }
+            ],
+            7: [ // 02/02(一)
+                { cat: '景點', icon: '🏂', title: '藏王滑雪場', time: '', desc: '整日滑雪活動', map: 'https://www.google.com/maps/search/?api=1&query=Zao+Onsen+Ski+Resort' },
+                { cat: '吃喝', icon: '🍜', title: '蔵王麺処 梨庵', time: '', desc: '午餐', map: 'https://www.google.com/maps/search/?api=1&query=Zao+Men-dokoro+Rian' }
+            ],
+            8: [ // 02/03(二)
+                { cat: '景點', icon: '🧊', title: '藏王樹冰', time: '早晨', desc: '最後觀賞機會', map: 'https://www.google.com/maps/search/?api=1&query=Zao+Juhyo' },
+                { cat: '移動', icon: '🚌', title: '藏王 → 仙台', time: '', desc: '巴士移動', map: 'https://www.google.com/maps/search/?api=1&query=Sendai+Station' },
+                { cat: '住宿', icon: '🏨', title: 'Sendai Nishiguchi Daiwa Roynet Premier', time: '', desc: '仙台西口', map: 'https://www.google.com/maps/search/?api=1&query=Daiwa+Roynet+Hotel+Sendai+Nishiguchi+Premier' },
+                { cat: '景點', icon: '🏙️', title: 'AER 觀景台', time: '', desc: '31F 免費夜景', map: 'https://www.google.com/maps/search/?api=1&query=AER+Observation+Terrace' }
+            ],
+            9: [ // 02/04(三)
+                { cat: '景點', icon: '🌊', title: '松島海岸', time: '早晨', desc: '日本三景之一', map: 'https://www.google.com/maps/search/?api=1&query=Matsushima+Kaigan+Station' },
+                { cat: '吃喝', icon: '🦪', title: '牡蠣小屋 / 魚市場', time: '', desc: '松島午餐', map: 'https://www.google.com/maps/search/?api=1&query=Matsushima+Fish+Market' },
+                { cat: '購物', icon: '🛍️', title: 'S-PAL / AER', time: '下午', desc: '仙台車站前逛街', map: 'https://www.google.com/maps/search/?api=1&query=S-PAL+Sendai' },
+                { cat: '移動', icon: '🚄', title: '新幹線 → 東京', time: '傍晚', desc: '返回東京', map: 'https://www.google.com/maps/search/?api=1&query=Tokyo+Station' },
+                { cat: '景點', icon: '🏙️', title: 'Ginza Sony Park', time: '', desc: '銀座新地標', map: 'https://www.google.com/maps/search/?api=1&query=Ginza+Sony+Park' },
+                { cat: '購物', icon: '👔', title: 'BEAMS 銀座店', time: '', desc: '2F/3F', map: 'https://maps.app.goo.gl/s53Lm7y1hWGfvUzs5' },
+                { cat: '購物', icon: '👕', title: 'UNIQLO 銀座旗艦店', time: '', desc: '12層樓', map: 'https://www.google.com/maps/search/?api=1&query=UNIQLO+Ginza' },
+                { cat: '購物', icon: '🖊️', title: '銀座 伊東屋 Itoya', time: '', desc: '文具控必逛', map: 'https://www.google.com/maps/search/?api=1&query=Ginza+Itoya' },
+                { cat: '購物', icon: '🏠', title: '無印良品 銀座', time: '', desc: '世界旗艦店', map: 'https://www.google.com/maps/search/?api=1&query=MUJI+Ginza' }
+            ],
+            10: [ // 02/05(四) 返程
+                { cat: '吃喝', icon: '☕', title: 'February Cafe', time: '08:30', desc: '淺草早餐', map: 'https://www.google.com/maps/search/?api=1&query=February+Cafe+Asakusa' },
+                { cat: '購物', icon: '🐧', title: 'Pensta 上野', time: '', desc: '企鵝周邊', map: 'https://www.google.com/maps/search/?api=1&query=Pensta+Ueno' },
+                { cat: '移動', icon: '🚆', title: 'Skyliner', time: '12:20', desc: '12:20-13:04\n上野 → 成田', map: 'https://www.google.com/maps/search/?api=1&query=Keisei+Ueno+Station' },
+                { cat: '移動', icon: '✈️', title: '航班 CX451', time: '15:20', desc: '15:20 成田T2 → 18:40 桃園', map: 'https://www.google.com/maps/search/?api=1&query=Narita+Airport+Terminal+2' }
+            ]
+        };
+
+        // State Init
+        let itinerary = JSON.parse(localStorage.getItem('trip_data_2601')) || defaultItinerary;
+        let currentDay = parseInt(localStorage.getItem('currentDay')) || 1;
+
+        function saveItinerary() {
+            localStorage.setItem('trip_data_2601', JSON.stringify(itinerary));
+        }
+
+        // Smart Header
+        let lastScrollY = window.scrollY;
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > lastScrollY && currentScrollY > 50) {
+                document.body.classList.add('header-hidden');
+            } else {
+                document.body.classList.remove('header-hidden');
+            }
+            lastScrollY = currentScrollY;
+        });
+
+        // Drag to Scroll Logic
+        const slider = document.getElementById('day-selector');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let isDragging = false; // Flag to distinguish click vs drag
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            isDragging = false;
+            slider.classList.add('active');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.classList.remove('active');
+        });
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // Scroll speed
+            slider.scrollLeft = scrollLeft - walk;
+            if (Math.abs(walk) > 5) isDragging = true; // Threshold to detect drag
+        });
+
+        function switchDay(day) {
+            if (isDragging) return; // Ignore click if dragging
+            document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`[data-day="${day}"]`).classList.add('active');
+            renderDay(day);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Categories & Icons
+        const cats = ['移動', '景點', '吃喝', '住宿', '購物', '作業'];
+        // Icons array is now local to selectIcon function for flexibility
+
+        function renderDay(day) {
+            currentDay = day;
+            localStorage.setItem('currentDay', day);
+            const container = document.getElementById('day-container');
+            const items = itinerary[day] || [];
+
+            container.innerHTML = items.map((item, i) => `
+                <div class="activity-card cat-${item.cat} p-5 rounded-2xl shadow-sm mb-3 relative group" id="card-${i}">
+                    <!-- Actions Group -->
+                    <div class="card-actions">
+                        <div class="action-btn edit-btn" onclick="toggleEdit(${i})" title="編輯">✎</div>
+                        <div class="action-btn delete-btn-static" onclick="deleteCard(${i}, event)" title="刪除">✕</div>
+                    </div>
+                    <!-- Done Button -->
+                    <button class="done-btn" onclick="saveCard(${i})">完成</button>
+                    <!-- Drag Handle -->
+                    <div class="drag-handle" id="drag-${i}">⠿</div>
+
+                    <div class="flex items-start gap-4 pr-16"> <!-- Items start aligned for better wrapping -->
+                        
+                        <!-- Left Column: Icon + Category -->
+                        <div class="flex flex-col items-center gap-2 flex-none" style="width: 52px;">
+                             <div id="icon-${i}" class="icon-box" onclick="if(!isCardEditing(${i})) return;">${item.icon}</div>
+                             <span id="cat-${i}" class="text-[10px] w-full text-center px-1 py-0.5 rounded-md bg-slate-100 text-slate-500 font-bold select-none truncate" onclick="if(!isCardEditing(${i})) return;">${item.cat}</span>
+                        </div>
+                        
+                        <!-- Right Column: Content -->
+                        <div class="flex-1 min-w-0 pt-1 cursor-pointer" onclick="if(!isCardEditing(${i})) openDetail(${i})">
+                            
+                            <div class="flex gap-3">
+                                <!-- Text Content Area -->
+                                <div class="flex-1 min-w-0">
+                                    <div id="title-${i}" class="font-bold text-base leading-tight mb-1 editable-field">${item.title}</div>
+                                    <div id="time-${i}" class="text-xs text-slate-400 font-mono editable-field mb-2 block">${item.time || ''}</div>
+                                    <div class="card-detail text-slate-600 line-clamp-3"> 
+                                        <div id="desc-${i}" class="text-sm whitespace-pre-line leading-relaxed editable-field">${item.desc || ''}</div>
+                                    </div>
+                                </div>
+
+                                <!-- Thumbnail (Right Side) - Improved Style -->
+                                ${item.img ? `<div class="w-20 h-20 bg-slate-100 rounded-xl flex-none bg-cover bg-center border border-slate-200 shadow-sm self-start mt-0.5" style="background-image: url('${item.img}')"></div>` : ''}
+                            </div>
+                            
+                            <!-- Image Inputs (Full Width, Visible only in editing) -->
+                            <div class="flex gap-2 mt-3 hidden group-[.editing]:flex items-center">
+                                <input id="img-${i}" type="text" class="flex-1 text-xs text-slate-400 bg-slate-50 border border-slate-200 rounded p-2" placeholder="貼上網址 或 點右邊上傳 →" value="${item.img || ''}">
+                                <label class="flex-none w-8 h-8 flex items-center justify-center bg-blue-50 text-blue-500 rounded cursor-pointer hover:bg-blue-100 border border-blue-200 transition-colors" title="上傳圖片">
+                                    <input type="file" class="hidden" accept="image/*" onchange="handleImageUpload(this, ${i})">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+                                    </svg>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Initialize Drag Handlers after render
+            setupDragHandlers();
+        }
+
+        // Check if a specific card is in edit mode
+        function isCardEditing(index) {
+            return document.getElementById(`card-${index}`).classList.contains('editing');
+        }
+
+        // Actions Group Actions
+        function toggleEdit(index) {
+            const card = document.getElementById(`card-${index}`);
+            card.classList.add('editing');
+
+            // Enable text inputs
+            ['title', 'time', 'desc'].forEach(field => {
+                const el = document.getElementById(`${field}-${index}`);
+                el.contentEditable = true;
+            });
+
+            // Convert Icon/Cat to clickable hints
+            const iconEl = document.getElementById(`icon-${index}`);
+            const catEl = document.getElementById(`cat-${index}`);
+
+            iconEl.classList.add('cycle-hint');
+            catEl.classList.add('cycle-hint');
+
+            // Attach One-time click listeners for dropdowns
+            iconEl.onclick = () => selectIcon(index);
+            catEl.onclick = () => selectCat(index);
+        }
+
+        function createSelector(index, type, options, currentValue) {
+            const elId = type === 'cat' ? `cat-${index}` : `icon-${index}`;
+            const container = document.getElementById(elId);
+            const parent = container.parentElement;
+
+            // Create Select Dictionary if needed or just array
+            // For simple implementation, use array options
+
+            const select = document.createElement('select');
+            select.className = "bg-white border-2 border-blue-400 text-slate-800 text-sm rounded-lg p-1 outline-none shadow-lg z-50 relative";
+            select.style.minWidth = type === 'cat' ? "60px" : "50px";
+
+            options.forEach(opt => {
+                const option = document.createElement('option');
+                option.value = opt;
+                option.text = opt;
+                if (opt === currentValue) option.selected = true;
+                select.appendChild(option);
+            });
+
+            // Replace element
+            container.style.display = 'none';
+            parent.insertBefore(select, container);
+
+            // Auto focus
+            select.focus();
+
+            const finishSelection = () => {
+                const newValue = select.value;
+                itinerary[currentDay][index][type] = newValue;
+                select.remove();
+                container.innerText = newValue;
+                container.style.display = type === 'cat' ? '' : 'flex';
+
+                // Update styling immediately for feedback
+                if (type === 'cat') {
+                    document.getElementById(`card-${index}`).className = `activity-card cat-${newValue} p-5 rounded-2xl shadow-sm mb-3 relative group editing`;
+                }
+            };
+
+            select.addEventListener('change', finishSelection);
+            select.addEventListener('blur', finishSelection);
+        }
+
+        function selectCat(index) {
+            const current = itinerary[currentDay][index].cat;
+            createSelector(index, 'cat', cats, current);
+        }
+
+        function selectIcon(index) {
+            const current = itinerary[currentDay][index].icon;
+            // Expanded icon set
+            const iconOptions = ['✨', '📍', '🚗', '🚆', '✈️', '🍜', '🛍️', '🏨', '📷', '🎒', '🎫', '🏯', '🎡', '🏟️', '🏪'];
+            createSelector(index, 'icon', iconOptions, current);
+        }
+
+        function saveCard(index) {
+            const card = document.getElementById(`card-${index}`);
+
+            // Save Text Data
+            itinerary[currentDay][index].title = document.getElementById(`title-${index}`).innerText;
+            itinerary[currentDay][index].time = document.getElementById(`time-${index}`).innerText;
+            itinerary[currentDay][index].desc = document.getElementById(`desc-${index}`).innerText;
+
+            // Save Image URL
+            const imgInput = document.getElementById(`img-${index}`);
+            if (imgInput) {
+                itinerary[currentDay][index].img = imgInput.value;
+            }
+
+            saveItinerary();
+            renderDay(currentDay); // Reset UI state fully
+        }
+
+        // Detail Modal Logic
+        function openDetail(index) {
+            const item = itinerary[currentDay][index];
+            const modal = document.getElementById('detail-modal');
+
+            // Populate Data
+            document.getElementById('detail-icon').innerText = item.icon;
+            document.getElementById('detail-cat').innerText = item.cat;
+            document.getElementById('detail-title').innerText = item.title;
+            document.getElementById('detail-time').innerText = item.time || '';
+            document.getElementById('detail-desc').innerText = item.desc || '';
+
+            // Handle Image
+            const imgContainer = document.getElementById('detail-img-container');
+            if (item.img) {
+                document.getElementById('detail-img').src = item.img;
+                imgContainer.classList.remove('hidden');
+            } else {
+                imgContainer.classList.add('hidden');
+            }
+
+            // Handle Map
+            const mapBtn = document.getElementById('detail-map');
+            if (item.map) {
+                mapBtn.href = item.map;
+                mapBtn.classList.remove('hidden');
+                mapBtn.classList.add('flex');
+            } else {
+                mapBtn.classList.add('hidden');
+                mapBtn.classList.remove('flex');
+            }
+
+            modal.classList.add('show');
+        }
+
+        function closeDetailModal() {
+            document.getElementById('detail-modal').classList.remove('show');
+        }
+
+        // Image Upload Logic (Compress & Convert to Base64)
+        function handleImageUpload(input, index) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = new Image();
+                img.onload = function () {
+                    // Compress Image
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    // Max dimension limits (e.g., 800px)
+                    let width = img.width;
+                    let height = img.height;
+                    const maxDim = 800;
+
+                    if (width > height) {
+                        if (width > maxDim) {
+                            height *= maxDim / width;
+                            width = maxDim;
+                        }
+                    } else {
+                        if (height > maxDim) {
+                            width *= maxDim / height;
+                            height = maxDim;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Get Base64 string (JPEG 0.7 quality)
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+
+                    // Update Input
+                    const textInput = document.getElementById(`img-${index}`);
+                    textInput.value = dataUrl;
+
+                    // Optional: Show preview immediately? 
+                    // Need to save first for it to appear in UI usually, 
+                    // but we can give visual feedback on the input border or something.
+                    textInput.style.borderColor = '#22c55e'; // Green border
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Drag & Drop Logic (Mobile Optimized)
+        function setupDragHandlers() {
+            const container = document.getElementById('day-container');
+            const handles = container.querySelectorAll('.drag-handle');
+            let draggingItem = null;
+
+            handles.forEach(handle => {
+                const card = handle.closest('.activity-card');
+
+                const handleStart = (e) => {
+                    draggingItem = card;
+                    card.classList.add('dragging');
+                    // Prevent scroll on mobile if touching handle
+                    if (e.type === 'touchstart') e.preventDefault();
+                };
+
+                const handleMove = (e) => {
+                    if (!draggingItem) return;
+                    e.preventDefault();
+
+                    const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+                    const siblings = [...container.querySelectorAll('.activity-card:not(.dragging)')];
+
+                    // Find closest sibling
+                    let nextSibling = siblings.find(sibling => {
+                        const box = sibling.getBoundingClientRect();
+                        return clientY <= box.top + box.height / 2;
+                    });
+
+                    container.insertBefore(draggingItem, nextSibling);
+                };
+
+                const handleEnd = () => {
+                    if (!draggingItem) return;
+                    draggingItem.classList.remove('dragging');
+                    draggingItem = null;
+
+                    // Save new order
+                    updateOrderFromDOM();
+                };
+
+                // Touch Events
+                handle.addEventListener('touchstart', handleStart, { passive: false });
+                handle.addEventListener('touchmove', handleMove, { passive: false });
+                handle.addEventListener('touchend', handleEnd);
+
+                // Mouse Events (Desktop fallback)
+                handle.addEventListener('mousedown', handleStart);
+            });
+
+            // Bind global move/up for mouse (since mouse moves out of handle easily)
+            document.addEventListener('mousemove', (e) => {
+                if (draggingItem && e.buttons === 1) { // Left click held
+                    const container = document.getElementById('day-container');
+                    const siblings = [...container.querySelectorAll('.activity-card:not(.dragging)')];
+                    let nextSibling = siblings.find(sibling => {
+                        const box = sibling.getBoundingClientRect();
+                        return e.clientY <= box.top + box.height / 2;
+                    });
+                    container.insertBefore(draggingItem, nextSibling);
+                }
+            });
+            document.addEventListener('mouseup', () => {
+                if (draggingItem) {
+                    draggingItem.classList.remove('dragging');
+                    draggingItem = null;
+                    updateOrderFromDOM();
+                }
+            });
+        }
+
+        function updateOrderFromDOM() {
+            const container = document.getElementById('day-container');
+            const newCards = container.querySelectorAll('.activity-card');
+
+            // Reconstruct array based on old IDs
+            const newItineraryDay = [];
+            newCards.forEach(card => {
+                const oldIndex = parseInt(card.id.split('-')[1]);
+                newItineraryDay.push(itinerary[currentDay][oldIndex]);
+            });
+
+            itinerary[currentDay] = newItineraryDay;
+            saveItinerary();
+            renderDay(currentDay); // Re-render to refresh IDs
+        }
+
+        function showModal(msg, callback, isDanger = false) {
+            const modal = document.getElementById('custom-modal');
+            const msgEl = document.getElementById('modal-msg');
+            const btn = document.getElementById('modal-confirm-btn');
+            const icon = modal.querySelector('.w-12');
+
+            msgEl.innerText = msg;
+            pendingCallback = callback;
+
+            if (isDanger) {
+                btn.className = "flex-1 px-4 py-3 rounded-xl bg-red-500 text-white font-bold hover:bg-red-600 shadow-lg shadow-red-500/30 transition-all text-sm";
+                icon.className = "w-12 h-12 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold";
+                icon.innerText = "!";
+            } else {
+                btn.className = "flex-1 px-4 py-3 rounded-xl bg-blue-500 text-white font-bold hover:bg-blue-600 shadow-lg shadow-blue-500/30 transition-all text-sm";
+                icon.className = "w-12 h-12 bg-blue-100 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold";
+                icon.innerText = "?";
+            }
+
+            modal.classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.remove('show');
+            setTimeout(() => { pendingCallback = null; }, 300);
+        }
+
+        document.getElementById('modal-confirm-btn').addEventListener('click', () => {
+            if (pendingCallback) pendingCallback();
+            closeModal();
+        });
+
+        function resetData() {
+            showModal('確定要移除所有自訂修改，回復到原始行程嗎？這將無法復原。', () => {
+                localStorage.removeItem('trip_data_2601');
+                location.reload();
+            }, true);
+        }
+
+        // Action Functions
+        function updateCard(index, field, value) {
+            itinerary[currentDay][index][field] = value;
+            saveItinerary();
+        }
+
+        function deleteCard(index, event) {
+            event.stopPropagation();
+            showModal('確定要刪除此行程卡片嗎？', () => {
+                itinerary[currentDay].splice(index, 1);
+                saveItinerary();
+                renderDay(currentDay);
+            }, true);
+        }
+
+        function addNewCard() {
+            itinerary[currentDay].push({
+                cat: '景點',
+                icon: '✨',
+                title: '新行程',
+                time: '',
+                desc: '點擊編輯內容',
+                map: ''
+            });
+            saveItinerary();
+            renderDay(currentDay);
+        }
+
+        function switchDay(day) {
+            document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`[data-day="${day}"]`).classList.add('active');
+            renderDay(day);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function changeTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Init Checkboxes for shop/todo persistence (Simple version)
+        document.querySelectorAll('input[type="checkbox"]').forEach((checkbox, i) => {
+            const id = `check_${i}`;
+            const label = checkbox.closest('label');
+            const span = label.querySelector('span');
+
+            // Load state
+            if (localStorage.getItem(id) === 'true') {
+                checkbox.checked = true;
+                label.classList.add('strikethrough');
+            }
+            if (span && localStorage.getItem(id + '_text')) {
+                span.innerText = localStorage.getItem(id + '_text');
+            }
+            if (span) {
+                span.contentEditable = true;
+                span.addEventListener('blur', () => {
+                    localStorage.setItem(id + '_text', span.innerText);
+                });
+            }
+
+            checkbox.addEventListener('change', function () {
+                localStorage.setItem(id, this.checked);
+                if (this.checked) label.classList.add('strikethrough');
+                else label.classList.remove('strikethrough');
+                updateShopProgress();
+            });
+        });
+
+        function updateShopProgress() {
+            const total = document.querySelectorAll('.shop-item').length;
+            const checked = document.querySelectorAll('.shop-item:checked').length;
+            const progress = document.getElementById('shopProgress');
+            if (progress) progress.innerText = `${checked}/${total}`;
+        }
+
+        updateShopProgress();
+        itinerary[1] = defaultItinerary[1]; // Force sync Day 1 data for this update
+        renderDay(currentDay);
+    </script>
