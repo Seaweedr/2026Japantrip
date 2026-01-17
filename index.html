@@ -653,9 +653,17 @@
             display: none;
         }
 
-        /* Only show FAB when Itinerary tab is active */
+        /* Only show FAB when Itinerary tab is active and modal is CLOSED */
         body:has(#itinerary.active) #fab-add {
             display: flex;
+        }
+
+        body.modal-open #fab-add {
+            display: none !important;
+        }
+
+        body:has(#detail-modal.show) #fab-add {
+            display: none !important;
         }
 
         /* Fallback for browsers that don't support :has */
@@ -763,7 +771,7 @@
 
     <!-- Detail Modal (New) -->
     <div id="detail-modal"
-        class="fixed inset-0 z-[70] flex items-end sm:items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300">
+        class="fixed inset-0 z-[2000] flex items-end sm:items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300">
         <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeDetailModal()"></div>
         <div
             class="detail-card bg-white w-full sm:max-w-md sm:rounded-3xl rounded-t-3xl p-0 relative shadow-2xl max-h-[90vh] overflow-y-auto transform translate-y-full transition-transform duration-300 ease-out flex flex-col">
@@ -1630,6 +1638,9 @@
             detailActiveIndex = index;
             const item = itinerary[currentDay][index];
             const modal = document.getElementById('detail-modal');
+            document.body.classList.add('modal-open');
+
+            // ... Populate Data ...
 
             // Populate Data
             document.getElementById('detail-icon').innerText = item.icon;
@@ -1663,6 +1674,7 @@
 
         function closeDetailModal() {
             document.getElementById('detail-modal').classList.remove('show');
+            document.body.classList.remove('modal-open');
             detailActiveIndex = null;
         }
 
@@ -1765,15 +1777,19 @@
             reader.readAsDataURL(file);
         }
 
+        // Global state for dragging to prevent memory leaks and duplicate listeners
+        let isGlobalListenersAttached = false;
+        let draggingItem = null;
+        let activeTouchId = null;
+        let longPressTimer = null;
+        let startPos = { x: 0, y: 0 };
+        let dragOccurred = false;
+        let currentDragCard = null;
+
         // Drag & Drop Logic (Optimized 800ms Long-press)
         function setupDragHandlers() {
             const container = document.getElementById('day-container');
             const cards = container.querySelectorAll('.activity-card');
-            let draggingItem = null;
-            let activeTouchId = null;
-            let longPressTimer = null;
-            let startPos = { x: 0, y: 0 };
-            let dragOccurred = false;
 
             cards.forEach(card => {
                 const handleStart = (e) => {
@@ -1783,10 +1799,10 @@
                     if (e.type === 'touchstart') activeTouchId = touch.identifier;
                     startPos = { x: touch.clientX, y: touch.clientY };
                     dragOccurred = false;
+                    currentDragCard = card;
 
                     card.classList.add('pressing');
 
-                    // 800ms Long Press for better UX
                     longPressTimer = setTimeout(() => {
                         if (window.getSelection) window.getSelection().removeAllRanges();
 
@@ -1814,14 +1830,29 @@
                     }
 
                     if (draggingItem) {
-                        e.preventDefault();
+                        if (e.cancelable) e.preventDefault();
                         const clientY = touch.clientY;
                         const siblings = [...container.querySelectorAll('.activity-card:not(.dragging)')];
-                        let nextSibling = siblings.find(sibling => {
+
+                        // Flexible detection: find the closest sibling rather than just 50/50 split
+                        let nextSibling = null;
+                        let minDistance = Infinity;
+
+                        for (const sibling of siblings) {
                             const box = sibling.getBoundingClientRect();
-                            return clientY <= box.top + box.height / 2;
-                        });
-                        container.insertBefore(draggingItem, nextSibling);
+                            const mid = box.top + box.height / 2;
+                            const distance = Math.abs(clientY - mid);
+
+                            // If we're closer to a sibling's top or bottom, we insert there
+                            if (clientY < mid) {
+                                nextSibling = sibling;
+                                break;
+                            }
+                        }
+
+                        if (nextSibling !== draggingItem.nextElementSibling) {
+                            container.insertBefore(draggingItem, nextSibling);
+                        }
                     }
                 };
 
@@ -1837,9 +1868,8 @@
                         return;
                     }
 
-                    // If we were dragging, prevent the click from bubbling to openDetail
                     if (dragOccurred) {
-                        e.preventDefault();
+                        if (e.cancelable) e.preventDefault();
                         e.stopPropagation();
                     }
 
@@ -1850,16 +1880,16 @@
                     draggingItem.classList.remove('dragging');
                     draggingItem = null;
                     updateOrderFromDOM();
+                    setTimeout(() => { dragOccurred = false; }, 100);
                 };
 
-                // Click Guard: Prevent modal if drag happened
+                // Click Guard
                 const clickableArea = card.querySelector('.cursor-pointer');
-                if (clickableArea) { // Ensure the element exists
+                if (clickableArea) {
                     const originalOnClick = clickableArea.onclick;
                     clickableArea.onclick = function (e) {
                         if (dragOccurred) {
-                            dragOccurred = false; // Reset for next time
-                            return false; // Prevent default click action
+                            return false;
                         }
                         if (originalOnClick) originalOnClick.apply(this, arguments);
                     };
@@ -1872,40 +1902,63 @@
                 card.addEventListener('mousedown', handleStart);
             });
 
-            document.addEventListener('mousemove', (e) => {
-                if (draggingItem && activeTouchId === null) {
-                    const siblings = [...container.querySelectorAll('.activity-card:not(.dragging)')];
-                    let nextSibling = siblings.find(sibling => {
-                        const box = sibling.getBoundingClientRect();
-                        return e.clientY <= box.top + box.height / 2;
-                    });
-                    container.insertBefore(draggingItem, nextSibling);
-                }
-            });
+            // Clean up global listeners to prevent duplicates
+            if (!isGlobalListenersAttached) {
+                document.addEventListener('mousemove', (e) => {
+                    if (draggingItem && activeTouchId === null) {
+                        const siblings = [...container.querySelectorAll('.activity-card:not(.dragging)')];
+                        let nextSibling = siblings.find(sibling => {
+                            const box = sibling.getBoundingClientRect();
+                            return e.clientY <= box.top + box.height / 2;
+                        });
+                        container.insertBefore(draggingItem, nextSibling);
+                    }
+                });
 
-            document.addEventListener('mouseup', (e) => {
-                if (draggingItem && activeTouchId === null) {
-                    draggingItem.classList.remove('dragging');
-                    draggingItem = null;
-                    updateOrderFromDOM();
-                }
-            });
+                document.addEventListener('mouseup', () => {
+                    if (draggingItem && activeTouchId === null) {
+                        draggingItem.classList.remove('dragging');
+                        draggingItem = null;
+                        updateOrderFromDOM();
+                        setTimeout(() => { dragOccurred = false; }, 100);
+                    }
+                    if (longPressTimer) {
+                        clearTimeout(longPressTimer);
+                        longPressTimer = null;
+                    }
+                });
+                isGlobalListenersAttached = true;
+            }
         }
 
         function updateOrderFromDOM() {
             const container = document.getElementById('day-container');
             const newCards = container.querySelectorAll('.activity-card');
+            if (newCards.length === 0 && itinerary[currentDay] && itinerary[currentDay].length > 0) return;
 
             // Reconstruct array based on old IDs
             const newItineraryDay = [];
-            newCards.forEach(card => {
-                const oldIndex = parseInt(card.id.split('-')[1]);
-                newItineraryDay.push(itinerary[currentDay][oldIndex]);
+            let orderChanged = false;
+
+            newCards.forEach((card, newIndex) => {
+                const parts = card.id.split('-');
+                if (parts.length < 2) return;
+                const oldIndex = parseInt(parts[1]);
+                if (isNaN(oldIndex) || !itinerary[currentDay][oldIndex]) return;
+
+                if (oldIndex !== newIndex) orderChanged = true;
+                newItineraryDay.push({ ...itinerary[currentDay][oldIndex] }); // Use copy to prevent reference issues
             });
 
-            itinerary[currentDay] = newItineraryDay;
-            saveItinerary();
-            renderDay(currentDay); // Re-render to refresh IDs
+            // ONLY update if something actually moved to prevent "原地拖移" bugs
+            if (orderChanged && newItineraryDay.length === itinerary[currentDay].length) {
+                itinerary[currentDay] = newItineraryDay;
+                saveItinerary();
+                renderDay(currentDay);
+            } else {
+                // If nothing changed, still re-render to clean up classes but don't save or flash
+                renderDay(currentDay);
+            }
         }
 
         function showModal(msg, callback, isDanger = false) {
