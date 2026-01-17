@@ -9,12 +9,16 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Noto+Sans+TC:wght@400;700&display=swap"
         rel="stylesheet">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <style>
         :root {
-            --primary: #3b82f6;
-            --bg: #f8fafc;
-            --glass: rgba(255, 255, 255, 0.85);
+            --primary: #2563eb;
+            --bg: #fdfdfe;
+            --glass: rgba(255, 255, 255, 0.72);
             --glass-border: rgba(255, 255, 255, 0.5);
+            --ios-blur: blur(20px) saturate(180%);
         }
 
         body {
@@ -31,11 +35,13 @@
 
         .glass-card {
             background: var(--glass);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: var(--ios-blur);
+            -webkit-backdrop-filter: var(--ios-blur);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
-            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+            box-shadow:
+                0 4px 24px -1px rgba(0, 0, 0, 0.04),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.4);
         }
 
         /* New Card Style - Icon Background Accent */
@@ -200,7 +206,8 @@
 
         .nav-btn.active {
             color: var(--primary);
-            transform: translateY(-4px);
+            transform: translateY(-4px) scale(1.1);
+            filter: drop-shadow(0 4px 8px rgba(37, 99, 235, 0.2));
         }
 
         .day-btn {
@@ -255,16 +262,20 @@
             cursor: -webkit-grabbing;
         }
 
-        /* When header is hidden, move up */
+        /* When header is hidden, move to absolute top for 'flush' feel */
         body.header-hidden #day-selector {
-            top: 15px;
-            /* Stick near top with padding */
-            background: rgba(248, 250, 252, 0.9);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            top: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: var(--ios-blur);
+            -webkit-backdrop-filter: var(--ios-blur);
+            border-radius: 0;
+            margin-left: -1rem;
+            margin-right: -1rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+            /* Ultra thin iOS border */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
         }
 
         /* Editing Mode - Premium Style */
@@ -304,27 +315,29 @@
         .editing .cycle-hint {
             position: relative;
             cursor: pointer;
-            animation: bounce-gentle 2s infinite;
+            /* Remove animation to make it look more like a stable UI element */
         }
 
         .editing .cycle-hint::after {
-            content: '⇄';
+            content: '▼';
             position: absolute;
-            top: -6px;
-            right: -8px;
+            bottom: -5px;
+            right: -5px;
             background: #3b82f6;
             color: white;
-            font-size: 10px;
-            width: 16px;
-            height: 16px;
+            font-size: 8px;
+            width: 17px;
+            height: 17px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.5);
             pointer-events: none;
-            border: 1px solid white;
+            border: 2px solid white;
+            line-height: 1;
+            z-index: 10;
         }
 
         @keyframes bounce-gentle {
@@ -490,6 +503,26 @@
         #custom-modal.show .modal-card {
             transform: scale(1);
         }
+
+        /* Cloud Sync UI Styles */
+        .sync-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        .sync-indicator.online {
+            background: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+        }
+
+        .sync-indicator.syncing {
+            background: #3b82f6;
+            animation: pulse 1s infinite;
+        }
     </style>
 </head>
 
@@ -574,14 +607,28 @@
 
     <!-- Sticky Header -->
     <header id="main-header"
-        class="fixed top-0 left-0 right-0 z-40 bg-white/60 backdrop-blur-md border-b border-slate-100 px-6 py-4">
+        class="fixed top-0 left-0 right-0 z-40 bg-white/70 backdrop-blur-2xl border-b-[0.5px] border-black/5 px-6 py-4"
+        style="backdrop-filter: var(--ios-blur); -webkit-backdrop-filter: var(--ios-blur);">
         <div class="max-w-md mx-auto flex justify-between items-center">
             <div>
                 <h1 class="text-xl font-bold tracking-tight">2601 日本之旅 🇯🇵</h1>
                 <p class="text-[10px] text-slate-500 font-semibold uppercase tracking-widest leading-none mt-1">Winter
                     Expedition 2026</p>
             </div>
-            <div class="text-right flex items-center gap-2">
+            <div class="text-right flex items-center gap-3">
+                <div class="relative group cursor-default">
+                    <div id="cloud-status-dot" class="sync-indicator"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="w-5 h-5 text-slate-300">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                    </svg>
+                    <!-- Tooltip for status -->
+                    <div
+                        class="absolute right-0 top-full mt-2 w-max px-2 py-1 bg-slate-800 text-white text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                        雲端同步中
+                    </div>
+                </div>
                 <button onclick="resetData()"
                     class="text-[10px] text-slate-400 font-bold hover:text-red-500 transition-colors">重置</button>
                 <span
@@ -597,7 +644,7 @@
         <div id="itinerary" class="tab-content active space-y-6">
 
             <!-- Horizontal Day Selector -->
-            <div class="flex overflow-x-auto gap-3 pb-4 no-scrollbar -mx-4 px-4 sticky top-[73px] z-30 bg-transparent"
+            <div class="flex overflow-x-auto gap-3 pb-4 no-scrollbar -mx-4 px-4 sticky top-[72px] z-30 transition-all duration-300"
                 id="day-selector">
                 <button onclick="switchDay(1)"
                     class="day-btn flex-none w-14 h-14 glass-card flex flex-col items-center justify-center active"
@@ -924,16 +971,91 @@
         let itinerary = JSON.parse(localStorage.getItem('trip_data_2601')) || defaultItinerary;
         let currentDay = parseInt(localStorage.getItem('currentDay')) || 1;
 
-        function saveItinerary() {
-            localStorage.setItem('trip_data_2601', JSON.stringify(itinerary));
+        // XSS Protection Utility
+        function esc(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
         }
+
+        // Cloud Sync Logic
+        let db = null;
+        const defaultCloudConfig = {
+            apiKey: "AIzaSyA4plhrX0LjzywroYpZMsHEXYWRcqiSWp4",
+            authDomain: "japantrip-a83a3.firebaseapp.com",
+            projectId: "japantrip-a83a3",
+            storageBucket: "japantrip-a83a3.firebasestorage.app",
+            messagingSenderId: "677594143545",
+            appId: "1:677594143545:web:2e6b9ef07cf3381fda66e8",
+            measurementId: "G-19FRE91L3Z"
+        };
+        let cloudConfig = defaultCloudConfig;
+        let syncId = 'seaweed-trip';
+
+        function initFirebase() {
+            if (!cloudConfig) return;
+            try {
+                if (firebase.apps.length === 0) {
+                    firebase.initializeApp(cloudConfig);
+                }
+                db = firebase.firestore();
+                document.getElementById('cloud-status-dot').classList.add('online');
+                pullFromCloud(); // Initial pull
+            } catch (e) {
+                console.error("Firebase Init Error:", e);
+                // alert("Firebase 連線失敗，請檢查 Config 格式"); // Removed alert as there's no UI to change config
+            }
+        }
+
+        async function saveItinerary() {
+            localStorage.setItem('trip_data_2601', JSON.stringify(itinerary));
+            if (db) {
+                pushToCloud();
+            }
+        }
+
+        async function pushToCloud() {
+            if (!db) return;
+            const dot = document.getElementById('cloud-status-dot');
+            dot.classList.add('syncing');
+            try {
+                await db.collection('trips').doc(syncId).set({
+                    itinerary: itinerary,
+                    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                setTimeout(() => dot.classList.remove('syncing'), 500);
+            } catch (e) {
+                console.error("Cloud Push Error:", e);
+            }
+        }
+
+        async function pullFromCloud() {
+            if (!db) return;
+            const dot = document.getElementById('cloud-status-dot');
+            dot.classList.add('syncing');
+            try {
+                const doc = await db.collection('trips').doc(syncId).get();
+                if (doc.exists) {
+                    const data = doc.data();
+                    itinerary = data.itinerary;
+                    renderDay(currentDay);
+                }
+                setTimeout(() => dot.classList.remove('syncing'), 500);
+            } catch (e) {
+                console.error("Cloud Pull Error:", e);
+            }
+        }
+
+        // Initialize on start
+        initFirebase();
 
         // Smart Header
         let lastScrollY = window.scrollY;
         const header = document.getElementById('main-header');
         window.addEventListener('scroll', () => {
             const currentScrollY = window.scrollY;
-            if (currentScrollY > lastScrollY && currentScrollY > 50) {
+            if (currentScrollY > lastScrollY && currentScrollY > 20) {
                 document.body.classList.add('header-hidden');
             } else {
                 document.body.classList.remove('header-hidden');
@@ -1007,7 +1129,7 @@
                         <!-- Left Column: Icon + Category -->
                         <div class="flex flex-col items-center gap-2 flex-none" style="width: 52px;">
                              <div id="icon-${i}" class="icon-box" onclick="if(!isCardEditing(${i})) return;">${item.icon}</div>
-                             <span id="cat-${i}" class="text-[10px] w-full text-center px-1 py-0.5 rounded-md bg-slate-100 text-slate-500 font-bold select-none truncate" onclick="if(!isCardEditing(${i})) return;">${item.cat}</span>
+                              <span id="cat-${i}" class="text-[10px] w-full text-center px-1 py-0.5 rounded-md bg-slate-100 text-slate-500 font-bold select-none" onclick="if(!isCardEditing(${i})) return;">${item.cat}</span>
                         </div>
                         
                         <!-- Right Column: Content -->
@@ -1016,20 +1138,20 @@
                             <div class="flex gap-3">
                                 <!-- Text Content Area -->
                                 <div class="flex-1 min-w-0">
-                                    <div id="title-${i}" class="font-bold text-base leading-tight mb-1 editable-field">${item.title}</div>
-                                    <div id="time-${i}" class="text-xs text-slate-400 font-mono editable-field mb-2 block">${item.time || ''}</div>
+                                    <div id="title-${i}" class="font-bold text-base leading-tight mb-1 editable-field">${esc(item.title)}</div>
+                                    <div id="time-${i}" class="text-xs text-slate-400 font-mono editable-field mb-2 block">${esc(item.time || '')}</div>
                                     <div class="card-detail text-slate-600 line-clamp-3"> 
-                                        <div id="desc-${i}" class="text-sm whitespace-pre-line leading-relaxed editable-field">${item.desc || ''}</div>
+                                        <div id="desc-${i}" class="text-sm whitespace-pre-line leading-relaxed editable-field">${esc(item.desc || '')}</div>
                                     </div>
                                 </div>
 
                                 <!-- Thumbnail (Right Side) - Improved Style -->
-                                ${item.img ? `<div class="w-20 h-20 bg-slate-100 rounded-xl flex-none bg-cover bg-center border border-slate-200 shadow-sm self-start mt-0.5" style="background-image: url('${item.img}')"></div>` : ''}
+                                ${item.img ? `<div class="w-20 h-20 bg-slate-100 rounded-xl flex-none bg-cover bg-center border border-slate-200 shadow-sm self-start mt-0.5" style="background-image: url('${esc(item.img)}')"></div>` : ''}
                             </div>
                             
                             <!-- Image Inputs (Full Width, Visible only in editing) -->
                             <div class="flex gap-2 mt-3 hidden group-[.editing]:flex items-center">
-                                <input id="img-${i}" type="text" class="flex-1 text-xs text-slate-400 bg-slate-50 border border-slate-200 rounded p-2" placeholder="貼上網址 或 點右邊上傳 →" value="${item.img || ''}">
+                                <input id="img-${i}" type="text" class="flex-1 text-xs text-slate-400 bg-slate-50 border border-slate-200 rounded p-2" placeholder="貼上網址 或 點右邊上傳 →" value="${esc(item.img || '')}">
                                 <label class="flex-none w-8 h-8 flex items-center justify-center bg-blue-50 text-blue-500 rounded cursor-pointer hover:bg-blue-100 border border-blue-200 transition-colors" title="上傳圖片">
                                     <input type="file" class="hidden" accept="image/*" onchange="handleImageUpload(this, ${i})">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -1067,8 +1189,8 @@
             const iconEl = document.getElementById(`icon-${index}`);
             const catEl = document.getElementById(`cat-${index}`);
 
-            iconEl.classList.add('cycle-hint');
-            catEl.classList.add('cycle-hint');
+            iconEl.classList.add('cycle-hint', 'hover-pulse');
+            catEl.classList.add('cycle-hint', 'hover-pulse');
 
             // Attach One-time click listeners for dropdowns
             iconEl.onclick = () => selectIcon(index);
@@ -1084,8 +1206,9 @@
             // For simple implementation, use array options
 
             const select = document.createElement('select');
-            select.className = "bg-white border-2 border-blue-400 text-slate-800 text-sm rounded-lg p-1 outline-none shadow-lg z-50 relative";
-            select.style.minWidth = type === 'cat' ? "60px" : "50px";
+            select.className = "bg-white border-2 border-primary text-slate-800 text-xs rounded-lg p-1 outline-none shadow-md z-50 relative font-bold";
+            select.style.fontFamily = "inherit";
+            select.style.minWidth = type === 'cat' ? "70px" : "55px";
 
             options.forEach(opt => {
                 const option = document.createElement('option');
