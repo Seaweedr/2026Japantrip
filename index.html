@@ -647,7 +647,8 @@
         }
 
         .tab-content:not(.active)~#fab-add,
-        #todo.active~#fab-add {
+        #todo.active~#fab-add,
+        #vouchers.active~#fab-add {
             display: none;
         }
 
@@ -672,6 +673,45 @@
         .packing-item.checked span {
             text-decoration: line-through;
             opacity: 0.5;
+        }
+
+        /* Voucher Styles */
+        .voucher-card {
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .voucher-card:active {
+            transform: scale(0.98);
+        }
+
+        .voucher-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #f1f5f9;
+        }
+
+        .voucher-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            background: rgba(15, 23, 42, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .voucher-overlay.show {
+            display: flex;
         }
 
         /* Only show FAB when Itinerary tab is active and modal is CLOSED */
@@ -1120,6 +1160,11 @@
             </div>
         </div>
 
+        <!-- Tab: Vouchers -->
+        <div id="vouchers" class="tab-content space-y-4">
+            <!-- Rendered by JS -->
+        </div>
+
         <!-- Rich Text Toolbar -->
         <div id="rich-toolbar" class="rich-toolbar">
             <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('bold')"
@@ -1344,16 +1389,45 @@
             }
         ];
 
+        const defaultVouchers = [
+            {
+                title: "唐吉訶德 Don Quijote",
+                desc: "免稅 10% + 5%~7% 折扣\n滿 1 萬日圓享 5% off，滿 3 萬享 7% off",
+                img: "don_quijote_coupon_preview_1768673227226.png",
+                cat: "購物"
+            },
+            {
+                title: "Bic Camera 必買工具",
+                desc: "免稅 10% + 3%~7% 折扣\n家電/玩具 7%, 藥妝 5%, 酒類 3%",
+                img: "bic_camera_coupon_preview_1768673243943.png",
+                cat: "電器"
+            },
+            {
+                title: "松本清 Matsumoto Kiyoshi",
+                desc: "免稅 10% + 3%~7% 折扣\n滿 1 萬 3% off, 滿 3 萬 5% off, 滿 5 萬 7% off",
+                img: "matsumoto_kiyoshi_coupon_preview_1768673259971.png",
+                cat: "藥妝"
+            },
+            {
+                title: "三井 Outlet Mitsui",
+                desc: "免稅 10% + 最高 10% 折扣券\n需至服務台出示護照領取優惠券",
+                img: "https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?q=80&w=600&auto=format&fit=crop",
+                cat: "購物"
+            }
+        ];
+
         // State Init
         let savedData = JSON.parse(localStorage.getItem('trip_data_2601'));
-        let itinerary, packing;
+        let itinerary, packing, vouchers;
 
         if (savedData && savedData.itinerary) {
             itinerary = savedData.itinerary;
             packing = savedData.packing || defaultPacking;
+            vouchers = savedData.vouchers || defaultVouchers;
         } else {
             itinerary = savedData || defaultItinerary;
             packing = defaultPacking;
+            vouchers = defaultVouchers;
         }
 
         let currentDay = parseInt(localStorage.getItem('currentDay')) || 1;
@@ -1408,7 +1482,7 @@
         }
 
         async function saveItinerary() {
-            localStorage.setItem('trip_data_2601', JSON.stringify({ itinerary, packing }));
+            localStorage.setItem('trip_data_2601', JSON.stringify({ itinerary, packing, vouchers }));
             if (db) {
                 pushToCloud();
             }
@@ -1422,6 +1496,7 @@
                 await db.collection('trips').doc(syncId).set({
                     itinerary: itinerary,
                     packing: packing,
+                    vouchers: vouchers,
                     lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 setTimeout(() => dot.classList.remove('syncing'), 500);
@@ -1440,8 +1515,10 @@
                     const data = doc.data();
                     itinerary = data.itinerary;
                     if (data.packing) packing = data.packing;
+                    if (data.vouchers) vouchers = data.vouchers;
                     renderDay(currentDay);
                     if (document.getElementById('packing').classList.contains('active')) renderPacking();
+                    if (document.getElementById('vouchers').classList.contains('active')) renderVouchers();
                 }
                 setTimeout(() => dot.classList.remove('syncing'), 500);
             } catch (e) {
@@ -2141,6 +2218,7 @@
             document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
 
             if (tab === 'packing') renderPacking();
+            if (tab === 'vouchers') renderVouchers();
 
             // Toggle FAB visibility
             const fab = document.getElementById('fab-add');
@@ -2151,6 +2229,85 @@
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Voucher Logic
+        function renderVouchers() {
+            const container = document.getElementById('vouchers');
+            container.innerHTML = `
+                <div class="px-6 pt-6 flex justify-between items-center">
+                    <h2 class="text-2xl font-black">🎟️ 優惠折價券</h2>
+                    <button onclick="addVoucher()" class="bg-blue-500 text-white text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-wider shadow-lg shadow-blue-500/30">+ 新增</button>
+                </div>
+                <div class="px-6 pb-24 space-y-6 mt-6">
+                    ${vouchers.map((v, idx) => `
+                        <div class="voucher-card relative group">
+                            <img src="${v.img}" class="voucher-img" onclick="viewVoucher('${v.img}')">
+                            <div class="p-5">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="text-[9px] font-black px-2 py-0.5 bg-slate-100 text-slate-500 rounded-full uppercase tracking-tighter">${v.cat}</span>
+                                </div>
+                                <h3 contenteditable="true" onblur="updateVoucher(${idx}, 'title', this.innerText)" class="text-lg font-black text-slate-800 outline-none">${esc(v.title)}</h3>
+                                <p contenteditable="true" onblur="updateVoucher(${idx}, 'desc', this.innerText)" class="text-sm text-slate-500 mt-1 whitespace-pre-line outline-none">${esc(v.desc)}</p>
+                                
+                                <div class="mt-4 flex gap-2">
+                                    <button class="bg-slate-50 text-slate-400 text-[10px] font-black px-3 py-1.5 rounded-lg flex-1 group-hover:bg-red-50 group-hover:text-red-400 transition-colors" onclick="deleteVoucher(${idx})">移除優惠券</button>
+                                    <label class="bg-slate-50 text-slate-400 text-[10px] font-black px-3 py-1.5 rounded-lg flex-1 flex items-center justify-center cursor-pointer hover:bg-blue-50 hover:text-blue-500 transition-colors">
+                                        更換圖片
+                                        <input type="file" class="hidden" onchange="handleVoucherUpload(this, ${idx})">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function viewVoucher(src) {
+            const viewer = document.getElementById('voucher-viewer');
+            document.getElementById('viewer-img').src = src;
+            viewer.classList.add('show');
+        }
+
+        function closeVoucher() {
+            document.getElementById('voucher-viewer').classList.remove('show');
+        }
+
+        function addVoucher() {
+            vouchers.unshift({
+                title: "新優惠券",
+                desc: "點擊修改說明...",
+                img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=600&auto=format&fit=crop",
+                cat: "購物"
+            });
+            saveItinerary();
+            renderVouchers();
+        }
+
+        function updateVoucher(idx, field, val) {
+            vouchers[idx][field] = val;
+            saveItinerary();
+        }
+
+        function deleteVoucher(idx) {
+            showModal('確定要移除這張優惠券嗎？', () => {
+                vouchers.splice(idx, 1);
+                saveItinerary();
+                renderVouchers();
+            }, true);
+        }
+
+        function handleVoucherUpload(input, idx) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    vouchers[idx].img = e.target.result;
+                    saveItinerary();
+                    renderVouchers();
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
         }
 
         // Packing Logic
