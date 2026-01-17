@@ -374,8 +374,8 @@
             padding-right: 1.5rem;
             border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-            z-index: 45;
-            /* Above many things when sticky */
+            z-index: 900;
+            /* Below main header but above cards */
         }
 
         /* Editing Mode - Premium Style */
@@ -411,33 +411,39 @@
             color: #1e293b;
         }
 
-        /* Cycle Hints for Icon/Cat */
-        .editing .cycle-hint {
-            position: relative;
-            cursor: pointer;
-            /* Remove animation to make it look more like a stable UI element */
+        /* Detail Modal Editing Cues */
+        #detail-modal [contenteditable="true"] {
+            padding: 4px 8px;
+            margin: 0 -8px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
         }
 
-        .editing .cycle-hint::after {
-            content: '▼';
-            position: absolute;
-            bottom: -5px;
-            right: -5px;
-            background: #3b82f6;
-            color: white;
-            font-size: 8px;
-            width: 17px;
-            height: 17px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        #detail-modal [contenteditable="true"]:hover {
+            background: #f8fafc;
+            border-color: #e2e8f0;
+        }
+
+        #detail-modal [contenteditable="true"]:focus {
+            background: #fff;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .editing-label {
+            display: none;
+            font-size: 10px;
+            color: #3b82f6;
             font-weight: bold;
-            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.5);
-            pointer-events: none;
-            border: 2px solid white;
-            line-height: 1;
-            z-index: 10;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        #detail-modal [contenteditable="true"]:focus+.editing-label,
+        #detail-modal [contenteditable="true"]:hover+.editing-label {
+            display: block;
         }
 
         @keyframes bounce-gentle {
@@ -460,44 +466,24 @@
             display: flex;
             gap: 10px;
             z-index: 50;
-            /* Higher z-index to stay on top */
             pointer-events: auto;
+            transition: opacity 0.2s;
+        }
+
+        .activity-card.editing .card-actions {
+            opacity: 0;
+            pointer-events: none;
         }
 
         /* Drag Handle */
-        .drag-handle {
-            position: absolute;
-            bottom: 12px;
-            right: 12px;
-            width: 44px;
-            /* Larger hit area */
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: move;
-            color: #94a3b8;
-            font-size: 24px;
-            touch-action: none;
-            z-index: 40;
-            opacity: 0.6;
-            background: rgba(248, 250, 252, 0.5);
-            border-radius: 50%;
-        }
-
-        .activity-card:hover .drag-handle {
-            opacity: 1;
-        }
-
-        .activity-card.editing .drag-handle {
-            display: none;
-        }
-
         .activity-card.dragging {
             opacity: 0.5;
+            z-index: 1000;
             background: #f8fafc;
             border: 2px dashed #94a3b8;
-            transform: scale(0.98);
+            transform: scale(1.02);
+            /* Slight lift effect */
+            transition: transform 0.1s;
         }
 
         .action-btn {
@@ -758,12 +744,21 @@
             class="detail-card bg-white w-full sm:max-w-md sm:rounded-3xl rounded-t-3xl p-0 relative shadow-2xl max-h-[90vh] overflow-y-auto transform translate-y-full transition-transform duration-300 ease-out flex flex-col">
 
             <!-- Cover Image Area -->
-            <div id="detail-img-container" class="w-full h-48 bg-slate-100 relative hidden">
+            <div id="detail-img-container" class="w-full h-48 bg-slate-100 relative group/cover">
                 <img id="detail-img" src="" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                <label
+                    class="absolute top-4 right-4 bg-black/50 backdrop-blur text-white p-2 rounded-full cursor-pointer hover:bg-black/70 transition opacity-0 group-hover/cover:opacity-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                    </svg>
+                    <input type="file" class="hidden" onchange="handleDetailImageUpload(this)">
+                </label>
             </div>
 
-            <div class="p-6">
+            <div class="p-6 relative">
                 <!-- Header -->
                 <div class="flex items-start gap-4 mb-4">
                     <div id="detail-icon" class="text-4xl filter drop-shadow-md"></div>
@@ -773,26 +768,34 @@
                                 class="text-xs px-2 py-0.5 rounded-full bg-slate-100 font-bold text-slate-600"></span>
                             <span id="detail-time" class="text-xs text-slate-400 font-mono"></span>
                         </div>
-                        <h2 id="detail-title" class="text-2xl font-black text-slate-800 leading-tight"></h2>
+                        <h2 id="detail-title" class="text-2xl font-black text-slate-800 leading-tight outline-none"
+                            contenteditable="true"></h2>
                     </div>
                 </div>
 
                 <!-- Body -->
-                <div id="detail-desc" class="text-base text-slate-600 leading-7 mb-6 rich-content"></div>
+                <div id="detail-desc" class="text-base text-slate-600 leading-7 mb-8 rich-content outline-none"
+                    contenteditable="true"></div>
 
                 <!-- Actions -->
-                <a id="detail-map" href="#" target="_blank"
-                    class="flex items-center justify-center gap-2 w-full py-4 bg-blue-50 text-blue-600 rounded-xl font-bold hover:bg-blue-100 transition mb-4 hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    開啟 Google Maps
-                </a>
+                <div class="flex flex-col gap-3 mt-4 border-t border-slate-50 pt-6">
+                    <a id="detail-map" href="#" target="_blank"
+                        class="flex items-center justify-center gap-2 w-full py-3 bg-blue-50 text-blue-600 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-blue-100 transition hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        開啟 Google Maps
+                    </a>
 
-                <button onclick="closeDetailModal()"
-                    class="w-full py-4 bg-slate-100 text-slate-800 rounded-xl font-bold">關閉</button>
+                    <div class="flex gap-3">
+                        <button onclick="saveDetailModal()"
+                            class="flex-[2] py-3.5 bg-blue-500 text-white rounded-xl text-sm font-black uppercase tracking-wider shadow-lg shadow-blue-500/30 hover:bg-blue-600 transition-all active:scale-95">儲存變更</button>
+                        <button onclick="closeDetailModal()"
+                            class="flex-1 py-3.5 bg-slate-100 text-slate-500 rounded-xl text-sm font-black uppercase tracking-wider hover:bg-slate-200 transition-all">取消</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -853,7 +856,7 @@
 
     <!-- Sticky Header -->
     <header id="main-header"
-        class="fixed top-0 left-0 right-0 z-40 bg-white/70 backdrop-blur-2xl border-b-[0.5px] border-black/5 px-6 py-4"
+        class="fixed top-0 left-0 right-0 z-[1000] bg-white/70 backdrop-blur-2xl border-b-[0.5px] border-black/5 px-6 py-4"
         style="backdrop-filter: var(--ios-blur); -webkit-backdrop-filter: var(--ios-blur);">
         <div class="max-w-md mx-auto flex justify-between items-center">
             <div>
@@ -1081,15 +1084,23 @@
 
         <!-- Rich Text Toolbar -->
         <div id="rich-toolbar" class="rich-toolbar">
-            <button class="toolbar-btn" onclick="richCmd('bold')" title="粗體"><b>B</b></button>
-            <button class="toolbar-btn" onclick="richCmd('italic')" title="斜體"><i>I</i></button>
-            <button class="toolbar-btn" onclick="richCmd('foreColor', '#ef4444')" style="color:#ef4444">A</button>
-            <button class="toolbar-btn" onclick="richCmd('foreColor', '#3b82f6')" style="color:#3b82f6">A</button>
-            <button class="toolbar-btn" onclick="richCmd('foreColor', '#10b981')" style="color:#10b981">A</button>
-            <button class="toolbar-btn" onclick="richCmd('foreColor', '#64748b')" style="color:#64748b">A</button>
+            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('bold')"
+                title="粗體"><b>B</b></button>
+            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('italic')"
+                title="斜體"><i>I</i></button>
+            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('foreColor', '#ef4444')"
+                style="color:#ef4444">A</button>
+            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('foreColor', '#3b82f6')"
+                style="color:#3b82f6">A</button>
+            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('foreColor', '#10b981')"
+                style="color:#10b981">A</button>
+            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('foreColor', '#64748b')"
+                style="color:#64748b">A</button>
             <div class="w-px h-4 bg-white/20 mx-1"></div>
-            <button class="toolbar-btn" onclick="richCmd('insertUnorderedList')" title="列表">•</button>
-            <button class="toolbar-btn" onclick="promptInsertImage()" title="插入圖片">🖼️</button>
+            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('insertUnorderedList')"
+                title="列表">•</button>
+            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="promptInsertImage()"
+                title="插入圖片">🖼️</button>
         </div>
 
     </main>
@@ -1408,9 +1419,6 @@
                             <span id="cat-${i}" class="cat-badge" onclick="if(!isCardEditing(${i})) return;">${item.cat}</span>
                         </div>
 
-                        <!-- Drag Handle -->
-                        <div class="drag-handle !top-2/3 !bottom-auto !right-4" id="drag-${i}">⠿</div>
-
                         <div class="cursor-pointer" onclick="if(!isCardEditing(${i})) openDetail(${i})">
                             <div id="title-${i}" class="font-bold text-lg leading-tight mb-1 editable-field">${esc(item.title)}</div>
                             <div id="time-${i}" class="text-xs text-slate-400 font-mono font-bold editable-field block mb-3">${esc(item.time || '')}</div>
@@ -1592,7 +1600,9 @@
         }
 
         // Detail Modal Logic
+        let detailActiveIndex = null;
         function openDetail(index) {
+            detailActiveIndex = index;
             const item = itinerary[currentDay][index];
             const modal = document.getElementById('detail-modal');
 
@@ -1628,6 +1638,55 @@
 
         function closeDetailModal() {
             document.getElementById('detail-modal').classList.remove('show');
+            detailActiveIndex = null;
+        }
+
+        function saveDetailModal() {
+            if (detailActiveIndex === null) return;
+            const index = detailActiveIndex;
+
+            itinerary[currentDay][index].title = document.getElementById('detail-title').innerText;
+            itinerary[currentDay][index].desc = document.getElementById('detail-desc').innerHTML;
+
+            saveItinerary();
+            renderDay(currentDay);
+            closeDetailModal();
+        }
+
+        function handleDetailImageUpload(input) {
+            const file = input.files[0];
+            if (!file || detailActiveIndex === null) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = new Image();
+                img.onload = function () {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    const maxDim = 800;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > maxDim) { height *= maxDim / width; width = maxDim; }
+                    } else {
+                        if (height > maxDim) { width *= maxDim / height; height = maxDim; }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+
+                    // Update state and UI
+                    itinerary[currentDay][detailActiveIndex].img = dataUrl;
+                    document.getElementById('detail-img').src = dataUrl;
+                    document.getElementById('detail-img-container').classList.remove('hidden');
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
         }
 
         // Image Upload Logic (Compress & Convert to Base64)
@@ -1681,59 +1740,70 @@
             reader.readAsDataURL(file);
         }
 
-        // Drag & Drop Logic (Mobile Optimized with Multi-touch awareness)
+        // Drag & Drop Logic (2s Long-press on whole card)
         function setupDragHandlers() {
             const container = document.getElementById('day-container');
-            const handles = container.querySelectorAll('.drag-handle');
+            const cards = container.querySelectorAll('.activity-card');
             let draggingItem = null;
             let activeTouchId = null;
+            let longPressTimer = null;
+            let startPos = { x: 0, y: 0 };
 
-            handles.forEach(handle => {
-                const card = handle.closest('.activity-card');
-
+            cards.forEach(card => {
                 const handleStart = (e) => {
-                    if (draggingItem) return;
-                    if (card.classList.contains('editing')) return; // DON'T START DRAG IF EDITING
+                    if (draggingItem || card.classList.contains('editing')) return;
 
-                    if (e.type === 'touchstart') {
-                        activeTouchId = e.changedTouches[0].identifier;
-                        // Haptic feedback if supported
-                        if (window.navigator.vibrate) window.navigator.vibrate(20);
-                    }
+                    const touch = e.type === 'touchstart' ? e.changedTouches[0] : e;
+                    if (e.type === 'touchstart') activeTouchId = touch.identifier;
+                    startPos = { x: touch.clientX, y: touch.clientY };
 
-                    draggingItem = card;
-                    card.classList.add('dragging');
-
-                    if (e.type === 'touchstart') e.preventDefault();
+                    // 2 Seconds Long Press
+                    longPressTimer = setTimeout(() => {
+                        draggingItem = card;
+                        card.classList.add('dragging');
+                        if (window.navigator.vibrate) window.navigator.vibrate([100, 50, 100]); // Noticeable vibration
+                    }, 2000); // Changed to 2000ms as requested
                 };
 
                 const handleMove = (e) => {
-                    if (!draggingItem) return;
+                    const touch = e.type === 'touchmove' ?
+                        Array.from(e.touches).find(t => t.identifier === activeTouchId) : e;
+                    if (!touch) return;
 
-                    let clientY;
-                    if (e.type === 'touchmove') {
-                        // Find the touch that started the drag
-                        const touch = Array.from(e.touches).find(t => t.identifier === activeTouchId);
-                        if (!touch) return;
-                        clientY = touch.clientY;
-                        e.preventDefault(); // Prevent scroll while dragging
-                    } else {
-                        clientY = e.clientY;
+                    // If not dragging yet, check if moved significantly to cancel long press
+                    if (!draggingItem && longPressTimer) {
+                        const dist = Math.hypot(touch.clientX - startPos.x, touch.clientY - startPos.y);
+                        if (dist > 10) { // If finger moves more than 10px, it's a scroll, not a long press
+                            clearTimeout(longPressTimer);
+                            longPressTimer = null;
+                        }
+                        return;
                     }
 
-                    const siblings = [...container.querySelectorAll('.activity-card:not(.dragging)')];
-                    let nextSibling = siblings.find(sibling => {
-                        const box = sibling.getBoundingClientRect();
-                        return clientY <= box.top + box.height / 2;
-                    });
-
-                    container.insertBefore(draggingItem, nextSibling);
+                    if (draggingItem) {
+                        e.preventDefault(); // Prevent scrolling once drag is active
+                        const clientY = touch.clientY;
+                        const siblings = [...container.querySelectorAll('.activity-card:not(.dragging)')];
+                        let nextSibling = siblings.find(sibling => {
+                            const box = sibling.getBoundingClientRect();
+                            return clientY <= box.top + box.height / 2;
+                        });
+                        container.insertBefore(draggingItem, nextSibling);
+                    }
                 };
 
                 const handleEnd = (e) => {
-                    if (!draggingItem) return;
+                    if (longPressTimer) {
+                        clearTimeout(longPressTimer);
+                        longPressTimer = null;
+                    }
 
-                    if (e.type === 'touchend') {
+                    if (!draggingItem) {
+                        activeTouchId = null;
+                        return;
+                    }
+
+                    if (e.type === 'touchend' || e.type === 'touchcancel') {
                         const touch = Array.from(e.changedTouches).find(t => t.identifier === activeTouchId);
                         if (!touch) return;
                         activeTouchId = null;
@@ -1744,19 +1814,16 @@
                     updateOrderFromDOM();
                 };
 
-                // Touch Events
-                handle.addEventListener('touchstart', handleStart, { passive: false });
-                handle.addEventListener('touchmove', handleMove, { passive: false });
-                handle.addEventListener('touchend', handleEnd, { passive: false });
-                handle.addEventListener('touchcancel', handleEnd, { passive: false });
-
-                // Mouse Events (Desktop fallback)
-                handle.addEventListener('mousedown', handleStart);
+                // Add to card instead of handle
+                card.addEventListener('touchstart', handleStart, { passive: true });
+                card.addEventListener('touchmove', handleMove, { passive: false });
+                card.addEventListener('touchend', handleEnd, { passive: true });
+                card.addEventListener('touchcancel', handleEnd, { passive: true });
+                card.addEventListener('mousedown', handleStart);
             });
 
-            // Bind global move/up for mouse
             document.addEventListener('mousemove', (e) => {
-                if (draggingItem && e.buttons === 1 && activeTouchId === null) {
+                if (draggingItem && activeTouchId === null) {
                     const siblings = [...container.querySelectorAll('.activity-card:not(.dragging)')];
                     let nextSibling = siblings.find(sibling => {
                         const box = sibling.getBoundingClientRect();
