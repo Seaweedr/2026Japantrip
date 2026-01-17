@@ -647,10 +647,31 @@
         }
 
         .tab-content:not(.active)~#fab-add,
-        #shopping.active~#fab-add,
-        #packing.active~#fab-add,
         #todo.active~#fab-add {
             display: none;
+        }
+
+        /* Packing List Styles */
+        .packing-category {
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .packing-item {
+            transition: all 0.2s;
+        }
+
+        .packing-item.checked {
+            background: #f8fafc;
+        }
+
+        .packing-item.checked span {
+            text-decoration: line-through;
+            opacity: 0.5;
         }
 
         /* Only show FAB when Itinerary tab is active and modal is CLOSED */
@@ -1067,23 +1088,7 @@
 
         <!-- Tab: Packing -->
         <div id="packing" class="tab-content space-y-4">
-            <div class="glass-card p-6">
-                <h2 class="text-2xl font-black mb-6">🎒 行李清單</h2>
-                <div class="space-y-3">
-                    <div class="p-4 bg-blue-50 rounded-2xl">
-                        <p class="text-[10px] font-black text-blue-400 uppercase">衣物</p>
-                        <p class="text-xs font-bold mt-1">• 發熱衣、羊毛襪、圍巾、手套、毛帽</p>
-                    </div>
-                    <div class="p-4 bg-slate-50 rounded-2xl">
-                        <p class="text-[10px] font-black text-slate-400 uppercase">文件</p>
-                        <p class="text-xs font-bold mt-1">• 護照、JR Pass QR、演唱會門票</p>
-                    </div>
-                    <div class="p-4 bg-indigo-50 rounded-2xl">
-                        <p class="text-[10px] font-black text-indigo-400 uppercase">電子設備</p>
-                        <p class="text-xs font-bold mt-1">• 行動電源、相機、充電器</p>
-                    </div>
-                </div>
-            </div>
+            <!-- Rendered by JS -->
         </div>
 
         <!-- Tab: To-Do -->
@@ -1272,9 +1277,85 @@
                 { cat: '移動', icon: '✈️', title: '航班 CX451', time: '15:20', desc: '15:20 成田T2 → 18:40 桃園', map: 'https://www.google.com/maps/search/?api=1&query=Narita+Airport+Terminal+2' }
             ]
         };
+        const defaultPacking = [
+            {
+                cat: "重要",
+                icon: "🔐",
+                items: [
+                    { text: "護照", checked: true },
+                    { text: "eSim", checked: true },
+                    { text: "機票", checked: true },
+                    { text: "手機、充電線", checked: true },
+                    { text: "台幣現金、錢包、信用卡", checked: false },
+                    { text: "行動電源", checked: true },
+                    { text: "日幣現金、零錢包", checked: true },
+                    { text: "Airpods Pro", checked: true },
+                    { text: "手表、充電線", checked: true },
+                    { text: "家裡鑰匙", checked: true },
+                    { text: "行李秤?", checked: false },
+                    { text: "行李束帶", checked: true },
+                    { text: "行李擴充包", checked: true },
+                    { text: "伊勢丹貴賓卡", checked: true },
+                    { text: "HARUKA / 南海電鐵 車票", checked: true }
+                ]
+            },
+            {
+                cat: "服裝",
+                icon: "👕",
+                items: [
+                    { text: "衣服 3+1", checked: true },
+                    { text: "褲子 2+1", checked: true },
+                    { text: "內衣 0 / 內褲 4+1", checked: true },
+                    { text: "襪子 4+1", checked: true },
+                    { text: "外套 1", checked: true },
+                    { text: "雨傘 0", checked: true },
+                    { text: "睡衣睡褲 1", checked: false },
+                    { text: "真空夾鏈袋 4", checked: true },
+                    { text: "帽子/手套/圍巾", checked: false }
+                ]
+            },
+            {
+                cat: "藥品美妝",
+                icon: "💊",
+                items: [
+                    { text: "維他命/益生菌/魚油", checked: true },
+                    { text: "化妝水、乳液", checked: true },
+                    { text: "護唇膏", checked: true },
+                    { text: "隱形眼鏡", checked: true },
+                    { text: "防曬、卸妝油", checked: true },
+                    { text: "頭痛藥、感冒藥", checked: true },
+                    { text: "腸胃藥", checked: true },
+                    { text: "護手霜", checked: true },
+                    { text: "口罩", checked: true },
+                    { text: "牙間刷", checked: true },
+                    { text: "濕疹軟膏/嘴破藥", checked: true },
+                    { text: "面紙/濕紙巾", checked: true },
+                    { text: "痠痛貼布/休足", checked: false },
+                    { text: "髮型澎澎水", checked: false }
+                ]
+            },
+            {
+                cat: "3C 與其他",
+                icon: "📸",
+                items: [
+                    { text: "相機、記憶卡、電池、充電器", checked: true },
+                    { text: "筆", checked: true }
+                ]
+            }
+        ];
 
         // State Init
-        let itinerary = JSON.parse(localStorage.getItem('trip_data_2601')) || defaultItinerary;
+        let savedData = JSON.parse(localStorage.getItem('trip_data_2601'));
+        let itinerary, packing;
+
+        if (savedData && savedData.itinerary) {
+            itinerary = savedData.itinerary;
+            packing = savedData.packing || defaultPacking;
+        } else {
+            itinerary = savedData || defaultItinerary;
+            packing = defaultPacking;
+        }
+
         let currentDay = parseInt(localStorage.getItem('currentDay')) || 1;
 
         // Content Protection Utility
@@ -1327,7 +1408,7 @@
         }
 
         async function saveItinerary() {
-            localStorage.setItem('trip_data_2601', JSON.stringify(itinerary));
+            localStorage.setItem('trip_data_2601', JSON.stringify({ itinerary, packing }));
             if (db) {
                 pushToCloud();
             }
@@ -1340,6 +1421,7 @@
             try {
                 await db.collection('trips').doc(syncId).set({
                     itinerary: itinerary,
+                    packing: packing,
                     lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 setTimeout(() => dot.classList.remove('syncing'), 500);
@@ -1357,7 +1439,9 @@
                 if (doc.exists) {
                     const data = doc.data();
                     itinerary = data.itinerary;
+                    if (data.packing) packing = data.packing;
                     renderDay(currentDay);
+                    if (document.getElementById('packing').classList.contains('active')) renderPacking();
                 }
                 setTimeout(() => dot.classList.remove('syncing'), 500);
             } catch (e) {
@@ -2056,6 +2140,8 @@
             document.getElementById(tab).classList.add('active');
             document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
 
+            if (tab === 'packing') renderPacking();
+
             // Toggle FAB visibility
             const fab = document.getElementById('fab-add');
             if (tab === 'itinerary') {
@@ -2065,6 +2151,74 @@
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Packing Logic
+        function renderPacking() {
+            const container = document.getElementById('packing');
+            container.innerHTML = `
+                <div class="px-6 pt-6">
+                    <h2 class="text-2xl font-black mb-6">🎒 行李清單</h2>
+                </div>
+                <div class="px-6 pb-20 space-y-6">
+                    ${packing.map((cat, catIdx) => `
+                        <div class="packing-category">
+                            <div class="px-5 py-3 border-b border-slate-50 flex justify-between items-center bg-slate-50/50">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-lg">${cat.icon}</span>
+                                    <span class="font-black text-sm uppercase tracking-wider text-slate-600">${cat.cat}</span>
+                                </div>
+                                <button onclick="addPackingItem(${catIdx})" class="text-xs font-black text-blue-500 hover:text-blue-600 transition-colors uppercaseTracking leading-none">+ 新增項目</button>
+                            </div>
+                            <div class="divide-y divide-slate-50">
+                                ${cat.items.map((item, itemIdx) => `
+                                    <div class="packing-item p-4 flex items-center justify-between group ${item.checked ? 'checked' : ''}">
+                                        <label class="flex items-center gap-3 flex-1 cursor-pointer">
+                                            <input type="checkbox" ${item.checked ? 'checked' : ''} 
+                                                   onchange="togglePackingItem(${catIdx}, ${itemIdx})"
+                                                   class="w-5 h-5 rounded-lg border-slate-200 text-blue-500 focus:ring-blue-500 transition-all">
+                                            <span contenteditable="true" 
+                                                  onblur="updatePackingItem(${catIdx}, ${itemIdx}, this.innerText)"
+                                                  class="text-sm font-bold text-slate-700 outline-none">${esc(item.text)}</span>
+                                        </label>
+                                        <button onclick="deletePackingItem(${catIdx}, ${itemIdx})" 
+                                                class="opacity-0 group-hover:opacity-100 text-slate-300 hover:text-red-500 transition-all ml-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function togglePackingItem(catIdx, itemIdx) {
+            packing[catIdx].items[itemIdx].checked = !packing[catIdx].items[itemIdx].checked;
+            if (window.navigator.vibrate) window.navigator.vibrate(20);
+            saveItinerary();
+            renderPacking();
+        }
+
+        function updatePackingItem(catIdx, itemIdx, newVal) {
+            if (packing[catIdx].items[itemIdx].text === newVal) return;
+            packing[catIdx].items[itemIdx].text = newVal;
+            saveItinerary();
+        }
+
+        function addPackingItem(catIdx) {
+            packing[catIdx].items.push({ text: "新項目", checked: false });
+            saveItinerary();
+            renderPacking();
+        }
+
+        function deletePackingItem(catIdx, itemIdx) {
+            packing[catIdx].items.splice(itemIdx, 1);
+            saveItinerary();
+            renderPacking();
         }
 
         // Init Checkboxes for shop/todo persistence (Simple version)
