@@ -1967,6 +1967,15 @@
             const btn = document.getElementById('modal-confirm-btn');
             const icon = modal.querySelector('.w-12');
 
+            // Clear any active interactions on cards
+            document.querySelectorAll('.activity-card').forEach(c => {
+                c.classList.remove('pressing', 'dragging');
+            });
+            if (longPressTimer) {
+                clearTimeout(longPressTimer);
+                longPressTimer = null;
+            }
+
             msgEl.innerText = msg;
             pendingCallback = callback;
 
@@ -1980,11 +1989,17 @@
                 icon.innerText = "?";
             }
 
+            document.body.classList.add('modal-open');
             modal.classList.add('show');
         }
 
         function closeModal() {
             document.getElementById('custom-modal').classList.remove('show');
+            document.body.classList.remove('modal-open');
+            // Fail-safe to ensure all cards are reset
+            document.querySelectorAll('.activity-card').forEach(c => {
+                c.classList.remove('pressing', 'dragging');
+            });
             setTimeout(() => { pendingCallback = null; }, 300);
         }
 
