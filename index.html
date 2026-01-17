@@ -487,12 +487,28 @@
         /* Drag Handle */
         .activity-card.dragging {
             opacity: 0.5;
-            z-index: 1000;
+            z-index: 1000 !important;
             background: #f8fafc;
-            border: 2px dashed #94a3b8;
-            transform: scale(1.02);
-            /* Slight lift effect */
-            transition: transform 0.1s;
+            border: 2px dashed #3b82f6;
+            transform: scale(1.05);
+            /* Noticeable lift */
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Press feedback animation */
+        @keyframes card-press {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(0.96);
+            }
+        }
+
+        .activity-card.pressing {
+            animation: card-press 0.8s ease-in-out forwards;
+            background: #f1f5f9;
         }
 
         .action-btn {
@@ -1749,7 +1765,7 @@
             reader.readAsDataURL(file);
         }
 
-        // Drag & Drop Logic (2s Long-press on whole card)
+        // Drag & Drop Logic (Optimized 800ms Long-press)
         function setupDragHandlers() {
             const container = document.getElementById('day-container');
             const cards = container.querySelectorAll('.activity-card');
@@ -1757,6 +1773,7 @@
             let activeTouchId = null;
             let longPressTimer = null;
             let startPos = { x: 0, y: 0 };
+            let dragOccurred = false;
 
             cards.forEach(card => {
                 const handleStart = (e) => {
@@ -1765,18 +1782,20 @@
                     const touch = e.type === 'touchstart' ? e.changedTouches[0] : e;
                     if (e.type === 'touchstart') activeTouchId = touch.identifier;
                     startPos = { x: touch.clientX, y: touch.clientY };
+                    dragOccurred = false;
 
-                    // 2 Seconds Long Press
+                    card.classList.add('pressing');
+
+                    // 800ms Long Press for better UX
                     longPressTimer = setTimeout(() => {
-                        // Clear any existing text selection to prevent mess
-                        if (window.getSelection) {
-                            window.getSelection().removeAllRanges();
-                        }
+                        if (window.getSelection) window.getSelection().removeAllRanges();
 
                         draggingItem = card;
+                        dragOccurred = true;
+                        card.classList.remove('pressing');
                         card.classList.add('dragging');
-                        if (window.navigator.vibrate) window.navigator.vibrate([100, 50, 100]); // Noticeable vibration
-                    }, 2000); // Changed to 2000ms as requested
+                        if (window.navigator.vibrate) window.navigator.vibrate(50);
+                    }, 800);
                 };
 
                 const handleMove = (e) => {
@@ -1784,18 +1803,18 @@
                         Array.from(e.touches).find(t => t.identifier === activeTouchId) : e;
                     if (!touch) return;
 
-                    // If not dragging yet, check if moved significantly to cancel long press
                     if (!draggingItem && longPressTimer) {
                         const dist = Math.hypot(touch.clientX - startPos.x, touch.clientY - startPos.y);
-                        if (dist > 10) { // If finger moves more than 10px, it's a scroll, not a long press
+                        if (dist > 15) {
                             clearTimeout(longPressTimer);
                             longPressTimer = null;
+                            card.classList.remove('pressing');
                         }
                         return;
                     }
 
                     if (draggingItem) {
-                        e.preventDefault(); // Prevent scrolling once drag is active
+                        e.preventDefault();
                         const clientY = touch.clientY;
                         const siblings = [...container.querySelectorAll('.activity-card:not(.dragging)')];
                         let nextSibling = siblings.find(sibling => {
@@ -1807,6 +1826,7 @@
                 };
 
                 const handleEnd = (e) => {
+                    card.classList.remove('pressing');
                     if (longPressTimer) {
                         clearTimeout(longPressTimer);
                         longPressTimer = null;
@@ -1817,9 +1837,13 @@
                         return;
                     }
 
+                    // If we were dragging, prevent the click from bubbling to openDetail
+                    if (dragOccurred) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+
                     if (e.type === 'touchend' || e.type === 'touchcancel') {
-                        const touch = Array.from(e.changedTouches).find(t => t.identifier === activeTouchId);
-                        if (!touch) return;
                         activeTouchId = null;
                     }
 
@@ -1828,10 +1852,22 @@
                     updateOrderFromDOM();
                 };
 
-                // Add to card instead of handle
+                // Click Guard: Prevent modal if drag happened
+                const clickableArea = card.querySelector('.cursor-pointer');
+                if (clickableArea) { // Ensure the element exists
+                    const originalOnClick = clickableArea.onclick;
+                    clickableArea.onclick = function (e) {
+                        if (dragOccurred) {
+                            dragOccurred = false; // Reset for next time
+                            return false; // Prevent default click action
+                        }
+                        if (originalOnClick) originalOnClick.apply(this, arguments);
+                    };
+                }
+
                 card.addEventListener('touchstart', handleStart, { passive: true });
                 card.addEventListener('touchmove', handleMove, { passive: false });
-                card.addEventListener('touchend', handleEnd, { passive: true });
+                card.addEventListener('touchend', handleEnd, { passive: false });
                 card.addEventListener('touchcancel', handleEnd, { passive: true });
                 card.addEventListener('mousedown', handleStart);
             });
@@ -1847,7 +1883,7 @@
                 }
             });
 
-            document.addEventListener('mouseup', () => {
+            document.addEventListener('mouseup', (e) => {
                 if (draggingItem && activeTouchId === null) {
                     draggingItem.classList.remove('dragging');
                     draggingItem = null;
