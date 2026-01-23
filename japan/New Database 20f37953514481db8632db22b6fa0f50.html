@@ -1,0 +1,714 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>New Database</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="20f37953-5144-81db-8632-db22b6fa0f50" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🏂🏻</span></div><h1 class="page-title" dir="auto">New Database</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><table class="collection-content"><thead><tr><th><span class="icon property-icon"><img src="https://www.notion.so/icons/font_gray.svg" style="width:14px;height:14px;display:block"/></span>地點</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/atm_gray.svg" style="width:14px;height:14px;display:block"/></span>台幣</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/formula_gray.svg" style="width:14px;height:14px;display:block"/></span>台幣結算</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/description_gray.svg" style="width:14px;height:14px;display:block"/></span>描述</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/atm_gray.svg" style="width:14px;height:14px;display:block"/></span>日圓</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/attachment_gray.svg" style="width:14px;height:14px;display:block"/></span>照片</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>第幾天</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>類別</th></tr></thead><tbody><tr id="27837953-5144-805e-860a-c946934fe954"><td class="cell-title"><a href="https://www.notion.so/BIRD-BATH-KIOSK-278379535144805e860ac946934fe954?pvs=21"><span class="icon">❓</span>BIRD BATH&amp;KIOSK 馬喰町</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">08:00–18:00<br/><mark class="highlight-blue">離飯店步行14分鐘</mark><br/>六休</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="25d37953-5144-80da-9b65-cd7e30797dae"><td class="cell-title"><a href="https://www.notion.so/Pelican-caf-25d37953514480da9b65cd7e30797dae?pvs=21"><span class="icon">❓</span>早餐 - Pelican café</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">備案<br/>08:30–20:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="27e37953-5144-80b1-8405-cb362dd94e3d"><td class="cell-title"><a href="https://www.notion.so/THE-ANOTHER-MUSEUM-ARTIDA-OUD-27e37953514480b18405cb362dd94e3d?pvs=21"><span class="icon">💍</span>THE ANOTHER MUSEUM ARTIDA OUD</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">飾品店<br/>12:00–18:30<br/>不順</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="24037953-5144-8007-803c-c26d8e8b8ace"><td class="cell-title"><a href="https://www.notion.so/Edifice-2403795351448007803cc26d8e8b8ace?pvs=21"><span class="icon">⭐</span>Edifice 涉谷</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><strong>417 EDIFICE Shibuya<br/>11:30–20:00</strong></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2e837953-5144-80c8-8cbf-e7d5b4561c5a"><td class="cell-title"><a href="https://www.notion.so/2e837953514480c88cbfe7d5b4561c5a?pvs=21"><span class="icon">🚉</span>神田 → 京橋</a></td><td class="cell-x^FC">0</td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">07:02→07:07 (5mins)<br/><mark class="highlight-teal">07:05→07:10</mark><br/>07:08→07:14</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="2ec37953-5144-805d-ba21-eb72c368e730"><td class="cell-title"><a href="https://www.notion.so/2ec379535144805dba21eb72c368e730?pvs=21"><span class="icon">🌸</span>銀座櫻花樹</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">京橋大根河岸果菜市場遺跡之碑</td><td class="cell-OEaF"></td><td class="cell-@)Dm"><span style="margin-inline-end:6px"><a href="New%20Database/%E9%8A%80%E5%BA%A7%E6%AB%BB%E8%8A%B1%E6%A8%B9/IMG_3534.jpg"><img style="width:20px;max-height:24px" src="New%20Database/%E9%8A%80%E5%BA%A7%E6%AB%BB%E8%8A%B1%E6%A8%B9/IMG_3534.jpg" alt="IMG_3534.JPG"/></a></span></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="2ec37953-5144-80ba-9658-fb26230ad177"><td class="cell-title"><a href="https://www.notion.so/2ec37953514480ba9658fb26230ad177?pvs=21"><span class="icon">🚉</span>京橋 → 神谷町</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-teal">07:42→07:57</mark> (15mins)<br/><mark class="highlight-default">07:48→08:02</mark><br/>07:57→08:12<br/><br/>銀座線 <mark class="highlight-orange">→銀座站</mark> 換日比谷線</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="25d37953-5144-809f-9ed9-c7e12f152e56"><td class="cell-title"><a href="https://www.notion.so/08-00-Balcony-by-6th-25d379535144809f9ed9c7e12f152e56?pvs=21"><span class="icon">⭐</span>08:00 Balcony by 6th</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">08:00–10:30<br/>11:00–23:00<br/><mark class="highlight-teal"><strong>Tabelog 已訂位</strong></mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2bc37953-5144-807d-8606-d8e6bcef9868"><td class="cell-title"><a href="https://www.notion.so/Maidens-shop-2bc379535144807d8606d8e6bcef9868?pvs=21"><span class="icon">⭐</span>Maidens shop</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">12:00–19:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="22f37953-5144-8066-8bfc-f4fede2152ae"><td class="cell-title"><a href="https://www.notion.so/P-TISSERIE-ASAKO-IWAYANAGI-22f37953514480668bfcf4fede2152ae?pvs=21">PÂTISSERIE ASAKO IWAYANAGI</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00–18:00<br/><strong>帕菲</strong>女王岩柳麻子-藝術品般的甜點</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="27837953-5144-8070-b254-d3df3ba24d3b"><td class="cell-title"><a href="https://www.notion.so/Tom-Wood-Aoyama-2783795351448070b254d3df3ba24d3b?pvs=21"><span class="icon">💍</span>Tom Wood Aoyama 飾品</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">12:00–20:00 二休<br/>在南青山<br/><mark class="highlight-orange_background">感覺有點繞 by Jo</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="21737953-5144-80be-adf4-fe3e7be2ba2b"><td class="cell-title"><a href="https://www.notion.so/SLOWJAM-21737953514480beadf4fe3e7be2ba2b?pvs=21">SLOWJAM (道の駅やまがた蔵王)</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">10:00–17:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="20f37953-5144-8180-a365-d28a686b8854"><td class="cell-title"><a href="https://www.notion.so/PREMIER-MAI-20f3795351448180a365d28a686b8854?pvs=21"><span class="icon">❌</span>早餐 - PREMIER MAI </a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">08:00–16:30<br/>不順路</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="27c37953-5144-806f-8bec-f630ac358c64"><td class="cell-title"><a href="https://www.notion.so/Parklet-Bakery-27c379535144806f8becf630ac358c64?pvs=21"><span class="icon">⭐</span>Parklet Bakery</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">08:30–18:00<br/><mark class="highlight-blue">離飯店步行13分鐘</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="29337953-5144-809d-8bd3-e1b05ab63270"><td class="cell-title"><a href="https://www.notion.so/293379535144809d8bd3e1b05ab63270?pvs=21"><span class="icon">⭐</span>早餐 - 繁邦</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">惠比壽駅<br/>09:00–15:00<br/>17:30–23:00<br/><mark class="highlight-teal"><strong>早餐時段無法預約</strong></mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"><span style="margin-inline-end:6px"><a href="New%20Database/%E6%97%A9%E9%A4%90%20-%20%E7%B9%81%E9%82%A6/%E6%88%AA%E5%9C%96_2025-10-24_20.54.12.png"><img style="width:20px;max-height:24px" src="New%20Database/%E6%97%A9%E9%A4%90%20-%20%E7%B9%81%E9%82%A6/%E6%88%AA%E5%9C%96_2025-10-24_20.54.12.png" alt="截圖 2025-10-24 20.54.12.png"/></a></span></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2bc37953-5144-807a-bd8e-cd3efd63d1c4"><td class="cell-title"><a href="https://www.notion.so/2bc379535144807abd8ecd3efd63d1c4?pvs=21"><span class="icon">🚆</span>惠比壽 → 横浜</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">JR湘南新宿ライン快速<br/><mark class="highlight-teal">10:09→10:32</mark><br/>10:23→10:49</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="21637953-5144-80e0-9a8b-e191b0540a0e"><td class="cell-title"><a href="https://www.notion.so/KAIT-21637953514480e09a8be191b0540a0e?pvs=21"><span class="icon">⭐</span>神奈川工科大学 KAIT広場</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">10:00–17:00 六日休<br/><a href="https://www.kait.jp/events/178.html">預約</a> ：<mark class="highlight-red"><strong>12/10 早上9點開放預約<br/><br/>參觀時間 中午12點至下午3點半</strong></mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"><span style="margin-inline-end:6px"><a href="New%20Database/%E7%A5%9E%E5%A5%88%E5%B7%9D%E5%B7%A5%E7%A7%91%E5%A4%A7%E5%AD%A6%20KAIT%E5%BA%83%E5%A0%B4/images.jpg"><img style="width:20px;max-height:24px" src="New%20Database/%E7%A5%9E%E5%A5%88%E5%B7%9D%E5%B7%A5%E7%A7%91%E5%A4%A7%E5%AD%A6%20KAIT%E5%BA%83%E5%A0%B4/images.jpg" alt="images.jpg"/></a></span></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="2cd37953-5144-80d6-9fc7-d97c21fb2f43"><td class="cell-title"><a href="https://www.notion.so/SUGAR-BUTTER-TREE-Sogo-2cd37953514480d69fc7d97c21fb2f43?pvs=21"><span class="icon">⭐</span>SUGAR BUTTER TREE Sogo橫濱</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">10:00–20:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="27937953-5144-8037-b302-cd829276c1aa"><td class="cell-title"><a href="https://www.notion.so/Beams-Life-2793795351448037b302cd829276c1aa?pvs=21"><span class="icon">⭐</span>Beams Life 横浜</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">10:00–21:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="21737953-5144-800f-b553-dc175d32f0a9"><td class="cell-title"><a href="https://www.notion.so/217379535144800fb553dc175d32f0a9?pvs=21"><span class="icon">🚆</span>銀山溫泉街 → 大石田</a></td><td class="cell-x^FC">0</td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-red"><strong>10:20 接駁車發車<br/></strong></mark><mark class="highlight-default">預估車程40-50分</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"><span style="margin-inline-end:6px"><a href="New%20Database/%E9%8A%80%E5%B1%B1%E6%BA%AB%E6%B3%89%E8%A1%97%20%E2%86%92%20%E5%A4%A7%E7%9F%B3%E7%94%B0/17644073002812x.jpg"><img style="width:20px;max-height:24px" src="New%20Database/%E9%8A%80%E5%B1%B1%E6%BA%AB%E6%B3%89%E8%A1%97%20%E2%86%92%20%E5%A4%A7%E7%9F%B3%E7%94%B0/17644073002812x.jpg" alt="1764407300281@2x.jpg"/></a></span></td><td class="cell-rj]="><span class="selected-value select-value-color-purple">01/31(六) 銀山溫泉 → 立石寺</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="2ba37953-5144-803c-8803-d99aa019a96d"><td class="cell-title"><a href="https://www.notion.so/2ba379535144803c8803d99aa019a96d?pvs=21"><span class="icon">⭐</span>たいやきや 銀の龍鯛魚燒</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">10:00-16:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-purple">01/31(六) 銀山溫泉 → 立石寺</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="29c37953-5144-808a-ac7b-c16e2dd4df87"><td class="cell-title"><a href="https://www.notion.so/29c379535144808aac7bc16e2dd4df87?pvs=21"><span class="icon">🚆</span>大石田 → 山寺站</a></td><td class="cell-x^FC">0</td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-teal"><strong>11:55→13:09 </strong></mark><mark class="highlight-teal">(1h14m)</mark><strong><br/></strong>奧羽本線<mark class="highlight-red">搭12站</mark> 在<mark class="highlight-red">羽前千歳</mark>站 換搭<mark class="highlight-red">仙山線</mark><strong><br/>¥770</strong></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-purple">01/31(六) 銀山溫泉 → 立石寺</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="2ba37953-5144-8097-8ff6-e26b8d66e517"><td class="cell-title"><a href="https://www.notion.so/2ba37953514480978ff6e26b8d66e517?pvs=21"><span class="icon">⭐</span>午餐 - お休処対面石</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">09:00-17:00<br/><a href="https://tabelog.com/tw/yamagata/A0601/A060101/6002406/">https://tabelog.com/tw/yamagata/A0601/A060101/6002406/</a></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-purple">01/31(六) 銀山溫泉 → 立石寺</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="21737953-5144-8083-99b9-ec2e0c0b29c0"><td class="cell-title"><a href="https://www.notion.so/3-57-217379535144808399b9ec2e0c0b29c0?pvs=21"><span class="icon">❌</span>蕎麥麵琳 3.57</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:30–14:30 三休<br/>蕎麥布丁 太遠</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="21637953-5144-80ac-b7a7-ee4e885379df"><td class="cell-title"><a href="https://www.notion.so/21637953514480acb7a7ee4e885379df?pvs=21"><span class="icon">⭐</span>立石寺</a></td><td class="cell-x^FC">103</td><td class="cell-_FHJ">103</td><td class="cell-f.~Z">08:00–16:00<br/>玉こんにゃく（玉蒟蒻）</td><td class="cell-OEaF"></td><td class="cell-@)Dm"><span style="margin-inline-end:6px"><a href="New%20Database/%E7%AB%8B%E7%9F%B3%E5%AF%BA/rissyauji_shrine.jpg"><img style="width:20px;max-height:24px" src="New%20Database/%E7%AB%8B%E7%9F%B3%E5%AF%BA/rissyauji_shrine.jpg" alt="rissyauji shrine.jpg"/></a></span></td><td class="cell-rj]="><span class="selected-value select-value-color-purple">01/31(六) 銀山溫泉 → 立石寺</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="29d37953-5144-8069-a57b-f7ccf564030a"><td class="cell-title"><a href="https://www.notion.so/29d3795351448069a57bf7ccf564030a?pvs=21"><span class="icon">🚆</span>山寺站 → 山形車站</a></td><td class="cell-x^FC">0</td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">14:56→15:16<br/><mark class="highlight-teal"><strong>15:51→16:17 </strong></mark><mark class="highlight-teal">(26m)</mark><br/>16:55→17:14<strong><br/>¥242</strong></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-purple">01/31(六) 銀山溫泉 → 立石寺</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="21637953-5144-800d-bee9-d5214fd91e72"><td class="cell-title"><a href="https://www.notion.so/teamLab-Borderless-216379535144800dbee9d5214fd91e72?pvs=21"><span class="icon">⭐</span>teamLab Borderless 麻布台</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">09:00–21:00<br/><a href="https://www.klook.com/zh-TW/activity/20707-teamlab-borderless-admission-ticket-tokyo/">購票連結</a><br/>暫抓2-3小時<br/><mark class="highlight-teal"><strong>已購買門票</strong></mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="2bc37953-5144-806a-8a46-e209c16e13bf"><td class="cell-title"><a href="https://www.notion.so/2bc379535144806a8a46e209c16e13bf?pvs=21"><span class="icon">🚆</span>横浜 → 表參道</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">12:03→12:43<br/>12:12→12:50<br/>12:18→12:53<br/><br/>都要換一班車</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="20f37953-5144-8159-956e-e7993b7d4548"><td class="cell-title"><a href="https://www.notion.so/FreshService-20f3795351448159956ee7993b7d4548?pvs=21"><span class="icon">❌</span>FreshService 原宿</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">12:00–19:00 三休<br/>原宿</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="21637953-5144-8062-90dd-d9993f34b445"><td class="cell-title"><a href="https://www.notion.so/216379535144806290ddd9993f34b445?pvs=21"><span class="icon">🚉</span>飯店 → 東京車站</a></td><td class="cell-x^FC">0</td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-red">預計 05:30 起床<br/></mark><mark class="highlight-teal">• </mark><mark class="highlight-teal"><strong>06:31→06:40 2號月台山手線</strong></mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-green">01/30(五) 東京-山形</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="20f37953-5144-8134-8c1e-fe368c4477be"><td class="cell-title"><a href="https://www.notion.so/20f37953514481348c1efe368c4477be?pvs=21"><span class="icon">🚅</span>東京 → 山形</a></td><td class="cell-x^FC">0</td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-red">新幹線</mark><br/><mark class="highlight-teal">• </mark><mark class="highlight-teal"><strong>07:12→09:53</strong></mark><mark class="highlight-teal"> (2h41m)</mark><br/><mark class="highlight-red">從西口出站！</mark><br/>-<mark class="highlight-teal"><br/></mark><mark class="highlight-default">JR pass十日 </mark><mark class="highlight-default"><strong>48,000</strong></mark><mark class="highlight-default">日圓<br/>(新幹線單買來回只要22860日圓)<br/>單程一人 11250 + 11450日圓</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-green">01/30(五) 東京-山形</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="29c37953-5144-80a9-904a-d350cc559013"><td class="cell-title"><a href="https://www.notion.so/29c37953514480a9904ad350cc559013?pvs=21"><span class="icon">🛅</span>山形站前里士滿飯店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">先放行李<br/><mark class="highlight-blue">離車站步行3分鐘</mark><br/>12/1 已確認可以先提前放行李</td><td class="cell-OEaF"></td><td class="cell-@)Dm"><span style="margin-inline-end:6px"><a href="New%20Database/%E5%B1%B1%E5%BD%A2%E7%AB%99%E5%89%8D%E9%87%8C%E5%A3%AB%E6%BB%BF%E9%A3%AF%E5%BA%97/IMG_1347.jpeg"><img style="width:20px;max-height:24px" src="New%20Database/%E5%B1%B1%E5%BD%A2%E7%AB%99%E5%89%8D%E9%87%8C%E5%A3%AB%E6%BB%BF%E9%A3%AF%E5%BA%97/IMG_1347.jpeg" alt="IMG_1347.jpeg"/></a></span></td><td class="cell-rj]="><span class="selected-value select-value-color-green">01/30(五) 東京-山形</span></td><td class="cell-:QwR"></td></tr><tr id="29637953-5144-8048-ac2e-c20551b8fc3b"><td class="cell-title"><a href="https://www.notion.so/MaxValu-Yamagata-Station-West-7-Eleven-2963795351448048ac2ec20551b8fc3b?pvs=21"><span class="icon">⭐</span>超市MaxValu Yamagata Station West / 全家 / 7-Eleven</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-red">補貨！<br/></mark><mark class="highlight-teal">超市</mark><mark class="highlight-red"><br/></mark><a href="https://maps.app.goo.gl/bKVTvFdc8n73iVb38">https://maps.app.goo.gl/bKVTvFdc8n73iVb38</a><mark class="highlight-red"><br/></mark><mark class="highlight-teal">全家 山形霞城セントラル店:<br/></mark><a href="https://maps.app.goo.gl/vkXroad5mjt5nCcg7">https://maps.app.goo.gl/vkXroad5mjt5nCcg7</a><mark class="highlight-red"><br/></mark><mark class="highlight-teal">711 Yamagata Station West: <br/></mark><a href="https://maps.app.goo.gl/WmTBBo2DFGGYFurK9">https://maps.app.goo.gl/WmTBBo2DFGGYFurK9</a></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-green">01/30(五) 東京-山形</span></td><td class="cell-:QwR"></td></tr><tr id="21737953-5144-80d4-b78c-e8845157c5c0"><td class="cell-title"><a href="https://www.notion.so/3-67-21737953514480d4b78ce8845157c5c0?pvs=21"><span class="icon">⭐</span>蕎麥麵 庄司屋 3.67</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00–15:30<br/>17:00–20:00 一休<br/><mark class="highlight-blue">離飯店步行12分鐘</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-green">01/30(五) 東京-山形</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="29c37953-5144-808e-80c3-c138fcf0f201"><td class="cell-title"><a href="https://www.notion.so/29c379535144808e80c3c138fcf0f201?pvs=21"><span class="icon">🚆</span>山形 → 大石田</a></td><td class="cell-x^FC">0</td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-teal"><strong>14:44 </strong></mark><mark class="highlight-teal">→</mark><mark class="highlight-teal"><strong> 15:15 新幹線 </strong></mark>¥1,970起<br/>14:52 → 15:41 ¥680</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-green">01/30(五) 東京-山形</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="21737953-5144-8044-8a32-ca42c032db4c"><td class="cell-title"><a href="https://www.notion.so/21737953514480448a32ca42c032db4c?pvs=21"><span class="icon">🚌</span>山形車站 → 銀山溫泉</a></td><td class="cell-x^FC">0</td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">JR大石田站 飯店接駁巴士<br/><mark class="highlight-red"><strong>15:45出發<br/>有工作人員在出口拿板子確認<br/>巴士停在大石田出口左轉處</strong></mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-green">01/30(五) 東京-山形</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="21737953-5144-807e-9948-d5cbebf3aa1c"><td class="cell-title"><a href="https://www.notion.so/3-74-217379535144807e9948d5cbebf3aa1c?pvs=21"><span class="icon">❌</span>午餐 - あらきそば 3.74</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><a href="https://maps.app.goo.gl/axVFW4rSt3J5cwAB6">https://maps.app.goo.gl/axVFW4rSt3J5cwAB6</a><br/>11:00–14:00 三休</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="21637953-5144-804d-907a-e0b843239e1c"><td class="cell-title"><a href="https://www.notion.so/216379535144804d907ae0b843239e1c?pvs=21"><span class="icon">♨️</span>古勢起屋 本館</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">17619</td><td class="cell-f.~Z"><mark class="highlight-teal">已支付</mark></td><td class="cell-OEaF">83,900</td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-green">01/30(五) 東京-山形</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-green">🏡 住宿</span></td></tr><tr id="29637953-5144-80ad-94d4-c3fb16862d8f"><td class="cell-title"><a href="https://www.notion.so/29637953514480ad94d4c3fb16862d8f?pvs=21"><span class="icon">⭐</span>野川豆腐屋</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">醉旅宿推薦<br/><a href="https://maps.app.goo.gl/8Nor6sdx6CHha6wUA">https://maps.app.goo.gl/8Nor6sdx6CHha6wUA</a><br/>09:30-<mark class="highlight-red">18:00</mark> </td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-green">01/30(五) 東京-山形</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="27e37953-5144-8085-9024-dd88016c20c1"><td class="cell-title"><a href="https://www.notion.so/27e37953514480859024dd88016c20c1?pvs=21"><span class="icon">🍜</span>午餐 - 和食 一芯</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-red">先排！</mark><br/>11:30–14:00<br/>17:00–23:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2c237953-5144-8017-aa2e-d14667cabdfb"><td class="cell-title"><a href="https://www.notion.so/2c23795351448017aa2ed14667cabdfb?pvs=21"><span class="icon">⭐</span>蔦屋書店代官山</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">J-Scent香水</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="27e37953-5144-804e-95c5-ec980a6c5496"><td class="cell-title"><a href="https://www.notion.so/HOMME-PLISS-27e379535144804e95c5ec980a6c5496?pvs=21"><span class="icon">⭐</span>HOMME PLISSÉ  代官山店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="20f37953-5144-812c-bc8a-c330364a8e11"><td class="cell-title"><a href="https://www.notion.so/Nanamica-20f379535144812cbc8ac330364a8e11?pvs=21"><span class="icon">❓</span>Nanamica 代官山</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00–19:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="29637953-5144-8071-b447-e4b3cd595bc7"><td class="cell-title"><a href="https://www.notion.so/NUMBER-SUGAR-2963795351448071b447e4b3cd595bc7?pvs=21"><span class="icon">⭐</span>NUMBER SUGAR 代官山</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">牛奶糖 / 伴手禮</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="20f37953-5144-8187-860a-fbc332983ca1"><td class="cell-title"><a href="https://www.notion.so/neel-20f3795351448187860afbc332983ca1?pvs=21"><span class="icon">⭐</span>neel 中目黑</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">09:00–20:30<br/>或是喝<strong>SIDEWALK STAND</strong></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2b137953-5144-803d-9796-f6ffe201133b"><td class="cell-title"><a href="https://www.notion.so/Coverchord-2b1379535144803d9796f6ffe201133b?pvs=21"><span class="icon">⭐</span>Coverchord 日牌選物店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00–19:00<br/>中目黑 A.PRESSE、COMOLI、AURALEE 、GRAPHPAPER、KAPTAIN SUNSHINE、UNLIKELY 、DAIWA PIER39</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="27e37953-5144-800c-8979-ffbb6dc3b9db"><td class="cell-title"><a href="https://www.notion.so/BRICK-MORTAR-27e379535144800c8979ffbb6dc3b9db?pvs=21"><span class="icon">❓</span>BRICK &amp; MORTAR</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">家飾店</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2ef37953-5144-80f0-bd64-fb4bb1424111"><td class="cell-title"><a href="https://www.notion.so/1LDK-apartments-2ef37953514480f0bd64fb4bb1424111?pvs=21">1LDK apartments.</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">13:00–19:00<br/>逛ssstein</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="27e37953-5144-8030-bef3-d83f4c2b83d7"><td class="cell-title"><a href="https://www.notion.so/I-m-donut-27e3795351448030bef3d83f4c2b83d7?pvs=21"><span class="icon">⭐</span>I’m donut ? 中目黑</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2b237953-5144-803a-b2e0-dd0d3ab50d52"><td class="cell-title"><a href="https://www.notion.so/Le-Bretagne-Creperie-2b2379535144803ab2e0dd0d3ab50d52?pvs=21"><span class="icon">⭐</span>Le Bretagne Creperie</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:30-22:00<br/>沒去雪具街的話可去 <a href="https://maps.app.goo.gl/2SqVMUohx6NWpuZJ8?g_st=ipc">https://maps.app.goo.gl/2SqVMUohx6NWpuZJ8?g_st=ipc</a></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="26c37953-5144-8085-a04c-df8d3b76bff4"><td class="cell-title"><a href="https://www.notion.so/26c3795351448085a04cdf8d3b76bff4?pvs=21"><span class="icon">⭐</span>雪具一條街-御茶之水站</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">斟酌裝備，買齊就不需要去了<br/>可以改去<strong>Alpen Tokyo或神樂坂</strong><br/>暫抓2-3小時</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2af37953-5144-80c7-a40c-e5813014be87"><td class="cell-title"><a href="https://www.notion.so/Alpen-Tokyo-2af37953514480c7a40ce5813014be87?pvs=21"><span class="icon">⭐</span>Alpen Tokyo 新宿</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00–22:00<br/>運動用品店 <strong>買軟水壺<br/>1F 運動鞋 2F男性運動潮流服飾<br/>3F：戶外休閒服飾 <br/>5FOutdoor用品 (有調味粉)<br/>8F雪具</strong></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"></td></tr><tr id="2e137953-5144-80ef-8cab-e50b49461147"><td class="cell-title"><a href="https://www.notion.so/Pensta-LUMINE-EST-2e137953514480ef8cabe50b49461147?pvs=21"><span class="icon">🐧</span>Pensta LUMINE EST新宿店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00–21:00 B1樓</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="29637953-5144-80e8-817b-e33dd5f49f30"><td class="cell-title"><a href="https://www.notion.so/Victoria-Main-Shop-29637953514480e8817be33dd5f49f30?pvs=21"><span class="icon">🏂</span>Victoria Main Shop / ヴィクトリア 御茶ノ水本店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00-20:00<br/><a href="https://maps.app.goo.gl/id1ZMpBtip9mw89P6">https://maps.app.goo.gl/id1ZMpBtip9mw89P6</a><br/><mark class="highlight-red">較大及款式齊全, 但論折扣未必比得上其他小店</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="27e37953-5144-80f9-8b04-dfd24d23ecf1"><td class="cell-title"><a href="https://www.notion.so/Murasaki-Sports-27e37953514480f98b04dfd24d23ecf1?pvs=21"><span class="icon">🏂</span>Murasaki Sports 神田小川町店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00–20:00<br/><a href="https://maps.app.goo.gl/aDsxvETY5sDDnaS18">https://maps.app.goo.gl/aDsxvETY5sDDnaS18</a><br/><mark class="highlight-red">全日本連鎖</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="27e37953-5144-801c-b291-d0313c89bd83"><td class="cell-title"><a href="https://www.notion.so/London-Sports-27e379535144801cb291d0313c89bd83?pvs=21"><span class="icon">🏂</span>London Sports</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">10:30–20:30<br/><a href="https://maps.app.goo.gl/BKQq1U8Fsijp98ca7">https://maps.app.goo.gl/BKQq1U8Fsijp98ca7</a><br/><br/><mark class="highlight-red">最便宜</mark> 但大多是<mark class="highlight-red">舊款式或零碼款式</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="29637953-5144-80a3-9035-ce9eb531fadb"><td class="cell-title"><a href="https://www.notion.so/Snowboard-shop-MDS-29637953514480a39035ce9eb531fadb?pvs=21"><span class="icon">🏂</span>Snowboard shop MDS</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">12:00-20:00<br/><a href="https://maps.app.goo.gl/h6tggAUAhnabJrEf9">https://maps.app.goo.gl/h6tggAUAhnabJrEf9</a><br/>位於內街的店舖, <mark class="highlight-red">折扣較多</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2c637953-5144-80d6-97ce-d6379ef25a94"><td class="cell-title"><a href="https://www.notion.so/2c637953514480d697ced6379ef25a94?pvs=21"><span class="icon">❓</span>東京大神宮</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">06:00–21:00<br/>有時間就去</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="21637953-5144-80d1-82ae-c52de4a2efce"><td class="cell-title"><a href="https://www.notion.so/Lady-Gaga-21637953514480d182aec52de4a2efce?pvs=21"><span class="icon">⭐</span>Lady Gaga 演唱會</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">Show Date: <mark class="highlight-red">Jan 29/2026 <br/>17:00 開放進場<br/>19:00 開演<br/>預計22:00結束<br/>可能 17:30-18:00 到巨蛋</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="29637953-5144-80af-8a0b-db23727000fd"><td class="cell-title"><a href="https://www.notion.so/Lawson-711-29637953514480af8a0bdb23727000fd?pvs=21"><span class="icon">🍜</span>晚餐 - Lawson / 711 / 全家</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">直接飯店附近超商簡單解決<br/><mark class="highlight-red">順便買隔天早餐！</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-yellow">01/29(四) 麻布台 代官山 演唱會</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="24737953-5144-80e4-a1ea-f256e81266d2"><td class="cell-title"><a href="https://www.notion.so/BEAMS-24737953514480e4a1eaf256e81266d2?pvs=21"><span class="icon">❓</span>BEAMS 原宿</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">12:00–20:00<br/>橫濱有就不用逛</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2bc37953-5144-80b3-b0b7-f14fe506c7ad"><td class="cell-title"><a href="https://www.notion.so/H-BEAUTY-YOUTH-2bc37953514480b3b0b7f14fe506c7ad?pvs=21"><span class="icon">⭐</span>H BEAUTY&amp;YOUTH</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">12:00–20:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="29637953-5144-805d-ac42-dd7b6df0019c"><td class="cell-title"><a href="https://www.notion.so/GOOD-EDITION-296379535144805dac42dd7b6df0019c?pvs=21"><span class="icon">❓</span>GOOD EDITION 原宿</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">紀念品店<br/>12:00–20:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2c837953-5144-8013-964f-d635dec86146"><td class="cell-title"><a href="https://www.notion.so/Diptyque-2c83795351448013964fd635dec86146?pvs=21"><span class="icon">⭐</span>Diptyque 青山</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00–20:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="28437953-5144-80a7-8009-d8c060f9a642"><td class="cell-title"><a href="https://www.notion.so/BASO-28437953514480a78009d8c060f9a642?pvs=21"><span class="icon">⭐</span>BASO 表参道 鴨肉蕎麥麵</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:30–21:00<br/>鴨肉蕎麥麵 (可花錢快速通關)</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="20f37953-5144-8169-aaa3-e01c9d3abe68"><td class="cell-title"><a href="https://www.notion.so/THE-NORTH-FACE-Standard-20f3795351448169aaa3e01c9d3abe68?pvs=21"><span class="icon">❓</span>THE NORTH FACE Standard</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00–20:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="27e37953-5144-80a6-96ad-ddc0bfa9c0b6"><td class="cell-title"><a href="https://www.notion.so/3COINS-27e37953514480a696adddc0bfa9c0b6?pvs=21"><span class="icon">⭐</span>3COINS 原宿旗艦店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00–20:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="29637953-5144-808e-924e-ee71cb49fbed"><td class="cell-title"><a href="https://www.notion.so/UNITED-TOKYO-296379535144808e924eee71cb49fbed?pvs=21"><span class="icon">❓</span>UNITED TOKYO 神宮前</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="29637953-5144-8093-b81b-f50b2ac7618a"><td class="cell-title"><a href="https://www.notion.so/On-2963795351448093b81bf50b2ac7618a?pvs=21"><span class="icon">⭐</span>On 東京旗艦店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00–20:00<br/>要排隊就放棄</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="24737953-5144-80da-ba5e-e346f3381cf8"><td class="cell-title"><a href="https://www.notion.so/THE-ROASTERY-by-NOZY-COFFEE-24737953514480daba5ee346f3381cf8?pvs=21"><span class="icon">☕</span>THE ROASTERY by NOZY COFFEE</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">10:00–20:00 無公休<br/><mark class="highlight-orange_background">希望可以內用🥺但趕時間外帶也沒關係 by Jo</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="29637953-5144-80aa-b783-f0f860fbc79b"><td class="cell-title"><a href="https://www.notion.so/White-Atelier-by-Converse-29637953514480aab783f0f860fbc79b?pvs=21"><span class="icon">⭐</span>White Atelier by Converse</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="20f37953-5144-81cb-8abd-f7b225962e80"><td class="cell-title"><a href="https://www.notion.so/Graphpaper-20f37953514481cb8abdf7b225962e80?pvs=21"><span class="icon">⭐</span>Graphpaper 青山店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">12:00–19:00 一休</td><td class="cell-OEaF"></td><td class="cell-@)Dm"><span style="margin-inline-end:6px"><a href="New%20Database/Graphpaper%20%E9%9D%92%E5%B1%B1%E5%BA%97/download.jpg"><img style="width:20px;max-height:24px" src="New%20Database/Graphpaper%20%E9%9D%92%E5%B1%B1%E5%BA%97/download.jpg" alt="download.jpg"/></a></span></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="29637953-5144-8014-b4ae-f95745f41af7"><td class="cell-title"><a href="https://www.notion.so/Streamer-Coffee-Company-Shibuya-2963795351448014b4aef95745f41af7?pvs=21"><span class="icon">☕</span>Streamer Coffee Company Shibuya</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">無公休 <mark class="highlight-red">營業時間到20:00<br/></mark><mark class="highlight-default">可外帶</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2d637953-5144-804e-8edd-e9bf441d638a"><td class="cell-title"><a href="https://www.notion.so/BILLY-S-ENT-Shibuya-2d6379535144804e8edde9bf441d638a?pvs=21"><span class="icon">⭐</span>BILLY’S ENT Shibuya</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00-20:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2ba37953-5144-802a-b4b1-d92990ac06ca"><td class="cell-title"><a href="https://www.notion.so/BIC-Camera-2ba379535144802ab4b1d92990ac06ca?pvs=21"><span class="icon">⭐</span>BIC Camera</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-red">可能改仙台回來在買(回饋10%)</mark><br/>10:00-<mark class="highlight-red">22:00</mark><br/><a href="https://maps.app.goo.gl/f9ASWeuowqQREJLt6">https://maps.app.goo.gl/f9ASWeuowqQREJLt6</a></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2c737953-5144-8093-9ea5-fef1c2540276"><td class="cell-title"><a href="https://www.notion.so/HOKA-Shibuya-2c737953514480939ea5fef1c2540276?pvs=21"><span class="icon">⭐</span>HOKA Shibuya 旗艦店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00<mark class="highlight-red">-20:00<br/></mark><mark class="highlight-default">2F 所有鞋款&amp;衣服<br/>3F HOKA Run Club<br/></mark><strong><a href="https://www.threads.com/@luke.thereal4sho/post/DAaAJDHBegR?hl=zh-tw">Mafate Three2</a></strong></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2d637953-5144-80ae-9953-ee0411e16ffd"><td class="cell-title"><a href="https://www.notion.so/ATMOS-Shibuya-2d637953514480ae9953ee0411e16ffd?pvs=21"><span class="icon">⭐</span>ATMOS Shibuya</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00-21:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="27c37953-5144-8082-b502-f51bdc78992b"><td class="cell-title"><a href="https://www.notion.so/27c3795351448082b502f51bdc78992b?pvs=21"><span class="icon">⭐</span>晚餐 - 活美登利</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-red">最好19:00前抽<br/></mark><mark class="highlight-default">排不到就殺去惠比壽吃烏龍麵</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="20f37953-5144-818d-be45-e30cf49c70fa"><td class="cell-title"><a href="https://www.notion.so/FREAK-S-STORE-20f379535144818dbe45e30cf49c70fa?pvs=21"><span class="icon">⭐</span>FREAK&#x27;S STORE 涉谷</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">12:00–20:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="29637953-5144-80d8-a967-ec86de2426cb"><td class="cell-title"><a href="https://www.notion.so/Kenyan-Shibuya-29637953514480d8a967ec86de2426cb?pvs=21"><span class="icon">☕</span>Kenyan Shibuya</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:30–22:00<br/>外帶</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="29637953-5144-8038-946a-de1fa62e2adb"><td class="cell-title"><a href="https://www.notion.so/Adam-et-Rope-PARCO-2963795351448038946ade1fa62e2adb?pvs=21"><span class="icon">⭐</span>Adam et Rope PARCO</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">PARCO Shibuya 4F<br/>11:00–21:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="23437953-5144-8072-ab98-ff9339eeb897"><td class="cell-title"><a href="https://www.notion.so/2343795351448072ab98ff9339eeb897?pvs=21"><span class="icon">🍜</span>晚餐 - 烏龍麵山長 惠比壽店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">備案<br/>12:00–15:30<br/>17:00<mark class="highlight-red">–22:00</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2d837953-5144-8051-ae91-fcc68ecb63f2"><td class="cell-title"><a href="https://www.notion.so/Keyakizaka-2d83795351448051ae91fcc68ecb63f2?pvs=21"><span class="icon">⭐</span>六本木Keyakizaka坂通</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">-2/14 17:00<mark class="highlight-red">-23:00</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"><span style="margin-inline-end:6px"><a href="New%20Database/%E5%85%AD%E6%9C%AC%E6%9C%A8Keyakizaka%E5%9D%82%E9%80%9A/Screenshot_2025-12-29_141114.png"><img style="width:20px;max-height:24px" src="New%20Database/%E5%85%AD%E6%9C%AC%E6%9C%A8Keyakizaka%E5%9D%82%E9%80%9A/Screenshot_2025-12-29_141114.png" alt="Screenshot 2025-12-29 141114.png"/></a></span></td><td class="cell-rj]="><span class="selected-value select-value-color-brown">01/28(三) 橫濱 原宿 涉谷</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="20f37953-5144-819e-a76c-ff4b7a37b364"><td class="cell-title"><a href="https://www.notion.so/20f379535144819ea76cff4b7a37b364?pvs=21"><span class="icon">🏠</span>家 → 桃園機場</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">Daryl: 09:03搭環狀線<br/>         - 09:25 新北產業 搭機捷<br/>Joseph: 09:26 搭機捷<br/><mark class="highlight-blue">09:50 Check in</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">01/27(二) 台北-東京</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="20f37953-5144-815c-b2e2-f7f302c4ff16"><td class="cell-title"><a href="https://www.notion.so/CX450-20f379535144815cb2e2f7f302c4ff16?pvs=21"><span class="icon">🛫</span>航班 CX450</a></td><td class="cell-x^FC">0</td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">12:50 桃園第一航廈<br/>16:50 成田 🇯🇵第二航廈</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">01/27(二) 台北-東京</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="2c637953-5144-801e-96a7-ddacdff50092"><td class="cell-title"><a href="https://www.notion.so/2c6379535144801e96a7ddacdff50092?pvs=21"><span class="icon">🏥</span>東京海上日動旅平險</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">到了境內才可以保<br/>VJW內</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">01/27(二) 台北-東京</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-orange">📋 作業</span></td></tr><tr id="20f37953-5144-81c4-876e-cee321410883"><td class="cell-title"><a href="https://www.notion.so/Skyliner-49-20f37953514481c4876ecee321410883?pvs=21"><span class="icon">🚅</span>Skyliner：49分</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">17:59 - 18:48 到上野 <a href="https://maps.app.goo.gl/hgRFVN6Kz1WR2yLe8">路線</a><br/>轉山手線到神田站 (20min)<br/><a href="https://www.keisei.co.jp/keisei/tetudou/skyliner/tc/traffic/skyliner.php">時刻表</a></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">01/27(二) 台北-東京</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="24837953-5144-8074-832b-ed5f3a72bdb4"><td class="cell-title"><a href="https://www.notion.so/SUI-by-ABEST-2483795351448074832bed5f3a72bdb4?pvs=21"><span class="icon">🛌🏻</span>ホテルSUI神田 by ABEST</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">7938</td><td class="cell-f.~Z">預計 19:00 Check in<br/><a href="https://mypage.travel.rakuten.co.jp/?l-id=mypage_submenu&amp;">樂天旅遊</a></td><td class="cell-OEaF">37,800</td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">01/27(二) 台北-東京</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-green">🏡 住宿</span></td></tr><tr id="21837953-5144-8091-b88a-de56fa4f0c96"><td class="cell-title"><a href="https://www.notion.so/2183795351448091b88ade56fa4f0c96?pvs=21"><span class="icon">❌</span>金蛇水神社</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">08:00–16:00<br/>搭車到JR岩沼站轉計程車<br/>可洗錢</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="20f37953-5144-8122-99ec-c21e7ec5e7c6"><td class="cell-title"><a href="https://www.notion.so/TEN-2-20f379535144812299ecc21e7ec5e7c6?pvs=21"><span class="icon">💍</span>TEN.新宿ルミネ2店 飾品</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><strong>新宿ルミネ2店 2樓<br/>價格稍貴</strong><br/>11:00–21:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="24737953-5144-802e-8d24-fe461b104f2a"><td class="cell-title"><a href="https://www.notion.so/nadoya-no-katte-3-51-247379535144802e8d24fe461b104f2a?pvs=21"><span class="icon">💔</span>nadoya no katte 3.51</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">09:00–18:00<br/>一二三四休<br/>代代木</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="21637953-5144-808f-b89c-c2f5ace25f18"><td class="cell-title"><a href="https://www.notion.so/LUMINE-216379535144808fb89cc2f5ace25f18?pvs=21"><span class="icon">⭐</span>LUMINE 有樂町</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00–21:00<br/><strong>Adam et Ropé FEMME 3樓<br/>HARBS 2樓</strong></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="24737953-5144-8057-a92d-e3860661edc5"><td class="cell-title"><a href="https://www.notion.so/Pathcafe-2473795351448057a92de3860661edc5?pvs=21">Pathcafe</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">08:00–13:00<br/>18:00–22:00 一休<br/>代代木 有餐點</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="27d37953-5144-8085-99c0-e1de33b9233f"><td class="cell-title"><a href="https://www.notion.so/27d379535144808599c0e1de33b9233f?pvs=21"><span class="icon">⭐</span>晚餐 - 沾麵 六厘舍 東京站店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">23:00打烊 / 無公休、無法預約</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">01/27(二) 台北-東京</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="29b37953-5144-80be-b482-f2489185d617"><td class="cell-title"><a href="https://www.notion.so/2025-29b37953514480beb482f2489185d617?pvs=21"><span class="icon">⭐</span>丸之內2025燈光秀</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">2025年11月13日至2026年2月15日<br/>16:00～23:00<br/><a href="https://www.facebook.com/travelyam/posts/2025%E4%B8%B8%E4%B9%8B%E5%85%A7%E9%BB%9E%E7%87%881113%E7%99%BB%E5%A0%B4%E8%BF%AA%E5%A3%AB%E5%B0%BC%E7%87%88%E6%B5%B7%E5%A4%A2%E5%B9%BB%E7%8F%BE%E8%BA%AB%E4%B8%B8%E4%B9%8B%E5%85%A7%E9%BB%9E%E7%87%882025%E5%B0%87%E6%96%BC1113%E8%87%B32026215%E6%96%BC%E6%9D%B1%E4%BA%AC%E8%BB%8A%E7%AB%99%E9%99%84%E8%BF%91%E8%88%89%E8%BE%A6%E6%98%AF%E6%AF%8F%E9%80%A2%E5%86%AC%E5%AD%A3%E5%BF%85%E7%9C%8B%E8%81%96%E8%AA%95%E7%87%88%E9%A3%BE%E4%B9%8B%E4%B8%80%E9%80%99%E6%A2%9D%E9%95%B7%E9%81%9412km%E7%9A%84%E4%B8%B8%E4%B9%8B/1122895263345279/">資訊連結</a></td><td class="cell-OEaF"></td><td class="cell-@)Dm"><span style="margin-inline-end:6px"><a href="New%20Database/%E4%B8%B8%E4%B9%8B%E5%85%A72025%E7%87%88%E5%85%89%E7%A7%80/2025xmastokyo7-1600x1067-1759821075.webp"><img style="width:20px;max-height:24px" src="New%20Database/%E4%B8%B8%E4%B9%8B%E5%85%A72025%E7%87%88%E5%85%89%E7%A7%80/2025xmastokyo7-1600x1067-1759821075.webp" alt="2025xmastokyo7-1600x1067-1759821075.webp"/></a></span></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">01/27(二) 台北-東京</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="29c37953-5144-8075-b26d-f82ef160d3ce"><td class="cell-title"><a href="https://www.notion.so/29c3795351448075b26df82ef160d3ce?pvs=21"><span class="icon">⭐</span>新丸之內大廈</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">7F免費觀景台 看東京車站<br/>11:00–23:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">01/27(二) 台北-東京</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="2d937953-5144-8055-a15d-d0e8d951bd8c"><td class="cell-title"><a href="https://www.notion.so/2d93795351448055a15dd0e8d951bd8c?pvs=21"><span class="icon">🚆</span>取新幹線票</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">QRCode在內頁</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">01/27(二) 台北-東京</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-orange">📋 作業</span></td></tr><tr id="20f37953-5144-81ba-b748-c32d3ddfaf4b"><td class="cell-title"><a href="https://www.notion.so/or-20f37953514481bab748c32d3ddfaf4b?pvs=21"><span class="icon">⭐</span>超商 吃宵夜 or 藥妝唐吉訶德</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-red">記得去7-11換Gaga演唱會票 (</mark><mark class="highlight-red"><a href="https://hochehao.com/lady-gaga-japan-tour-2026-tickets-receive/#penci-%F0%9F%AA%A7_%E9%A0%98%E7%A5%A8%E6%96%B9%E5%BC%8F">參考</a></mark><mark class="highlight-red">)<br/>-<br/></mark>唐吉訶德 秋葉原店(<a href="https://maps.app.goo.gl/ZhQMDSWdjHatMTfZ8">map</a>)<br/>買定型噴霧、定妝、襪子、護手霜(Kose coen rich Q10)、護唇膏、酸痛藥布、暖暖包(貼式)</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">01/27(二) 台北-東京</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="21737953-5144-80e1-880f-fdcc58b73b44"><td class="cell-title"><a href="https://www.notion.so/21737953514480e1880ffdcc58b73b44?pvs=21"><span class="icon">⭐</span>淺草寺 雷門</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">7點前無人</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">02/05(四) 上野 淺草</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="21737953-5144-80a6-8c92-ed9b9ca3ecc4"><td class="cell-title"><a href="https://www.notion.so/February-Cafe-21737953514480a68c92ed9b9ca3ecc4?pvs=21"><span class="icon">⭐</span>早餐 - February Cafe</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">08:15–17:00<br/>已確認無公休、無法預約</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">02/05(四) 上野 淺草</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="21737953-5144-8077-87fe-c89a368b14b4"><td class="cell-title"><a href="https://www.notion.so/FUGLEN-ASAKUSA-217379535144807787fec89a368b14b4?pvs=21"><span class="icon">⭐</span>FUGLEN ASAKUSA</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">08:00–21:00<br/>已確認無公休</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">02/05(四) 上野 淺草</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="21737953-5144-809c-b96d-cfe2b8e8e061"><td class="cell-title"><a href="https://www.notion.so/Pelican-CAFE-217379535144809cb96dcfe2b8e8e061?pvs=21"><span class="icon">❓</span>早餐 - Pelican CAFE</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">無法預約<br/>09:00–17:30</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="29d37953-5144-806c-ad52-c55661f1251b"><td class="cell-title"><a href="https://www.notion.so/PENSTA-ecute-29d379535144806cad52c55661f1251b?pvs=21"><span class="icon">🐧</span>PENSTA ecute上野店 (賣店)</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-orange"><strong>3F 改札内</strong></mark> エキュート上野内<br/>09:00–21:00<br/><mark class="highlight-red">新宿有去就不用</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">02/05(四) 上野 淺草</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2bc37953-5144-8038-8903-cd1d95f308be"><td class="cell-title"><a href="https://www.notion.so/Doughnut-Mori-2bc37953514480388903cd1d95f308be?pvs=21"><span class="icon">⭐</span>Doughnut Mori上野店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-orange"><strong>3F 改札内</strong></mark><br/>09:00-21:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">02/05(四) 上野 淺草</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="29d37953-5144-807c-bcf1-fdddfd20dbe4"><td class="cell-title"><a href="https://www.notion.so/KURAMAE-CANNELE-29d379535144807cbcf1fdddfd20dbe4?pvs=21"><span class="icon">⭐</span>KURAMAE CANNELE エキュート上野店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-orange"><strong>3F 改札内</strong></mark><br/>10:00-20:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">02/05(四) 上野 淺草</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2e137953-5144-8029-8520-c7156c7fa5ed"><td class="cell-title"><a href="https://www.notion.so/2e137953514480298520c7156c7fa5ed?pvs=21"><span class="icon">⭐</span>午餐 - 鳥つね湯島天神前店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00–13:30<br/>17:00–21:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">02/05(四) 上野 淺草</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2e137953-5144-8077-9da5-ed54d973782d"><td class="cell-title"><a href="https://www.notion.so/TRUFFLE-mini-2e137953514480779da5ed54d973782d?pvs=21"><span class="icon">⭐</span>TRUFFLE mini 御徒町店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">09:00–21:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">02/05(四) 上野 淺草</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="21737953-5144-800e-9503-c18cf0302b0f"><td class="cell-title"><a href="https://www.notion.so/12-20-217379535144800e9503c18cf0302b0f?pvs=21">12:20 上野出發</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">13:01 到成田機場</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">02/05(四) 上野 淺草</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="20f37953-5144-812e-9c8c-ce195da4784f"><td class="cell-title"><a href="https://www.notion.so/13-20-check-in-20f379535144812e9c8cce195da4784f?pvs=21">13:20 機場check in</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">02/05(四) 上野 淺草</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-orange">📋 作業</span></td></tr><tr id="20f37953-5144-8184-b29e-d7785a917ab4"><td class="cell-title"><a href="https://www.notion.so/CX451-20f3795351448184b29ed7785a917ab4?pvs=21">航班 CX451</a></td><td class="cell-x^FC">0</td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">15:20 成田 🇯🇵第二航廈飛<br/>18:40 回台灣第一航廈</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-blue">02/05(四) 上野 淺草</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="21737953-5144-804f-9ba9-fb0ba88c5f2a"><td class="cell-title"><a href="https://www.notion.so/45-217379535144804f9ba9fb0ba88c5f2a?pvs=21"><span class="icon">🚏</span>山形駅前巴士案內所 → 藏王溫泉巴士總站：45分</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-red">從東口出站！</mark><br/>1. 買前往藏王車票<br/>2. 公共電話打給飯店派接駁車<br/><br/>1號候車處( 每一小時一班車 )<br/><a href="https://www.yamakobus.jp/a4ba73198eff7b52d13a643791cbf18728185b5a.pdf">時刻表</a><br/>最早 <strong>6:50 - 7:26 預抓</strong><br/><a href="https://travel.yamakobus.jp/zh-tw/timetable/routebus-yamagata-zaoline.html">官網</a><br/>2025年12月27日 〜 2026年2月22日（期間內的36天），點燈時間是17:00 - 21:00。</td><td class="cell-OEaF"></td><td class="cell-@)Dm"><span style="margin-inline-end:6px"><a href="New%20Database/%E5%B1%B1%E5%BD%A2%E9%A7%85%E5%89%8D%E5%B7%B4%E5%A3%AB%E6%A1%88%E5%85%A7%E6%89%80%20%E2%86%92%20%E8%97%8F%E7%8E%8B%E6%BA%AB%E6%B3%89%E5%B7%B4%E5%A3%AB%E7%B8%BD%E7%AB%99%EF%BC%9A45%E5%88%86/IMG_1743.jpeg"><img style="width:20px;max-height:24px" src="New%20Database/%E5%B1%B1%E5%BD%A2%E9%A7%85%E5%89%8D%E5%B7%B4%E5%A3%AB%E6%A1%88%E5%85%A7%E6%89%80%20%E2%86%92%20%E8%97%8F%E7%8E%8B%E6%BA%AB%E6%B3%89%E5%B7%B4%E5%A3%AB%E7%B8%BD%E7%AB%99%EF%BC%9A45%E5%88%86/IMG_1743.jpeg" alt="IMG_1743.jpeg"/></a></span></td><td class="cell-rj]="><span class="selected-value select-value-color-default">02/01(日) 藏王滑雪</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="21737953-5144-8009-a48f-fd4ccaa3e2b7"><td class="cell-title"><a href="https://www.notion.so/2173795351448009a48ffd4ccaa3e2b7?pvs=21"><span class="icon">⭐</span>三五郎小屋</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">10:00–16:00<br/>晚餐不開放住客以外的人</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-red">02/03(二) 藏王樹冰 - 仙台</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="29d37953-5144-801c-9958-c2e0be147fec"><td class="cell-title"><a href="https://www.notion.so/29d379535144801c9958c2e0be147fec?pvs=21"><span class="icon">🚉</span>藏王巴士案內所</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><a href="https://www.yamakobus.jp/a4ba73198eff7b52d13a643791cbf18728185b5a.pdf">時刻表</a><br/><strong>預抓 15:20 - 16:05</strong></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-red">02/03(二) 藏王樹冰 - 仙台</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="21637953-5144-8018-bf8d-e7ab7cb952a5"><td class="cell-title"><a href="https://www.notion.so/Base-Center-JUPEER-2163795351448018bf8de7ab7cb952a5?pvs=21"><span class="icon">🚡</span>上の台 Base Center JUPEER</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><a href="https://tw.wamazing.com/snow/items/13240?fbclid=IwY2xjawNJcjVleHRuA2FlbQIxMABicmlkETFLRk1Vck1MUzR6cEppb2xyAR6RLlJavEXoaDUD7MQgHOMuTTMVxU5ujf1RgHZ4wh1emmcBXI9cqGdsuAeIEg_aem_jPVSoFNZtLgaAu2Kir0t0g">雪票訂票</a> ✅ 自動售票機用完美行QRCode取票<br/>平日、週六、國定假日：8:30-17:00<br/>夜滑：17:00-21:00 （除天候不佳不開放）</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-default">02/01(日) 藏王滑雪</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="22c37953-5144-806b-b9ca-e7c95a0e9482"><td class="cell-title"><a href="https://www.notion.so/Onsen-Stay-OakHill-22c379535144806bb9cae7c95a0e9482?pvs=21"><span class="icon">🛌🏻</span>Onsen &amp; Stay OakHill</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">15540</td><td class="cell-f.~Z">先寄放行李；預計 15:00 Check in<br/>- 到藏王溫泉巴士總站後打電話給飯店會有接駁車來接<br/>電話：<a href="https://www.google.com/search?q=onsen+and+stay+oakhill&amp;oq=onsen&amp;gs_lcrp=EgZjaHJvbWUqDAgBECMYJxiABBiKBTIOCAAQRRg5GEMYgAQYigUyDAgBECMYJxiABBiKBTIMCAIQABhDGIAEGIoFMhMIAxAuGK8BGMcBGIAEGJgFGJkFMgcIBBAAGIAEMgcIBRAAGIAEMgwIBhAAGEMYgAQYigUyBggHEEUYPNIBCDYwMzFqMGoxqAIAsAIA&amp;sourceid=chrome&amp;ie=UTF-8#">+81 23-694-2110</a><br/>- <a href="https://www.onestayapp.com/v2/checkin/search?checkin_code=18993886&amp;pin_code=e8mdm0dh73&amp;referral=email">https://www.onestayapp.com/v2/checkin/search?checkin_code=18993886&amp;pin_code=e8mdm0dh73&amp;referral=email</a><br/>(預先報到Check in)<br/>Jalan</td><td class="cell-OEaF">74,000</td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-default">02/01(日) 藏王滑雪</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-green">🏡 住宿</span></td></tr><tr id="2a337953-5144-8015-8801-cfdae7f6e8a8"><td class="cell-title"><a href="https://www.notion.so/Skiing-Now-Zao-2a337953514480158801cfdae7f6e8a8?pvs=21"><span class="icon">🏂</span>Skiing Now Zao 鬧雪具藏王店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">上の台纜車旁 <strong>Wonderworld ski school 美好滑雪基地</strong><br/><strong>營業時間： 7:30-21:00</strong><br/>✅12/15已線上預約<br/>使用當天<mark class="highlight-red">需提前一個半小時</mark>到店</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-default">02/01(日) 藏王滑雪</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-orange">📋 作業</span></td></tr><tr id="21637953-5144-805f-b38f-ea7db1d80a9d"><td class="cell-title"><a href="https://www.notion.so/216379535144805fb38fea7db1d80a9d?pvs=21"><span class="icon">❓</span>藏王溫泉 源七露天之湯</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-default">02/01(日) 藏王滑雪</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="21637953-5144-80e0-bb74-f9cf05e01c00"><td class="cell-title"><a href="https://www.notion.so/21637953514480e0bb74f9cf05e01c00?pvs=21"><span class="icon">🥩</span>かしぇる</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00–14:00<br/>18:00–21:00<br/>成吉思汗烤肉</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-default">02/01(日) 藏王滑雪</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="22c37953-5144-8034-aa37-da3e6b55f5cc"><td class="cell-title"><a href="https://www.notion.so/22c3795351448034aa37da3e6b55f5cc?pvs=21"><span class="icon">🥩</span>蔵王温泉「ろばた」</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">成吉思汗烤肉</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-default">02/01(日) 藏王滑雪</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="22c37953-5144-80ca-8060-d69ba81aa39e"><td class="cell-title"><a href="https://www.notion.so/22c37953514480ca8060d69ba81aa39e?pvs=21"><span class="icon">⭐</span>音茶屋(オトチャヤ)</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00–16:00<br/>17:30–20:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-default">02/01(日) 藏王滑雪</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="22c37953-5144-801d-8c31-c3747e0006ee"><td class="cell-title"><a href="https://www.notion.so/22c379535144801d8c31c3747e0006ee?pvs=21"><span class="icon">❌</span>寿し喜らく</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">17:30 - 21:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-default">02/01(日) 藏王滑雪</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="21737953-5144-8052-b86b-ed32f3a19318"><td class="cell-title"><a href="https://www.notion.so/hatake-style-2173795351448052b86bed32f3a19318?pvs=21"><span class="icon">⭐</span>hatake style エスパル山形店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">09:30–19:30<br/>站前咖啡廳</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-purple">01/31(六) 銀山溫泉 → 立石寺</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2a037953-5144-8034-b5be-c8a3f0539907"><td class="cell-title"><a href="https://www.notion.so/Montbell-2a03795351448034b5bec8a3f0539907?pvs=21"><span class="icon">⭐</span>Montbell</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">10:00–<mark class="highlight-red">20:00</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-purple">01/31(六) 銀山溫泉 → 立石寺</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2e737953-5144-809f-9fc2-e6bc39d87840"><td class="cell-title"><a href="https://www.notion.so/Workman-2e7379535144809f9fc2e6bc39d87840?pvs=21"><span class="icon">⭐</span>Workman</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">07:00–20:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-purple">01/31(六) 銀山溫泉 → 立石寺</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="28037953-5144-80a5-afc0-d6c5069c7665"><td class="cell-title"><a href="https://www.notion.so/19-00-Al-che-Cciano-Con-cert-28037953514480a5afc0d6c5069c7665?pvs=21"><span class="icon">⭐</span>19:00 Al-che Cciano Con cert</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:30–14:00<br/>17:00–20:00<br/>義式餐廳 <mark class="highlight-teal"><strong>已訂位 </strong></mark><br/><a href="https://tabelog.com/yamagata/A0601/A060101/6011073/">https://tabelog.com/yamagata/A0601/A060101/6011073/</a></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-purple">01/31(六) 銀山溫泉 → 立石寺</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2a037953-5144-807e-9434-f5177c7111a8"><td class="cell-title"><a href="https://www.notion.so/2a0379535144807e9434f5177c7111a8?pvs=21"><span class="icon">⭐</span>霞城セントラル展望ロビー</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">07:00–<mark class="highlight-red">23:00</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-purple">01/31(六) 銀山溫泉 → 立石寺</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="21737953-5144-8010-acfd-ee6c85fdf246"><td class="cell-title"><a href="https://www.notion.so/2173795351448010acfdee6c85fdf246?pvs=21"><span class="icon">🛌🏻</span>山形站前里士滿飯店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">3439.38</td><td class="cell-f.~Z"><mark class="highlight-teal"><mark class="highlight-teal_background"><a href="https://www.notion.so/21437953514480fbb1d0e9da00fe67dc?pvs=21">已訂</a></mark></mark><mark class="highlight-teal"><mark class="highlight-teal_background"><br/></mark></mark><mark class="highlight-default"><mark class="highlight-teal_background">Agoda</mark></mark></td><td class="cell-OEaF">16,378</td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-purple">01/31(六) 銀山溫泉 → 立石寺</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-green">🏡 住宿</span></td></tr><tr id="22c37953-5144-80ba-b8cd-ddf31b1f17fd"><td class="cell-title"><a href="https://www.notion.so/22c37953514480bab8cdddf31b1f17fd?pvs=21"><span class="icon">⭐</span>蔵王麺処 梨庵(りあん)</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><strong>無公休<br/>11:30–15:00<br/>17:30–21:30</strong></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-pink">02/02(一) 藏王滑雪</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2ec37953-5144-803b-b9d8-d592a94c04fc"><td class="cell-title"><a href="https://www.notion.so/2ec379535144803bb9d8d592a94c04fc?pvs=21"><span class="icon">🛅</span>先寄放行李</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-orange">📋 作業</span></td></tr><tr id="2b137953-5144-804b-a296-ef145aa7315f"><td class="cell-title"><a href="https://www.notion.so/2b1379535144804ba296ef145aa7315f?pvs=21"><span class="icon">🍣</span>早餐 - 牡蠣と寿司朝市総本店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-red">09:00</mark>-14:00<br/>無公休</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="21737953-5144-8006-8e3f-d9ab0cc2cf71"><td class="cell-title"><a href="https://www.notion.so/imosen-21737953514480068e3fd9ab0cc2cf71?pvs=21"><span class="icon">🍜</span>早餐 - imosen蕎麥麵</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">7:30–14:30</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="21737953-5144-80f9-b84c-e32dc5a04f42"><td class="cell-title"><a href="https://www.notion.so/110-coffee-21737953514480f9b84ce32dc5a04f42?pvs=21"><span class="icon">⭐</span>110 coffee (イトーコーヒー)</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">08:00–16:00<br/><mark class="highlight-teal">~老闆新年在休長假中~</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2e937953-5144-8037-8a2c-e035bd9339c7"><td class="cell-title"><a href="https://www.notion.so/Date-Cafe-O-rder-2e937953514480378a2ce035bd9339c7?pvs=21"><span class="icon">🍙</span>Date Cafe O’rder</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">仙台駅 2F<br/>07:15-20:45</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2b137953-5144-80ee-a0da-c034008bbd92"><td class="cell-title"><a href="https://www.notion.so/2b137953514480eea0dac034008bbd92?pvs=21"><span class="icon">🚆</span>仙台 → 松島海岸</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">JR 仙石線 10號月台<br/>10:09 → 10:48<br/><mark class="highlight-teal">10:29 → 11:08</mark><br/>10:49 → 11:28<br/>仙台車站到<mark class="highlight-blue">松島海岸站</mark><mark class="highlight-default">單趟</mark>約40分<br/>來回車票 840 日圓</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="2c137953-5144-80c4-bfc5-c10277ea2a44"><td class="cell-title"><a href="https://www.notion.so/2c137953514480c4bfc5c10277ea2a44?pvs=21"><span class="icon">🦪</span>漁師の海鮮丼</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00-<mark class="highlight-red">15:00<br/></mark><mark class="highlight-default">四五公休、無法預約</mark><mark class="highlight-red"><br/></mark><mark class="highlight-blue">松島海岸站出來後左轉步行三分鐘</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2e937953-5144-8032-ba79-e232ade9f46c"><td class="cell-title"><a href="https://www.notion.so/2e93795351448032ba79e232ade9f46c?pvs=21"><span class="icon">🥐</span>サくサく可頌</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">10:00-17:00 禮拜二公休</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2c137953-5144-80f3-aaea-cb939f16f5cc"><td class="cell-title"><a href="https://www.notion.so/2c137953514480f3aaeacb939f16f5cc?pvs=21"><span class="icon">⭐</span>円通院（八通院）</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">09:00-16:00</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="21837953-5144-80c2-9c73-d859ca6d2037"><td class="cell-title"><a href="https://www.notion.so/21837953514480c29c73d859ca6d2037?pvs=21"><span class="icon">⭐</span>瑞巖寺</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">08:30–16:30</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="2c137953-5144-80ea-aa24-c6ac2cac45f6"><td class="cell-title"><a href="https://www.notion.so/2c137953514480eaaa24c6ac2cac45f6?pvs=21"><span class="icon">⭐</span>瑞巖寺五大堂</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">08:30–16:30<br/>鏤空橋</td><td class="cell-OEaF"></td><td class="cell-@)Dm"><span style="margin-inline-end:6px"><a href="New%20Database/%E7%91%9E%E5%B7%96%E5%AF%BA%E4%BA%94%E5%A4%A7%E5%A0%82/%E6%88%AA%E5%9C%96_2025-12-06_15.18.44.png"><img style="width:20px;max-height:24px" src="New%20Database/%E7%91%9E%E5%B7%96%E5%AF%BA%E4%BA%94%E5%A4%A7%E5%A0%82/%E6%88%AA%E5%9C%96_2025-12-06_15.18.44.png" alt="截圖 2025-12-06 15.18.44.png"/></a></span></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="2e937953-5144-8010-b19e-c0e03a87dc67"><td class="cell-title"><a href="https://www.notion.so/2e93795351448010b19ec0e03a87dc67?pvs=21"><span class="icon">🍘</span> 松島雪竹屋</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">現烤仙貝 無公休日<br/>10:00–<mark class="highlight-red">17:30</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="21737953-5144-80cb-ae5b-c75d21be0a44"><td class="cell-title"><a href="https://www.notion.so/21737953514480cbae5bc75d21be0a44?pvs=21"><span class="icon">⭐</span>松島蒲鉾本舗 総本店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">伴手禮、自己烤魚板<br/>09:30-16:30<br/>無公休</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2b137953-5144-80ae-bead-c400063b0526"><td class="cell-title"><a href="https://www.notion.so/2b137953514480aebeadc400063b0526?pvs=21"><span class="icon">🚆</span>松島海岸 → 仙台</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">12:33 → 13:10<br/><mark class="highlight-teal">12:53 → 13:31<br/></mark><mark class="highlight-default">13:11 → 13:49</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="2ef37953-5144-8015-a401-fdd141eaf1b3"><td class="cell-title"><a href="https://www.notion.so/2ef3795351448015a401fdd141eaf1b3?pvs=21"><span class="icon">⭐</span>阿部蒲鉾店 本店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">炸葫蘆<br/>10:00-18:30</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2b137953-5144-8066-8a80-d840b1d1bb5b"><td class="cell-title"><a href="https://www.notion.so/2b137953514480668a80d840b1d1bb5b?pvs=21"><span class="icon">⭐</span>齋藤惣菜店 ころっけや </a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">可樂餅<br/><mark class="highlight-default">09:00–</mark><mark class="highlight-red">17:00</mark><br/><a href="https://tabelog.com/miyagi/A0401/A040101/4002163/">https://tabelog.com/miyagi/A0401/A040101/4002163/</a></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2c737953-5144-80f8-9921-d6d85e75dfb4"><td class="cell-title"><a href="https://www.notion.so/S-PAL-2c737953514480f89921d6d85e75dfb4?pvs=21"><span class="icon">⭐</span>S-PAL</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">如果前一天有去就可略過<br/>本館 1F 無印<br/>2F Adam et rope<br/>東館 3F Freak’s Store、columbia</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="28437953-5144-8037-8833-cc0aca8a40a3"><td class="cell-title"><a href="https://www.notion.so/28437953514480378833cc0aca8a40a3?pvs=21"><span class="icon">🚆</span>仙台 → 上野</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-teal"><strong>14:57→16:26</strong></mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="29d37953-5144-806f-b653-e64e9cd7ca34"><td class="cell-title"><a href="https://www.notion.so/29d379535144806fb653e64e9cd7ca34?pvs=21"><span class="icon">🚆</span>山形 → 仙台</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"><mark class="highlight-teal"><strong>16:14 - 17:33</strong></mark><strong><br/>16:29 - 17:48<br/>16:44 - 18:03</strong></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-red">02/03(二) 藏王樹冰 - 仙台</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-blue">🚗 移動</span></td></tr><tr id="21637953-5144-80a6-a220-d9250221b060"><td class="cell-title"><a href="https://www.notion.so/Hotel-sardonyx-ueno-21637953514480a6a220d9250221b060?pvs=21"><span class="icon">🛌🏻</span>上野寶石飯店
+Hotel sardonyx ueno</a></td><td class="cell-x^FC">1,662</td><td class="cell-_FHJ">1662</td><td class="cell-f.~Z">先放行李<br/><mark class="highlight-teal">已支付</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-green">🏡 住宿</span></td></tr><tr id="2b137953-5144-80f7-83b1-cfabb8ebe24b"><td class="cell-title"><a href="https://www.notion.so/Ginza-Sony-Park-2b137953514480f783b1cfabb8ebe24b?pvs=21"><span class="icon">❓</span>Ginza Sony Park</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00<mark class="highlight-red">-19:00<br/></mark><mark class="highlight-default">無公休<br/><br/>🚃JR 有樂町站 中央口步行約 5 分鐘<br/>東京地下鐵銀座車站地下通道 B9 出口</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"><span style="margin-inline-end:6px"><a href="New%20Database/Ginza%20Sony%20Park/%E6%88%AA%E5%9C%96_2025-11-21_01.09.56.png"><img style="width:20px;max-height:24px" src="New%20Database/Ginza%20Sony%20Park/%E6%88%AA%E5%9C%96_2025-11-21_01.09.56.png" alt="截圖 2025-11-21 01.09.56.png"/></a></span></td><td class="cell-rj]="><span class="selected-value select-value-color-orange">回收區</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="2b137953-5144-80a9-9d2d-cc86fd90d470"><td class="cell-title"><a href="https://www.notion.so/2b137953514480a99d2dcc86fd90d470?pvs=21"><span class="icon">⭐</span>晚餐 - 麥與橄欖</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">無法預約<br/>17:30-<mark class="highlight-red">21:30</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2e237953-5144-8032-b72e-f577708847fa"><td class="cell-title"><a href="https://www.notion.so/MARLOWE-2e23795351448032b72ef577708847fa?pvs=21"><span class="icon">🍮</span>MARLOWE 布丁</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">GINZA SIX B1<br/><strong>10:30–</strong><mark class="highlight-red"><strong>20:30</strong></mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2ba37953-5144-807f-aaba-fa36c88ae199"><td class="cell-title"><a href="https://www.notion.so/BEAMS-2ba379535144807faabafa36c88ae199?pvs=21"><span class="icon">⭐</span>BEAMS 銀座店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11 :00-<mark class="highlight-red">20:00<br/></mark><a href="https://maps.app.goo.gl/s53Lm7y1hWGfvUzs5">https://maps.app.goo.gl/s53Lm7y1hWGfvUzs5</a></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2c337953-5144-808a-9bec-e5f0e5d0a23d"><td class="cell-title"><a href="https://www.notion.so/HOMME-PLISSE-ISSEY-MIYAKE-Hankyu-Men-s-Tokyo-Store-2c3379535144808a9bece5f0e5d0a23d?pvs=21"><span class="icon">⭐</span>HOMME PLISSE ISSEY MIYAKE Hankyu Men’s Tokyo Store</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">-<mark class="highlight-red">20:00</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2ba37953-5144-8007-958a-e6374704d899"><td class="cell-title"><a href="https://www.notion.so/UNIQLO-2ba3795351448007958ae6374704d899?pvs=21"><span class="icon">⭐</span>UNIQLO</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11 :00-<mark class="highlight-red">21:00</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2ba37953-5144-80dc-8f4e-c0c46fdcd31b"><td class="cell-title"><a href="https://www.notion.so/2ba37953514480dc8f4ec0c46fdcd31b?pvs=21"><span class="icon">⭐</span>無印良品 銀座</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11 :00-<mark class="highlight-red">21:00</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2c637953-5144-8044-8c84-c0f3dddba068"><td class="cell-title"><a href="https://www.notion.so/2c637953514480448c84c0f3dddba068?pvs=21"><span class="icon">⭐</span>宵夜 - 串焼きと天ぷら 春子屋</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">15:00-<mark class="highlight-red">23:00 (22:30最後點餐)</mark><br/><br/><mark class="highlight-teal">已用LINE訂位 22:00</mark><br/><a href="https://www.threads.com/@x_______t/post/DP0MzC5j_FD?xmt=AQF0vf600lZ4BRPAe5UWgrRWhjqWdG0ty0WpCp6DXvo5j8-BjwvmBdIJAihpLYJ76L5jIWwc&amp;slof=1">https://www.threads.com/@x_______t/post/DP0MzC5j_FD?xmt=AQF0vf600lZ4BRPAe5UWgrRWhjqWdG0ty0WpCp6DXvo5j8-BjwvmBdIJAihpLYJ76L5jIWwc&amp;slof=1</a></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-gray">02/04(三) 仙台 - 東京銀座</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="24737953-5144-80dd-b62f-e47ef0b4fe08"><td class="cell-title"><a href="https://www.notion.so/PREMIER-24737953514480ddb62fe47ef0b4fe08?pvs=21"><span class="icon">🛌🏻</span>仙台西口大和魯內 PREMIER 飯店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">3327.66</td><td class="cell-f.~Z"><mark class="highlight-default"><mark class="highlight-teal_background">Agoda 先放行李</mark></mark></td><td class="cell-OEaF">15,846</td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-red">02/03(二) 藏王樹冰 - 仙台</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-green">🏡 住宿</span></td></tr><tr id="21837953-5144-806f-91ca-efbaf679ff94"><td class="cell-title"><a href="https://www.notion.so/218379535144806f91caefbaf679ff94?pvs=21"><span class="icon">⭐</span>名掛丁商店街</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">逛街攻略：<a href="http://bring-you.info/zh-tw/sendai-commercial-street">bring-you.info/zh-tw/sendai-commercial-street</a></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-red">02/03(二) 藏王樹冰 - 仙台</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2b137953-5144-807d-9352-c52d46a65566"><td class="cell-title"><a href="https://www.notion.so/2b1379535144807d9352c52d46a65566?pvs=21"><span class="icon">⭐</span>鯛きち 名掛丁店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">10:30-<mark class="highlight-red">19:30（麵糊賣完就打烊）</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-red">02/03(二) 藏王樹冰 - 仙台</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2d637953-5144-80db-be32-edef59d65d3a"><td class="cell-title"><a href="https://www.notion.so/2d637953514480dbbe32edef59d65d3a?pvs=21"><span class="icon">⭐</span>無印良品 仙台ロフト</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">10:00-<mark class="highlight-red">20:00</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-red">02/03(二) 藏王樹冰 - 仙台</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2a037953-5144-80fc-9a8d-ee8098f435cd"><td class="cell-title"><a href="https://www.notion.so/2a037953514480fc9a8dee8098f435cd?pvs=21">ずんだ茶寮 仙台駅ずんだ小径店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">8:00-<mark class="highlight-red">21:00</mark><br/>無公休日<br/><br/>仙台站3F</td><td class="cell-OEaF"></td><td class="cell-@)Dm"><span style="margin-inline-end:6px"><a href="New%20Database/%E3%81%9A%E3%82%93%E3%81%A0%E8%8C%B6%E5%AF%AE%20%E4%BB%99%E5%8F%B0%E9%A7%85%E3%81%9A%E3%82%93%E3%81%A0%E5%B0%8F%E5%BE%84%E5%BA%97/IMG_0018.jpeg"><img style="width:20px;max-height:24px" src="New%20Database/%E3%81%9A%E3%82%93%E3%81%A0%E8%8C%B6%E5%AF%AE%20%E4%BB%99%E5%8F%B0%E9%A7%85%E3%81%9A%E3%82%93%E3%81%A0%E5%B0%8F%E5%BE%84%E5%BA%97/IMG_0018.jpeg" alt="IMG_0018.jpeg"/></a></span></td><td class="cell-rj]="><span class="selected-value select-value-color-red">02/03(二) 藏王樹冰 - 仙台</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2ec37953-5144-8004-ad21-d28374c8f70f"><td class="cell-title"><a href="https://www.notion.so/UNIQLO-2ec3795351448004ad21d28374c8f70f?pvs=21"><span class="icon">⭐</span>UNIQLO ヨドバシ仙台店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">10:00-<mark class="highlight-red">21:00</mark></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-red">02/03(二) 藏王樹冰 - 仙台</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="21837953-5144-8077-b9d9-e20c971697c2"><td class="cell-title"><a href="https://www.notion.so/AER-2183795351448077b9d9e20c971697c2?pvs=21"><span class="icon">⭐</span>AER 展望台テラス</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">10:00–<mark class="highlight-red">20:00<br/></mark><mark class="highlight-blue">JR仙台站步行約2分鐘</mark><br/>31F 西側與東側觀景臺免費開放</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-red">02/03(二) 藏王樹冰 - 仙台</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-brown">⛱ 景點</span></td></tr><tr id="2b137953-5144-802f-a7ae-d19e452b7840"><td class="cell-title"><a href="https://www.notion.so/DASHIRO-2b1379535144802fa7aed19e452b7840?pvs=21"><span class="icon">⭐</span>晚餐 - DASHIRO だし廊</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">11:00-<mark class="highlight-red">21:00</mark><br/>無公休、無法預約<br/><mark class="highlight-orange_background">米其林推薦 &amp; Tabelog 2024拉麵百名店入選店🏆</mark><br/><a href="https://tabelog.com/tw/miyagi/A0401/A040101/4019493/">https://tabelog.com/tw/miyagi/A0401/A040101/4019493/</a></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-red">02/03(二) 藏王樹冰 - 仙台</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2b137953-5144-807e-b9ee-e4ead9785dc8"><td class="cell-title"><a href="https://www.notion.so/2b1379535144807eb9eee4ead9785dc8?pvs=21"><span class="icon">❓</span>備案晚餐 - 馬鈴薯</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">17:00<mark class="highlight-red">-22:00<br/></mark>日、三公休<mark class="highlight-red"><br/></mark><a href="https://s.tabelog.com/tw/miyagi/A0401/A040101/4007879/">https://s.tabelog.com/tw/miyagi/A0401/A040101/4007879/</a></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-red">02/03(二) 藏王樹冰 - 仙台</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2c537953-5144-80fc-b071-c6149ef40215"><td class="cell-title"><a href="https://www.notion.so/Clis-Road-2c537953514480fcb071c6149ef40215?pvs=21"><span class="icon">⭐</span>大國藥妝 仙台Clis Road店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">08:05–22:50<br/>藥妝採買</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-red">02/03(二) 藏王樹冰 - 仙台</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-gray">🛍️ 購物</span></td></tr><tr id="2c537953-5144-808f-a511-c712964324a0"><td class="cell-title"><a href="https://www.notion.so/2c5379535144808fa511c712964324a0?pvs=21"><span class="icon">❓</span>炉端とおでん 呼炉凪来 仙台駅前店</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z">16:00–00:00<br/>宵夜，有力氣跟胃就去</td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="><span class="selected-value select-value-color-red">02/03(二) 藏王樹冰 - 仙台</span></td><td class="cell-:QwR"><span class="selected-value select-value-color-yellow">🧁 吃喝</span></td></tr><tr id="2d637953-5144-80db-9c5e-d960ae30bf69"><td class="cell-title"><a href="https://www.notion.so/2d637953514480db9c5ed960ae30bf69?pvs=21">無標題</a></td><td class="cell-x^FC"></td><td class="cell-_FHJ">0</td><td class="cell-f.~Z"></td><td class="cell-OEaF"></td><td class="cell-@)Dm"></td><td class="cell-rj]="></td><td class="cell-:QwR"></td></tr></tbody></table><br/><br/></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

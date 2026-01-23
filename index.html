@@ -46,16 +46,15 @@
         /* Notion-inspired Card Style */
         .activity-card {
             background: white;
-            border-radius: 20px;
-            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            border: 1px solid #eef2f6;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            /* Prevent accidental selection during long press/drag */
+            box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.04);
             user-select: none;
             -webkit-user-select: none;
         }
@@ -68,31 +67,31 @@
 
         .card-cover {
             width: 100%;
-            height: 140px;
+            height: 100px;
             background-size: cover;
             background-position: center;
-            background-color: #f1f5f9;
+            background-color: #f8fafc;
             position: relative;
         }
 
         .card-body {
-            padding: 1.25rem;
+            padding: 1rem 1.25rem 1.25rem 1.25rem;
             position: relative;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
         .card-icon-floater {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             background: white;
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            margin-top: -34px;
+            font-size: 1.25rem;
+            margin-top: -30px;
             z-index: 10;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             border: 2px solid white;
@@ -153,13 +152,13 @@
         }
 
         .cat-badge {
-            font-size: 10px;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 8px;
+            font-size: 9px;
+            font-weight: 900;
+            padding: 3px 8px;
+            border-radius: 6px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .cat-移動 .cat-badge {
@@ -495,22 +494,6 @@
             box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
         }
 
-        /* Press feedback animation */
-        @keyframes card-press {
-            0% {
-                transform: scale(1);
-            }
-
-            100% {
-                transform: scale(0.96);
-            }
-        }
-
-        .activity-card.pressing {
-            animation: card-press 0.8s ease-in-out forwards;
-            background: #f1f5f9;
-        }
-
         .action-btn {
             width: 32px;
             height: 32px;
@@ -773,57 +756,83 @@
         }
 
         /* Modern Bubble Editor Toolbar */
+        /* Modern Selection Toolbar */
         .rich-toolbar {
-            display: none;
             position: fixed;
-            background: #111827;
-            padding: 5px;
-            border-radius: 10px;
-            gap: 2px;
-            z-index: 1000;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            background: #1e293b;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(30, 41, 59, 0.95);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 6px;
+            display: flex;
+            gap: 4px;
+            z-index: 3000;
+            box-shadow:
+                0 10px 15px -3px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateY(8px) scale(0.95);
+        }
+
+        .rich-toolbar.show {
+            opacity: 1;
             pointer-events: auto;
-            transform: translateY(-10px);
-            transition: opacity 0.2s, transform 0.2s;
+            transform: translateY(0) scale(1);
         }
 
         .rich-toolbar::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -6px;
             left: 50%;
             transform: translateX(-50%);
             border-left: 6px solid transparent;
             border-right: 6px solid transparent;
-            border-top: 6px solid #111827;
-        }
-
-        .rich-toolbar.show {
-            display: flex;
-            opacity: 1;
-            transform: translateY(0);
+            border-top: 6px solid rgba(30, 41, 59, 0.95);
         }
 
         .toolbar-btn {
             width: 32px;
             height: 32px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            border-radius: 6px;
+            color: #cbd5e1;
             transition: all 0.2s;
             cursor: pointer;
-            font-size: 14px;
+            border: 1px solid transparent;
         }
 
         .toolbar-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
         .toolbar-btn.active {
             background: #3b82f6;
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .toolbar-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .toolbar-divider {
+            width: 1px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            margin: 0 4px;
+            align-self: center;
         }
     </style>
 </head>
@@ -1065,65 +1074,7 @@
 
         <!-- Tab: Shopping -->
         <div id="shopping" class="tab-content space-y-6">
-            <div class="glass-card p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-black">🛒 購物清單</h2>
-                    <span id="shopProgress"
-                        class="text-xs font-black text-blue-500 bg-blue-50 px-3 py-1 rounded-full">0/10</span>
-                </div>
-                <div class="space-y-2">
-                    <label
-                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
-                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
-                        <span class="text-sm font-bold">唐吉訶德：定型噴霧、襪子</span>
-                    </label>
-                    <label
-                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
-                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
-                        <span class="text-sm font-bold">Kose Q10 護手霜</span>
-                    </label>
-                    <label
-                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
-                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
-                        <span class="text-sm font-bold">護唇膏</span>
-                    </label>
-                    <label
-                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
-                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
-                        <span class="text-sm font-bold">SUGAR BUTTER TREE</span>
-                    </label>
-                    <label
-                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
-                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
-                        <span class="text-sm font-bold">Beams Life 橫濱</span>
-                    </label>
-                    <label
-                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
-                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
-                        <span class="text-sm font-bold">H BEAUTY&YOUTH</span>
-                    </label>
-                    <label
-                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
-                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
-                        <span class="text-sm font-bold">Graphpaper 青山</span>
-                    </label>
-                    <label
-                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
-                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
-                        <span class="text-sm font-bold">J-Scent 香水 (蔦屋書店)</span>
-                    </label>
-                    <label
-                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
-                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
-                        <span class="text-sm font-bold">Coverchord (A.PRESSE, COMOLI)</span>
-                    </label>
-                    <label
-                        class="flex items-center gap-3 p-3 bg-white/40 rounded-xl cursor-pointer hover:bg-white transition-all">
-                        <input type="checkbox" class="shop-item w-5 h-5 rounded-full">
-                        <span class="text-sm font-bold">NUMBER SUGAR (焦糖)</span>
-                    </label>
-                </div>
-            </div>
+            <!-- Rendered by JS -->
         </div>
 
         <!-- Tab: Packing -->
@@ -1133,31 +1084,7 @@
 
         <!-- Tab: To-Do -->
         <div id="todo" class="tab-content space-y-4">
-            <div class="glass-card p-6">
-                <h2 class="text-2xl font-black mb-6">✅ 待辦事項</h2>
-                <div class="space-y-4">
-                    <label
-                        class="flex items-center justify-between p-4 bg-green-50/50 rounded-2xl border border-green-100">
-                        <span class="text-sm font-bold">Visit Japan Web 完成</span>
-                        <input type="checkbox" checked class="w-6 h-6 rounded-full">
-                    </label>
-                    <label
-                        class="flex items-center justify-between p-4 bg-white/50 rounded-2xl border border-slate-100">
-                        <span class="text-sm font-bold">7-11 領取 Lady Gaga 演唱會票</span>
-                        <input type="checkbox" class="w-6 h-6 rounded-full border-slate-300">
-                    </label>
-                    <label
-                        class="flex items-center justify-between p-4 bg-white/50 rounded-2xl border border-slate-100">
-                        <span class="text-sm font-bold">取新幹線票 (QR code)</span>
-                        <input type="checkbox" class="w-6 h-6 rounded-full border-slate-300">
-                    </label>
-                    <label
-                        class="flex items-center justify-between p-4 bg-green-50/50 rounded-2xl border border-green-100">
-                        <span class="text-sm font-bold">保險申請 (東京海上日動)</span>
-                        <input type="checkbox" checked class="w-6 h-6 rounded-full">
-                    </label>
-                </div>
-            </div>
+            <!-- Rendered by JS -->
         </div>
 
         <!-- Tab: Vouchers -->
@@ -1165,25 +1092,77 @@
             <!-- Rendered by JS -->
         </div>
 
-        <!-- Rich Text Toolbar -->
+        <!-- Modern Rich Text Toolbar -->
         <div id="rich-toolbar" class="rich-toolbar">
-            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('bold')"
-                title="粗體"><b>B</b></button>
-            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('italic')"
-                title="斜體"><i>I</i></button>
-            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('foreColor', '#ef4444')"
-                style="color:#ef4444">A</button>
+            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('bold')" title="粗體">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" />
+                    <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" />
+                </svg>
+            </button>
+            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('italic')" title="斜體">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="4" x2="10" y2="4" />
+                    <line x1="14" y1="20" x2="5" y2="20" />
+                    <line x1="15" y1="4" x2="9" y2="20" />
+                </svg>
+            </button>
+            <div class="toolbar-divider"></div>
+            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('foreColor', '#ee4444')"
+                title="紅字">
+                <div class="toolbar-color bg-red-500"></div>
+            </button>
             <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('foreColor', '#3b82f6')"
-                style="color:#3b82f6">A</button>
-            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('foreColor', '#10b981')"
-                style="color:#10b981">A</button>
-            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('foreColor', '#64748b')"
-                style="color:#64748b">A</button>
-            <div class="w-px h-4 bg-white/20 mx-1"></div>
+                title="藍字">
+                <div class="toolbar-color bg-blue-500"></div>
+            </button>
+            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('foreColor', '#fbbf24')"
+                title="黃字">
+                <div class="toolbar-color bg-amber-400"></div>
+            </button>
+            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('hiliteColor', '#fcd34d')"
+                title="螢光筆">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m9 11-6 6v3h9l3-3" />
+                    <path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4" />
+                </svg>
+            </button>
+            <div class="toolbar-divider"></div>
             <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('insertUnorderedList')"
-                title="列表">•</button>
-            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="promptInsertImage()"
-                title="插入圖片">🖼️</button>
+                title="列表">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="8" y1="6" x2="21" y2="6" />
+                    <line x1="8" y1="12" x2="21" y2="12" />
+                    <line x1="8" y1="18" x2="21" y2="18" />
+                    <line x1="3" y1="6" x2="3.01" y2="6" />
+                    <line x1="3" y1="12" x2="3.01" y2="12" />
+                    <line x1="3" y1="18" x2="3.01" y2="18" />
+                </svg>
+            </button>
+            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="promptInsertImage()" title="圖片">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <polyline points="21 15 16 10 5 21" />
+                </svg>
+            </button>
+            <div class="toolbar-divider"></div>
+            <button class="toolbar-btn" onmousedown="event.preventDefault()" onclick="richCmd('removeFormat')"
+                title="清除格式">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17.47 17.47 15.3 15.3M12.8 12.8 5 5" />
+                    <path d="m11 5 8 8" />
+                    <path d="m14 19-3-3" />
+                    <path d="M17.9 17.9 20 20" />
+                    <path d="M4.1 4.1 2 2" />
+                </svg>
+            </button>
         </div>
 
     </main>
@@ -1234,196 +1213,1231 @@
     </nav>
 
     <script>
-        // Strictly verified itinerary data (Default)
+        // Strictly verified itinerary data (Default) - Updated from Notion Database
         const defaultItinerary = {
-            1: [ // 01/27(二) 台北-東京
-                { cat: '移動', icon: '🚗', title: '家 → 桃園機場', time: '', desc: 'Daryl: 09:00 搭車\nJoseph: 10:26 搭機捷\n10:50 Check in', map: 'https://www.google.com/maps/search/?api=1&query=桃園國際機場' },
-                { cat: '移動', icon: '✈️', title: '航班 CX450', time: '12:50', desc: '12:50 桃園第一航廈\n16:50 成田 🇯🇵第二航廈', map: 'https://www.google.com/maps/search/?api=1&query=桃園國際機場' },
-                { cat: '作業', icon: '📋', title: '東京海上日動旅平險', time: '', desc: '到了境內才可以保 (VJW內)' },
-                { cat: '移動', icon: '🚆', title: 'Skyliner: 49分', time: '17:59', desc: '17:59-18:48 到上野\n轉山手線到神田站(20分)', map: 'https://www.google.com/maps/search/?api=1&query=Keisei+Ueno+Station' },
-                { cat: '住宿', icon: '🏨', title: 'ホテルSUI神田 by ABEST', time: '19:00', desc: '預計 19:00 Check in\n樂天旅遊', map: 'https://www.google.com/maps/search/?api=1&query=Hotel+SUI+Kanda+by+ABEST' },
-                { cat: '吃喝', icon: '🍜', title: '晚餐 - 沾麵 六厘舍 東京站店', time: '', desc: '23:00 打烊\n無公休、無法預約', map: 'https://www.google.com/maps/search/?api=1&query=六厘舍+東京站' },
-                { cat: '景點', icon: '✨', title: '丸之內2025燈光秀', time: '16:00', desc: '16:00-23:00\n至2026/02/15', map: 'https://www.google.com/maps/search/?api=1&query=丸之內燈光秀' },
-                { cat: '景點', icon: '🏢', title: '新丸之內大廈', time: '', desc: '7F免費觀景台看東京車站\n11:00-23:00', map: 'https://www.google.com/maps/search/?api=1&query=新丸之內大廈' },
-                { cat: '作業', icon: '🚄', title: '取新幹線票', time: '', desc: 'QRCode在內頁' },
-                { cat: '購物', icon: '⭐', title: '超商 吃宵夜 or 藥妝唐吉訶德', time: '', desc: '記得去7-11換Gaga演唱會票 (參考)\n-\n唐吉訶德 秋葉原店(map)\n買定型噴霧、定妝、襪子、護手霜(Kose coen rich Q10)、護唇膏', map: 'https://www.google.com/maps/search/?api=1&query=Don+Quijote+Akihabara' }
+            "1": [
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "家 → 桃園機場",
+                                    "time": "09:03",
+                                    "desc": "Daryl: 09:03搭環狀線          - 09:25 新北產業 搭機捷 Joseph: 09:26 搭機捷 09:50 Check in",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=家 → 桃園機場"
+                        },
+                        {
+                                    "cat": "景點",
+                                    "icon": "⭐",
+                                    "title": "新丸之內大廈",
+                                    "time": "11:00",
+                                    "desc": "7F免費觀景台 看東京車站 11:00–23:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=新丸之內大廈"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "航班 CX450",
+                                    "time": "12:50",
+                                    "desc": "12:50 桃園第一航廈 16:50 成田 🇯🇵第二航廈",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=航班 CX450"
+                        },
+                        {
+                                    "cat": "景點",
+                                    "icon": "⭐",
+                                    "title": "丸之內2025燈光秀",
+                                    "time": "16:00",
+                                    "desc": "2025年11月13日至2026年2月15日 16:00～23:00 https://www.facebook.com/travelyam/posts/2025%E4%B8%B8%E4%B9%8B%E5%85%A7%E9%BB%9E%E7%87%881113%E7%99%BB%E5%A0%B4%E8%BF%AA%E5%A3%AB%E5%B0%BC%E7%87%88%E6%B5%B7%E5%A4%A2%E5%B9%BB%E7%8F%BE%E8%BA%AB%E4%B8%B8%E4%B9%8B%E5%85%A7%E9%BB%9E%E7%87%882025%E5%B0%87%E6%96%BC1113%E8%87%B32026215%E6%96%BC%E6%9D%B1%E4%BA%AC%E8%BB%8A%E7%AB%99%E9%99%84%E8%BF%91%E8%88%89%E8%BE%A6%E6%98%AF%E6%AF%8F%E9%80%A2%E5%86%AC%E5%AD%A3%E5%BF%85%E7%9C%8B%E8%81%96%E8%AA%95%E7%87%88%E9%A3%BE%E4%B9%8B%E4%B8%80%E9%80%99%E6%A2%9D%E9%95%B7%E9%81%9412km%E7%9A%84%E4%B8%B8%E4%B9%8B/1122895263345279/",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=丸之內2025燈光秀",
+                                    "img": "New Database/%E4%B8%B8%E4%B9%8B%E5%85%A72025%E7%87%88%E5%85%89%E7%A7%80/2025xmastokyo7-1600x1067-1759821075.webp"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "Skyliner：49分",
+                                    "time": "17:59",
+                                    "desc": "17:59 - 18:48 到上野 https://maps.app.goo.gl/hgRFVN6Kz1WR2yLe8 轉山手線到神田站 (20min) https://www.keisei.co.jp/keisei/tetudou/skyliner/tc/traffic/skyliner.php",
+                                    "map": "https://maps.app.goo.gl/hgRFVN6Kz1WR2yLe8"
+                        },
+                        {
+                                    "cat": "住宿",
+                                    "icon": "🛌🏻",
+                                    "title": "ホテルSUI神田 by ABEST",
+                                    "time": "19:00",
+                                    "desc": "預計 19:00 Check in https://mypage.travel.rakuten.co.jp/?l-id=mypage_submenu&",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=ホテルSUI神田 by ABEST"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "晚餐 - 沾麵 六厘舍 東京站店",
+                                    "time": "23:00",
+                                    "desc": "23:00打烊 / 無公休、無法預約",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=晚餐 - 沾麵 六厘舍 東京站店"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "超商 吃宵夜 or 藥妝唐吉訶德",
+                                    "time": "",
+                                    "desc": "記得去7-11換Gaga演唱會票 (https://hochehao.com/lady-gaga-japan-tour-2026-tickets-receive/#penci-%F0%9F%AA%A7_%E9%A0%98%E7%A5%A8%E6%96%B9%E5%BC%8F) - 唐吉訶德 秋葉原店(https://maps.app.goo.gl/ZhQMDSWdjHatMTfZ8) 買定型噴霧、定妝、襪子、護手霜(Kose coen rich Q10)、護唇膏、酸痛藥布、暖暖包(貼式)",
+                                    "map": "https://maps.app.goo.gl/ZhQMDSWdjHatMTfZ8"
+                        },
+                        {
+                                    "cat": "作業",
+                                    "icon": "📋",
+                                    "title": "東京海上日動旅平險",
+                                    "time": "",
+                                    "desc": "到了境內才可以保 VJW內",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=東京海上日動旅平險"
+                        },
+                        {
+                                    "cat": "作業",
+                                    "icon": "📋",
+                                    "title": "取新幹線票",
+                                    "time": "",
+                                    "desc": "QRCode在內頁",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=取新幹線票"
+                        }
             ],
-            2: [ // 01/28(三) 橫濱 原宿 涉谷
-                { cat: '吃喝', icon: '☕', title: '早餐 - 繁邦', time: '', desc: '惠比壽站\n09:00-15:00\n早餐時段無法預約', map: 'https://www.google.com/maps/search/?api=1&query=繁邦+Ebisu' },
-                { cat: '移動', icon: '🚃', title: '惠比壽 → 橫濱', time: '10:09', desc: 'JR湘南新宿快速\n約23-30分\n10:09→10:32\n10:23→10:45' },
-                { cat: '購物', icon: '🍰', title: 'SUGAR BUTTER TREE Sogo橫濱', time: '', desc: '10:00-20:00', map: 'https://www.google.com/maps/search/?api=1&query=SUGAR+BUTTER+TREE+Sogo+Yokohama' },
-                { cat: '購物', icon: '👔', title: 'Beams Life 橫濱', time: '', desc: '10:00-21:00', map: 'https://www.google.com/maps/search/?api=1&query=Beams+Life+Yokohama' },
-                { cat: '移動', icon: '🚃', title: '橫濱 → 表參道', time: '12:03', desc: '需換一次車', map: 'https://www.google.com/maps/search/?api=1&query=Omotesando+Station' },
-                { cat: '購物', icon: '👕', title: 'H BEAUTY&YOUTH', time: '', desc: '12:00-20:00', map: 'https://www.google.com/maps/search/?api=1&query=H+BEAUTY%26YOUTH' },
-                { cat: '吃喝', icon: '🍜', title: 'BASO 表參道 鴨肉蕎麥麵', time: '', desc: '11:30-21:00', map: 'https://www.google.com/maps/search/?api=1&query=BASO+Omotesando' },
-                { cat: '購物', icon: '🛍️', title: '3COINS 原宿旗艦店', time: '', desc: '包含原宿限定商品', map: 'https://www.google.com/maps/search/?api=1&query=3COINS+Harajuku+Flagship+Store' },
-                { cat: '購物', icon: '🧥', title: 'Nanamica Mountain', time: '', desc: '11:00-20:00', map: 'https://www.google.com/maps/search/?api=1&query=nanamica+MOUNTAIN' },
-                { cat: '購物', icon: '👕', title: 'HUMAN MADE OFFLINE STORE', time: '', desc: '11:00-19:00', map: 'https://www.google.com/maps/search/?api=1&query=HUMAN+MADE+OFFLINE+STORE' },
-                { cat: '購物', icon: '👟', title: 'On Flagship Store Harajuku', time: '', desc: '全球第二間旗艦店', map: 'https://www.google.com/maps/search/?api=1&query=On+Flagship+Store+Harajuku' },
-                { cat: '購物', icon: '🛹', title: 'Supreme Harajuku', time: '', desc: '11:00-20:00', map: 'https://www.google.com/maps/search/?api=1&query=Supreme+Harajuku' },
-                { cat: '購物', icon: '🧥', title: 'NEIGHBORHOOD HARAJUKU', time: '', desc: '12:00-19:00', map: 'https://www.google.com/maps/search/?api=1&query=NEIGHBORHOOD+HARAJUKU' },
-                { cat: '購物', icon: '👕', title: 'KITH Tokyo', time: '', desc: 'MIYASHITA PARK 1F', map: 'https://www.google.com/maps/search/?api=1&query=KITH+Tokyo' },
-                { cat: '購物', icon: '👟', title: 'HOKA Harajuku', time: '', desc: '11:00-20:00', map: 'https://www.google.com/maps/search/?api=1&query=HOKA+Harajuku' },
-                { cat: '購物', icon: '👟', title: 'atmos Sendagaya', time: '', desc: '11:00-20:00', map: 'https://www.google.com/maps/search/?api=1&query=atmos+Sendagaya' },
-                { cat: '購物', icon: '👕', title: 'Graphpaper AOYAMA', time: '', desc: '12:00-19:00 週一休', map: 'https://www.google.com/maps/search/?api=1&query=Graphpaper+AOYAMA' },
-                { cat: '吃喝', icon: '🍣', title: '晚餐 - 活美登利 西武涉谷店', time: '', desc: '迴轉壽司\n11:00-22:00', map: 'https://www.google.com/maps/search/?api=1&query=Katsu+Midori+Seibu+Shibuya' },
-                { cat: '吃喝', icon: '🍚', title: '晚餐 - 挽肉と米 涉谷', time: '', desc: '需現場領號碼牌或線上預約', map: 'https://www.google.com/maps/search/?api=1&query=Hikiniku+to+Come+Shibuya' }
+            "2": [
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "早餐 - 繁邦",
+                                    "time": "09:00",
+                                    "desc": "惠比壽駅 09:00–15:00 17:30–23:00 早餐時段無法預約",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=早餐 - 繁邦",
+                                    "img": "New Database/%E6%97%A9%E9%A4%90 - %E7%B9%81%E9%82%A6/%E6%88%AA%E5%9C%96_2025-10-24_20.54.12.png"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "THE ROASTERY by NOZY COFFEE",
+                                    "time": "10:00",
+                                    "desc": "10:00–20:00 無公休 希望可以內用🥺但趕時間外帶也沒關係 by Jo",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=THE ROASTERY by NOZY COFFEE"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "Beams Life 横浜",
+                                    "time": "10:00",
+                                    "desc": "10:00–21:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Beams Life 横浜"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "BIC Camera",
+                                    "time": "10:00",
+                                    "desc": "可能改仙台回來在買(回饋10%) 10:00-22:00 https://maps.app.goo.gl/f9ASWeuowqQREJLt6",
+                                    "map": "https://maps.app.goo.gl/f9ASWeuowqQREJLt6"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "SUGAR BUTTER TREE Sogo橫濱",
+                                    "time": "10:00",
+                                    "desc": "10:00–20:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=SUGAR BUTTER TREE Sogo橫濱"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "惠比壽 → 横浜",
+                                    "time": "10:09",
+                                    "desc": "JR湘南新宿ライン快速 10:09→10:32 10:23→10:49",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=惠比壽 → 横浜"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "3COINS 原宿旗艦店",
+                                    "time": "11:00",
+                                    "desc": "11:00–20:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=3COINS 原宿旗艦店"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "On 東京旗艦店",
+                                    "time": "11:00",
+                                    "desc": "11:00–20:00 要排隊就放棄",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=On 東京旗艦店"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "Adam et Rope PARCO",
+                                    "time": "11:00",
+                                    "desc": "PARCO Shibuya 4F 11:00–21:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Adam et Rope PARCO"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "HOKA Shibuya 旗艦店",
+                                    "time": "11:00",
+                                    "desc": "11:00-20:00 2F 所有鞋款&衣服 3F HOKA Run Club https://www.threads.com/@luke.thereal4sho/post/DAaAJDHBegR?hl=zh-tw",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=HOKA Shibuya 旗艦店"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "Diptyque 青山",
+                                    "time": "11:00",
+                                    "desc": "11:00–20:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Diptyque 青山"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "BILLY’S ENT Shibuya",
+                                    "time": "11:00",
+                                    "desc": "11:00-20:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=BILLY’S ENT Shibuya"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "ATMOS Shibuya",
+                                    "time": "11:00",
+                                    "desc": "11:00-21:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=ATMOS Shibuya"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "BASO 表参道 鴨肉蕎麥麵",
+                                    "time": "11:30",
+                                    "desc": "11:30–21:00 鴨肉蕎麥麵 (可花錢快速通關)",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=BASO 表参道 鴨肉蕎麥麵"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "Kenyan Shibuya",
+                                    "time": "11:30",
+                                    "desc": "11:30–22:00 外帶",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Kenyan Shibuya"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "Graphpaper 青山店",
+                                    "time": "12:00",
+                                    "desc": "12:00–19:00 一休",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Graphpaper 青山店",
+                                    "img": "New Database/Graphpaper %E9%9D%92%E5%B1%B1%E5%BA%97/download.jpg"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "FREAK'S STORE 涉谷",
+                                    "time": "12:00",
+                                    "desc": "12:00–20:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=FREAK'S STORE 涉谷"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "晚餐 - 烏龍麵山長 惠比壽店",
+                                    "time": "12:00",
+                                    "desc": "備案 12:00–15:30 17:00–22:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=晚餐 - 烏龍麵山長 惠比壽店"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "H BEAUTY&YOUTH",
+                                    "time": "12:00",
+                                    "desc": "12:00–20:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=H BEAUTY&YOUTH"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "横浜 → 表參道",
+                                    "time": "12:03",
+                                    "desc": "12:03→12:43 12:12→12:50 12:18→12:53  都要換一班車",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=横浜 → 表參道"
+                        },
+                        {
+                                    "cat": "景點",
+                                    "icon": "⭐",
+                                    "title": "六本木Keyakizaka坂通",
+                                    "time": "17:00",
+                                    "desc": "-2/14 17:00-23:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=六本木Keyakizaka坂通",
+                                    "img": "New Database/%E5%85%AD%E6%9C%AC%E6%9C%A8Keyakizaka%E5%9D%82%E9%80%9A/Screenshot_2025-12-29_141114.png"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "晚餐 - 活美登利",
+                                    "time": "19:00",
+                                    "desc": "最好19:00前抽 排不到就殺去惠比壽吃烏龍麵",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=晚餐 - 活美登利"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "Streamer Coffee Company Shibuya",
+                                    "time": "20:00",
+                                    "desc": "無公休 營業時間到20:00 可外帶",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Streamer Coffee Company Shibuya"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "UNITED TOKYO 神宮前",
+                                    "time": "",
+                                    "desc": "",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=UNITED TOKYO 神宮前"
+                        }
             ],
-            3: [ // 01/29(四) 麻布台 演唱會
-                { cat: '吃喝', icon: '🥐', title: '08:00 Balcony by 6th', time: '08:00', desc: 'Tabelog已訂位', map: 'https://www.google.com/maps/search/?api=1&query=Balcony+by+6th' },
-                { cat: '景點', icon: '🎨', title: 'teamLab Borderless', time: '09:00', desc: '09:00-21:00\n已購票\n預留2.5小時', map: 'https://maps.app.goo.gl/teamlab' },
-                { cat: '購物', icon: '👕', title: 'HOMME PLISSÉ ISSEY MIYAKE', time: '', desc: '代官山', map: 'https://www.google.com/maps/search/?api=1&query=HOMME+PLISSE+ISSEY+MIYAKE+Daikanyama' },
-                { cat: '購物', icon: '📚', title: '蔦屋書店 代官山', time: '', desc: 'J-Scent香水', map: 'https://www.google.com/maps/search/?api=1&query=Daikanyama+T-Site' },
-                { cat: '購物', icon: '🧥', title: 'Nanamica Daikanyama', time: '', desc: '11:00-20:00', map: 'https://www.google.com/maps/search/?api=1&query=nanamica+Daikanyama' },
-                { cat: '購物', icon: '👕', title: 'Okura', time: '', desc: '藍染服飾', map: 'https://www.google.com/maps/search/?api=1&query=Okura+Daikanyama' },
-                { cat: '吃喝', icon: '🍱', title: '午餐 - 和食 惠比壽', time: '', desc: '11:30開門\n需先排隊', map: 'https://www.google.com/maps/search/?api=1&query=和食+一芯+代官山' },
-                { cat: '購物', icon: '☕', title: 'neel 中目黑', time: '', desc: '', map: 'https://www.google.com/maps/search/?api=1&query=neel+Nakameguro' },
-                { cat: '購物', icon: '🍩', title: 'I\'m donut? 中目黑', time: '', desc: '人氣甜甜圈', map: 'https://www.google.com/maps/search/?api=1&query=Im+donut+Nakameguro' },
-                { cat: '購物', icon: '👖', title: 'Kapital, Visvim, 1LDK', time: '', desc: '中目黑逛街', map: 'https://www.google.com/maps/search/?api=1&query=1LDK+Nakameguro' },
-                { cat: '景點', icon: '🎤', title: 'Lady Gaga 演唱會', time: '19:00', desc: '埼玉超級體育場\n重點行程\n17:00 開放入場', map: 'https://maps.app.goo.gl/karena' }
+            "3": [
+                        {
+                                    "cat": "景點",
+                                    "icon": "⭐",
+                                    "title": "東京大神宮",
+                                    "time": "06:00",
+                                    "desc": "06:00–21:00 有時間就去",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=東京大神宮"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "神田 → 京橋",
+                                    "time": "07:02",
+                                    "desc": "07:02→07:07 (5mins) 07:05→07:10 07:08→07:14",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=神田 → 京橋"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "京橋 → 神谷町",
+                                    "time": "07:42",
+                                    "desc": "07:42→07:57 (15mins) 07:48→08:02 07:57→08:12  銀座線 →銀座站 換日比谷線",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=京橋 → 神谷町"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "08:00 Balcony by 6th",
+                                    "time": "08:00",
+                                    "desc": "08:00–10:30 11:00–23:00 Tabelog 已訂位",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=08:00 Balcony by 6th"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "neel 中目黑",
+                                    "time": "09:00",
+                                    "desc": "09:00–20:30 或是喝SIDEWALK STAND",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=neel 中目黑"
+                        },
+                        {
+                                    "cat": "景點",
+                                    "icon": "⭐",
+                                    "title": "teamLab Borderless 麻布台",
+                                    "time": "09:00",
+                                    "desc": "09:00–21:00 https://www.klook.com/zh-TW/activity/20707-teamlab-borderless-admission-ticket-tokyo/ 暫抓2-3小時 已購買門票",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=teamLab Borderless 麻布台"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "London Sports",
+                                    "time": "10:30",
+                                    "desc": "10:30–20:30 https://maps.app.goo.gl/BKQq1U8Fsijp98ca7  最便宜 但大多是舊款式或零碼款式",
+                                    "map": "https://maps.app.goo.gl/BKQq1U8Fsijp98ca7"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "Nanamica 代官山",
+                                    "time": "11:00",
+                                    "desc": "11:00–19:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Nanamica 代官山"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "Murasaki Sports 神田小川町店",
+                                    "time": "11:00",
+                                    "desc": "11:00–20:00 https://maps.app.goo.gl/aDsxvETY5sDDnaS18 全日本連鎖",
+                                    "map": "https://maps.app.goo.gl/aDsxvETY5sDDnaS18"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "Victoria Main Shop / ヴィクトリア 御茶ノ水本店",
+                                    "time": "11:00",
+                                    "desc": "11:00-20:00 https://maps.app.goo.gl/id1ZMpBtip9mw89P6 較大及款式齊全, 但論折扣未必比得上其他小店",
+                                    "map": "https://maps.app.goo.gl/id1ZMpBtip9mw89P6"
+                        },
+                        {
+                                    "cat": "其他",
+                                    "icon": "❓",
+                                    "title": "Alpen Tokyo 新宿",
+                                    "time": "11:00",
+                                    "desc": "11:00–22:00 運動用品店 買軟水壺 1F 運動鞋 2F男性運動潮流服飾 3F：戶外休閒服飾  5FOutdoor用品 (有調味粉) 8F雪具",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Alpen Tokyo 新宿"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "Coverchord 日牌選物店",
+                                    "time": "11:00",
+                                    "desc": "11:00–19:00 中目黑 A.PRESSE、COMOLI、AURALEE 、GRAPHPAPER、KAPTAIN SUNSHINE、UNLIKELY 、DAIWA PIER39",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Coverchord 日牌選物店"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "Pensta LUMINE EST新宿店",
+                                    "time": "11:00",
+                                    "desc": "11:00–21:00 B1樓",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Pensta LUMINE EST新宿店"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "午餐 - 和食 一芯",
+                                    "time": "11:30",
+                                    "desc": "先排！ 11:30–14:00 17:00–23:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=午餐 - 和食 一芯"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "Le Bretagne Creperie",
+                                    "time": "11:30",
+                                    "desc": "11:30-22:00 沒去雪具街的話可去 https://maps.app.goo.gl/2SqVMUohx6NWpuZJ8?g_st=ipc",
+                                    "map": "https://maps.app.goo.gl/2SqVMUohx6NWpuZJ8?g_st=ipc"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "Snowboard shop MDS",
+                                    "time": "12:00",
+                                    "desc": "12:00-20:00 https://maps.app.goo.gl/h6tggAUAhnabJrEf9 位於內街的店舖, 折扣較多",
+                                    "map": "https://maps.app.goo.gl/h6tggAUAhnabJrEf9"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "1LDK apartments.",
+                                    "time": "13:00",
+                                    "desc": "13:00–19:00 逛ssstein",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=1LDK apartments."
+                        },
+                        {
+                                    "cat": "景點",
+                                    "icon": "⭐",
+                                    "title": "Lady Gaga 演唱會",
+                                    "time": "17:00",
+                                    "desc": "Show Date: Jan 29/2026  17:00 開放進場 19:00 開演 預計22:00結束 可能 17:30-18:00 到巨蛋",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Lady Gaga 演唱會"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "I’m donut ? 中目黑",
+                                    "time": "",
+                                    "desc": "",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=I’m donut ? 中目黑"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "HOMME PLISSÉ  代官山店",
+                                    "time": "",
+                                    "desc": "",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=HOMME PLISSÉ  代官山店"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "BRICK & MORTAR",
+                                    "time": "",
+                                    "desc": "家飾店",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=BRICK & MORTAR"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "NUMBER SUGAR 代官山",
+                                    "time": "",
+                                    "desc": "牛奶糖 / 伴手禮",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=NUMBER SUGAR 代官山"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "晚餐 - Lawson / 711 / 全家",
+                                    "time": "",
+                                    "desc": "直接飯店附近超商簡單解決 順便買隔天早餐！",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=晚餐 - Lawson / 711 / 全家"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "蔦屋書店代官山",
+                                    "time": "",
+                                    "desc": "J-Scent香水",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=蔦屋書店代官山"
+                        },
+                        {
+                                    "cat": "景點",
+                                    "icon": "⭐",
+                                    "title": "銀座櫻花樹",
+                                    "time": "",
+                                    "desc": "京橋大根河岸果菜市場遺跡之碑",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=銀座櫻花樹",
+                                    "img": "New Database/%E9%8A%80%E5%BA%A7%E6%AB%BB%E8%8A%B1%E6%A8%B9/IMG_3534.jpg"
+                        }
             ],
-            4: [ // 01/30(五) 東京 - 銀山溫泉
-                { cat: '移動', icon: '🚄', title: '上野 → 大石田', time: '', desc: '山形新幹線\n預計10:00班次', map: 'https://www.google.com/maps/search/?api=1&query=Oishida+Station' },
-                { cat: '購物', icon: '🛒', title: '超市 MaxValu', time: '', desc: '大石田站附近', map: 'https://www.google.com/maps/search/?api=1&query=MaxValu+Oishida' },
-                { cat: '住宿', icon: '♨️', title: '古勢起屋 本館', time: '', desc: '銀山溫泉\n包含懷石料理晚餐', map: 'https://www.google.com/maps/search/?api=1&query=Kosekiya+Honkan' }
+            "4": [
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "飯店 → 東京車站",
+                                    "time": "05:30",
+                                    "desc": "預計 05:30 起床 • 06:31→06:40 2號月台山手線",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=飯店 → 東京車站"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "東京 → 山形",
+                                    "time": "07:12",
+                                    "desc": "新幹線 • 07:12→09:53 (2h41m) 從西口出站！ - JR pass十日 48,000日圓 (新幹線單買來回只要22860日圓) 單程一人 11250 + 11450日圓",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=東京 → 山形"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "野川豆腐屋",
+                                    "time": "09:30",
+                                    "desc": "醉旅宿推薦 https://maps.app.goo.gl/8Nor6sdx6CHha6wUA 09:30-18:00",
+                                    "map": "https://maps.app.goo.gl/8Nor6sdx6CHha6wUA"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "https://tabelog.com/tw/yamagata/A0601/A060101/6000003/ 3.67",
+                                    "time": "11:00",
+                                    "desc": "11:00–15:30 17:00–20:00 一休 離飯店步行12分鐘",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=https://tabelog.com/tw/yamagata/A0601/A060101/6000003/ 3.67"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "https://japantravel.navitime.com/zh-tw/area/jp/route/result/?start=00003107&goal=00005661&start_name=%E5%B1%B1%E5%BD%A2&goal_name=%E5%A4%A7%E7%9F%B3%E7%94%B0&cid=&from=route_top_search_box&date_time=2026-01-27T12:50",
+                                    "time": "14:44",
+                                    "desc": "14:44 → 15:15 新幹線 ¥1,970起 14:52 → 15:41 ¥680",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=https://japantravel.navitime.com/zh-tw/area/jp/route/result/?start=00003107&goal=00005661&start_name=%E5%B1%B1%E5%BD%A2&goal_name=%E5%A4%A7%E7%9F%B3%E7%94%B0&cid=&from=route_top_search_box&date_time=2026-01-27T12:50"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "山形車站 → 銀山溫泉",
+                                    "time": "15:45",
+                                    "desc": "JR大石田站 飯店接駁巴士 15:45出發 有工作人員在出口拿板子確認 巴士停在大石田出口左轉處",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=山形車站 → 銀山溫泉"
+                        },
+                        {
+                                    "cat": "住宿",
+                                    "icon": "🛌🏻",
+                                    "title": "古勢起屋 本館",
+                                    "time": "",
+                                    "desc": "已支付",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=古勢起屋 本館"
+                        },
+                        {
+                                    "cat": "其他",
+                                    "icon": "❓",
+                                    "title": "超市MaxValu Yamagata Station West / 全家 / 7-Eleven",
+                                    "time": "",
+                                    "desc": "補貨！ 超市 https://maps.app.goo.gl/bKVTvFdc8n73iVb38 全家 山形霞城セントラル店: https://maps.app.goo.gl/vkXroad5mjt5nCcg7 711 Yamagata Station West:  https://maps.app.goo.gl/WmTBBo2DFGGYFurK9",
+                                    "map": "https://maps.app.goo.gl/bKVTvFdc8n73iVb38"
+                        },
+                        {
+                                    "cat": "其他",
+                                    "icon": "❓",
+                                    "title": "山形站前里士滿飯店",
+                                    "time": "",
+                                    "desc": "先放行李 離車站步行3分鐘 12/1 已確認可以先提前放行李",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=山形站前里士滿飯店",
+                                    "img": "New Database/%E5%B1%B1%E5%BD%A2%E7%AB%99%E5%89%8D%E9%87%8C%E5%A3%AB%E6%BB%BF%E9%A3%AF%E5%BA%97/IMG_1347.jpeg"
+                        }
             ],
-            5: [ // 01/31(六) 銀山溫泉 - 山形
-                { cat: '移動', icon: '🚌', title: '大石田 → 山形', time: '', desc: '接駁車轉乘JR', map: 'https://www.google.com/maps/search/?api=1&query=Yamagata+Station' },
-                { cat: '景點', icon: '⛰️', title: '山寺 (立石寺)', time: '', desc: '1000階梯', map: 'https://www.google.com/maps/search/?api=1&query=Yamadera' },
-                { cat: '購物', icon: '🧥', title: 'Montbell 山形', time: '', desc: '', map: 'https://www.google.com/maps/search/?api=1&query=Montbell+Yamagata' },
-                { cat: '購物', icon: '👕', title: 'Workman', time: '', desc: '平價機能服', map: 'https://www.google.com/maps/search/?api=1&query=Workman+Yamagata' },
-                { cat: '吃喝', icon: '🇮🇹', title: 'Al-che-cciano', time: '', desc: '義式料理音樂會', map: 'https://www.google.com/maps/search/?api=1&query=Al-che-cciano' }
+            "5": [
+                        {
+                                    "cat": "景點",
+                                    "icon": "⭐",
+                                    "title": "霞城セントラル展望ロビー",
+                                    "time": "07:00",
+                                    "desc": "07:00–23:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=霞城セントラル展望ロビー"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "Workman",
+                                    "time": "07:00",
+                                    "desc": "07:00–20:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Workman"
+                        },
+                        {
+                                    "cat": "景點",
+                                    "icon": "⭐",
+                                    "title": "立石寺",
+                                    "time": "08:00",
+                                    "desc": "08:00–16:00 玉こんにゃく（玉蒟蒻）",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=立石寺",
+                                    "img": "New Database/%E7%AB%8B%E7%9F%B3%E5%AF%BA/rissyauji_shrine.jpg"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "午餐 - お休処対面石",
+                                    "time": "09:00",
+                                    "desc": "09:00-17:00 https://tabelog.com/tw/yamagata/A0601/A060101/6002406/",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=午餐 - お休処対面石"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "hatake style エスパル山形店",
+                                    "time": "09:30",
+                                    "desc": "09:30–19:30 站前咖啡廳",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=hatake style エスパル山形店"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "Montbell",
+                                    "time": "10:00",
+                                    "desc": "10:00–20:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Montbell"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "たいやきや 銀の龍鯛魚燒",
+                                    "time": "10:00",
+                                    "desc": "10:00-16:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=たいやきや 銀の龍鯛魚燒"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "銀山溫泉街 → 大石田",
+                                    "time": "10:20",
+                                    "desc": "10:20 接駁車發車 預估車程40-50分",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=銀山溫泉街 → 大石田",
+                                    "img": "New Database/%E9%8A%80%E5%B1%B1%E6%BA%AB%E6%B3%89%E8%A1%97 %E2%86%92 %E5%A4%A7%E7%9F%B3%E7%94%B0/17644073002812x.jpg"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "19:00 Al-che Cciano Con cert",
+                                    "time": "11:30",
+                                    "desc": "11:30–14:00 17:00–20:00 義式餐廳 已訂位  https://tabelog.com/yamagata/A0601/A060101/6011073/",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=19:00 Al-che Cciano Con cert"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "大石田 → 山寺站",
+                                    "time": "11:55",
+                                    "desc": "11:55→13:09 (1h14m) 奧羽本線搭12站 在羽前千歳站 換搭仙山線 ¥770",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=大石田 → 山寺站"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "山寺站 → 山形車站",
+                                    "time": "14:56",
+                                    "desc": "14:56→15:16 15:51→16:17 (26m) 16:55→17:14 ¥242",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=山寺站 → 山形車站"
+                        },
+                        {
+                                    "cat": "住宿",
+                                    "icon": "🛌🏻",
+                                    "title": "山形站前里士滿飯店",
+                                    "time": "",
+                                    "desc": "https://www.notion.so/21437953514480fbb1d0e9da00fe67dc?pvs=21 Agoda",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=山形站前里士滿飯店"
+                        }
             ],
-            6: [ // 02/01(日)
-                { cat: '景點', icon: '🧊', title: '藏王纜車看樹冰', time: '', desc: '停留2-3小時', map: 'https://www.google.com/maps/search/?api=1&query=Zao+Ropeway' },
-                { cat: '移動', icon: '🚌', title: '山形→藏王', time: '', desc: '巴士40-50分\n單程660日圓', map: 'https://www.google.com/maps/search/?api=1&query=Zao+Onsen+Bus+Terminal' },
-                { cat: '住宿', icon: '🏨', title: 'Onsen & Stay OakHill', time: '', desc: '藏王溫泉', map: 'https://www.google.com/maps/search/?api=1&query=Onsen+%26+Stay+OakHill' }
+            "6": [
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "かしぇる",
+                                    "time": "11:00",
+                                    "desc": "11:00–14:00 18:00–21:00 成吉思汗烤肉",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=かしぇる"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "音茶屋(オトチャヤ)",
+                                    "time": "11:00",
+                                    "desc": "11:00–16:00 17:30–20:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=音茶屋(オトチャヤ)"
+                        },
+                        {
+                                    "cat": "住宿",
+                                    "icon": "🛌🏻",
+                                    "title": "Onsen & Stay OakHill",
+                                    "time": "15:00",
+                                    "desc": "先寄放行李；預計 15:00 Check in - 到藏王溫泉巴士總站後打電話給飯店會有接駁車來接 電話：https://www.google.com/search?q=onsen+and+stay+oakhill&oq=onsen&gs_lcrp=EgZjaHJvbWUqDAgBECMYJxiABBiKBTIOCAAQRRg5GEMYgAQYigUyDAgBECMYJxiABBiKBTIMCAIQABhDGIAEGIoFMhMIAxAuGK8BGMcBGIAEGJgFGJkFMgcIBBAAGIAEMgcIBRAAGIAEMgwIBhAAGEMYgAQYigUyBggHEEUYPNIBCDYwMzFqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8# - https://www.onestayapp.com/v2/checkin/search?checkin_code=18993886&pin_code=e8mdm0dh73&referral=email (預先報到Check in) Jalan",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Onsen & Stay OakHill"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "寿し喜らく",
+                                    "time": "17:30",
+                                    "desc": "17:30 - 21:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=寿し喜らく"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "山形駅前巴士案內所 → 藏王溫泉巴士總站：45分",
+                                    "time": "6:50",
+                                    "desc": "從東口出站！ 1. 買前往藏王車票 2. 公共電話打給飯店派接駁車  1號候車處( 每一小時一班車 ) https://www.yamakobus.jp/a4ba73198eff7b52d13a643791cbf18728185b5a.pdf 最早 6:50 - 7:26 預抓 https://travel.yamakobus.jp/zh-tw/timetable/routebus-yamagata-zaoline.html 2025年12月27日 〜 2026年2月22日（期間內的36天），點燈時間是17:00 - 21:00。",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=山形駅前巴士案內所 → 藏王溫泉巴士總站：45分",
+                                    "img": "New Database/%E5%B1%B1%E5%BD%A2%E9%A7%85%E5%89%8D%E5%B7%B4%E5%A3%AB%E6%A1%88%E5%85%A7%E6%89%80 %E2%86%92 %E8%97%8F%E7%8E%8B%E6%BA%AB%E6%B3%89%E5%B7%B4%E5%A3%AB%E7%B8%BD%E7%AB%99%EF%BC%9A45%E5%88%86/IMG_1743.jpeg"
+                        },
+                        {
+                                    "cat": "作業",
+                                    "icon": "📋",
+                                    "title": "Skiing Now Zao 鬧雪具藏王店",
+                                    "time": "7:30",
+                                    "desc": "上の台纜車旁 Wonderworld ski school 美好滑雪基地 營業時間： 7:30-21:00 ✅12/15已線上預約 使用當天需提前一個半小時到店",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Skiing Now Zao 鬧雪具藏王店"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "上の台 Base Center JUPEER",
+                                    "time": "8:30",
+                                    "desc": "https://tw.wamazing.com/snow/items/13240?fbclid=IwY2xjawNJcjVleHRuA2FlbQIxMABicmlkETFLRk1Vck1MUzR6cEppb2xyAR6RLlJavEXoaDUD7MQgHOMuTTMVxU5ujf1RgHZ4wh1emmcBXI9cqGdsuAeIEg_aem_jPVSoFNZtLgaAu2Kir0t0g ✅ 自動售票機用完美行QRCode取票 平日、週六、國定假日：8:30-17:00 夜滑：17:00-21:00 （除天候不佳不開放）",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=上の台 Base Center JUPEER"
+                        },
+                        {
+                                    "cat": "景點",
+                                    "icon": "⭐",
+                                    "title": "藏王溫泉 源七露天之湯",
+                                    "time": "",
+                                    "desc": "",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=藏王溫泉 源七露天之湯"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "蔵王温泉「ろばた」",
+                                    "time": "",
+                                    "desc": "成吉思汗烤肉",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=蔵王温泉「ろばた」"
+                        }
             ],
-            7: [ // 02/02(一)
-                { cat: '景點', icon: '🏂', title: '藏王滑雪場', time: '', desc: '整日滑雪活動', map: 'https://www.google.com/maps/search/?api=1&query=Zao+Onsen+Ski+Resort' },
-                { cat: '吃喝', icon: '🍜', title: '蔵王麺処 梨庵', time: '', desc: '午餐', map: 'https://www.google.com/maps/search/?api=1&query=Zao+Men-dokoro+Rian' }
+            "7": [
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "蔵王麺処 梨庵(りあん)",
+                                    "time": "11:30",
+                                    "desc": "無公休 11:30–15:00 17:30–21:30",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=蔵王麺処 梨庵(りあん)"
+                        }
             ],
-            8: [ // 02/03(二)
-                { cat: '景點', icon: '🧊', title: '藏王樹冰', time: '早晨', desc: '最後觀賞機會', map: 'https://www.google.com/maps/search/?api=1&query=Zao+Juhyo' },
-                { cat: '移動', icon: '🚌', title: '藏王 → 仙台', time: '', desc: '巴士移動', map: 'https://www.google.com/maps/search/?api=1&query=Sendai+Station' },
-                { cat: '住宿', icon: '🏨', title: 'Sendai Nishiguchi Daiwa Roynet Premier', time: '', desc: '仙台西口', map: 'https://www.google.com/maps/search/?api=1&query=Daiwa+Roynet+Hotel+Sendai+Nishiguchi+Premier' },
-                { cat: '景點', icon: '🏙️', title: 'AER 觀景台', time: '', desc: '31F 免費夜景', map: 'https://www.google.com/maps/search/?api=1&query=AER+Observation+Terrace' }
+            "8": [
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "大國藥妝 仙台Clis Road店",
+                                    "time": "08:05",
+                                    "desc": "08:05–22:50 藥妝採買",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=大國藥妝 仙台Clis Road店"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "三五郎小屋",
+                                    "time": "10:00",
+                                    "desc": "10:00–16:00 晚餐不開放住客以外的人",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=三五郎小屋"
+                        },
+                        {
+                                    "cat": "景點",
+                                    "icon": "⭐",
+                                    "title": "AER 展望台テラス",
+                                    "time": "10:00",
+                                    "desc": "10:00–20:00 JR仙台站步行約2分鐘 31F 西側與東側觀景臺免費開放",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=AER 展望台テラス"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "無印良品 仙台ロフト",
+                                    "time": "10:00",
+                                    "desc": "10:00-20:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=無印良品 仙台ロフト"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "UNIQLO ヨドバシ仙台店",
+                                    "time": "10:00",
+                                    "desc": "10:00-21:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=UNIQLO ヨドバシ仙台店"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "鯛きち 名掛丁店",
+                                    "time": "10:30",
+                                    "desc": "10:30-19:30（麵糊賣完就打烊）",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=鯛きち 名掛丁店"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "晚餐 - DASHIRO だし廊",
+                                    "time": "11:00",
+                                    "desc": "11:00-21:00 無公休、無法預約 米其林推薦 & Tabelog 2024拉麵百名店入選店🏆 https://tabelog.com/tw/miyagi/A0401/A040101/4019493/",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=晚餐 - DASHIRO だし廊"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "藏王巴士案內所",
+                                    "time": "15:20",
+                                    "desc": "https://www.yamakobus.jp/a4ba73198eff7b52d13a643791cbf18728185b5a.pdf 預抓 15:20 - 16:05",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=藏王巴士案內所"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "炉端とおでん 呼炉凪来 仙台駅前店",
+                                    "time": "16:00",
+                                    "desc": "16:00–00:00 宵夜，有力氣跟胃就去",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=炉端とおでん 呼炉凪来 仙台駅前店"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "山形 → 仙台",
+                                    "time": "16:14",
+                                    "desc": "16:14 - 17:33 16:29 - 17:48 16:44 - 18:03",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=山形 → 仙台"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "備案晚餐 - 馬鈴薯",
+                                    "time": "17:00",
+                                    "desc": "17:00-22:00 日、三公休 https://s.tabelog.com/tw/miyagi/A0401/A040101/4007879/",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=備案晚餐 - 馬鈴薯"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "ずんだ茶寮 仙台駅ずんだ小径店",
+                                    "time": "8:00",
+                                    "desc": "8:00-21:00 無公休日  仙台站3F",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=ずんだ茶寮 仙台駅ずんだ小径店",
+                                    "img": "New Database/%E3%81%9A%E3%82%93%E3%81%A0%E8%8C%B6%E5%AF%AE %E4%BB%99%E5%8F%B0%E9%A7%85%E3%81%9A%E3%82%93%E3%81%A0%E5%B0%8F%E5%BE%84%E5%BA%97/IMG_0018.jpeg"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "名掛丁商店街",
+                                    "time": "",
+                                    "desc": "逛街攻略：http://bring-you.info/zh-tw/sendai-commercial-street",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=名掛丁商店街"
+                        },
+                        {
+                                    "cat": "住宿",
+                                    "icon": "🛌🏻",
+                                    "title": "仙台西口大和魯內 PREMIER 飯店",
+                                    "time": "",
+                                    "desc": "Agoda 先放行李",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=仙台西口大和魯內 PREMIER 飯店"
+                        }
             ],
-            9: [ // 02/04(三)
-                { cat: '景點', icon: '🌊', title: '松島海岸', time: '早晨', desc: '日本三景之一', map: 'https://www.google.com/maps/search/?api=1&query=Matsushima+Kaigan+Station' },
-                { cat: '吃喝', icon: '🦪', title: '牡蠣小屋 / 魚市場', time: '', desc: '松島午餐', map: 'https://www.google.com/maps/search/?api=1&query=Matsushima+Fish+Market' },
-                { cat: '購物', icon: '🛍️', title: 'S-PAL / AER', time: '下午', desc: '仙台車站前逛街', map: 'https://www.google.com/maps/search/?api=1&query=S-PAL+Sendai' },
-                { cat: '移動', icon: '🚄', title: '新幹線 → 東京', time: '傍晚', desc: '返回東京', map: 'https://www.google.com/maps/search/?api=1&query=Tokyo+Station' },
-                { cat: '景點', icon: '🏙️', title: 'Ginza Sony Park', time: '', desc: '銀座新地標', map: 'https://www.google.com/maps/search/?api=1&query=Ginza+Sony+Park' },
-                { cat: '購物', icon: '👔', title: 'BEAMS 銀座店', time: '', desc: '2F/3F', map: 'https://maps.app.goo.gl/s53Lm7y1hWGfvUzs5' },
-                { cat: '購物', icon: '👕', title: 'UNIQLO 銀座旗艦店', time: '', desc: '12層樓', map: 'https://www.google.com/maps/search/?api=1&query=UNIQLO+Ginza' },
-                { cat: '購物', icon: '🖊️', title: '銀座 伊東屋 Itoya', time: '', desc: '文具控必逛', map: 'https://www.google.com/maps/search/?api=1&query=Ginza+Itoya' },
-                { cat: '購物', icon: '🏠', title: '無印良品 銀座', time: '', desc: '世界旗艦店', map: 'https://www.google.com/maps/search/?api=1&query=MUJI+Ginza' }
+            "9": [
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "Date Cafe O’rder",
+                                    "time": "07:15",
+                                    "desc": "仙台駅 2F 07:15-20:45",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Date Cafe O’rder"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "110 coffee (イトーコーヒー)",
+                                    "time": "08:00",
+                                    "desc": "08:00–16:00 ~老闆新年在休長假中~",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=110 coffee (イトーコーヒー)"
+                        },
+                        {
+                                    "cat": "景點",
+                                    "icon": "⭐",
+                                    "title": "瑞巖寺",
+                                    "time": "08:30",
+                                    "desc": "08:30–16:30",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=瑞巖寺"
+                        },
+                        {
+                                    "cat": "景點",
+                                    "icon": "⭐",
+                                    "title": "瑞巖寺五大堂",
+                                    "time": "08:30",
+                                    "desc": "08:30–16:30 鏤空橋",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=瑞巖寺五大堂",
+                                    "img": "New Database/%E7%91%9E%E5%B7%96%E5%AF%BA%E4%BA%94%E5%A4%A7%E5%A0%82/%E6%88%AA%E5%9C%96_2025-12-06_15.18.44.png"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "齋藤惣菜店 ころっけや",
+                                    "time": "09:00",
+                                    "desc": "可樂餅 09:00–17:00 https://tabelog.com/miyagi/A0401/A040101/4002163/",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=齋藤惣菜店 ころっけや"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "早餐 - 牡蠣と寿司朝市総本店",
+                                    "time": "09:00",
+                                    "desc": "09:00-14:00 無公休",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=早餐 - 牡蠣と寿司朝市総本店"
+                        },
+                        {
+                                    "cat": "景點",
+                                    "icon": "⭐",
+                                    "title": "円通院（八通院）",
+                                    "time": "09:00",
+                                    "desc": "09:00-16:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=円通院（八通院）"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "松島蒲鉾本舗 総本店",
+                                    "time": "09:30",
+                                    "desc": "伴手禮、自己烤魚板 09:30-16:30 無公休",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=松島蒲鉾本舗 総本店"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "サくサく可頌",
+                                    "time": "10:00",
+                                    "desc": "10:00-17:00 禮拜二公休",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=サくサく可頌"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "松島雪竹屋",
+                                    "time": "10:00",
+                                    "desc": "現烤仙貝 無公休日 10:00–17:30",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=松島雪竹屋"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "阿部蒲鉾店 本店",
+                                    "time": "10:00",
+                                    "desc": "炸葫蘆 10:00-18:30",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=阿部蒲鉾店 本店"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "仙台 → 松島海岸",
+                                    "time": "10:09",
+                                    "desc": "JR 仙石線 10號月台 10:09 → 10:48 10:29 → 11:08 10:49 → 11:28 仙台車站到松島海岸站單趟約40分 來回車票 840 日圓",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=仙台 → 松島海岸"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "MARLOWE 布丁",
+                                    "time": "10:30",
+                                    "desc": "GINZA SIX B1 10:30–20:30",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=MARLOWE 布丁"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "漁師の海鮮丼",
+                                    "time": "11:00",
+                                    "desc": "11:00-15:00 四五公休、無法預約 松島海岸站出來後左轉步行三分鐘",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=漁師の海鮮丼"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "松島海岸 → 仙台",
+                                    "time": "12:33",
+                                    "desc": "12:33 → 13:10 12:53 → 13:31 13:11 → 13:49",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=松島海岸 → 仙台"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "仙台 → 上野",
+                                    "time": "14:57",
+                                    "desc": "14:57→16:26",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=仙台 → 上野"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "宵夜 - 串焼きと天ぷら 春子屋",
+                                    "time": "15:00",
+                                    "desc": "15:00-23:00 (22:30最後點餐)  已用LINE訂位 22:00 https://www.threads.com/@x_______t/post/DP0MzC5j_FD?xmt=AQF0vf600lZ4BRPAe5UWgrRWhjqWdG0ty0WpCp6DXvo5j8-BjwvmBdIJAihpLYJ76L5jIWwc&slof=1",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=宵夜 - 串焼きと天ぷら 春子屋"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "晚餐 - 麥與橄欖",
+                                    "time": "17:30",
+                                    "desc": "無法預約 17:30-21:30",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=晚餐 - 麥與橄欖"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "BEAMS 銀座店",
+                                    "time": "20:00",
+                                    "desc": "11 :00-20:00 https://maps.app.goo.gl/s53Lm7y1hWGfvUzs5",
+                                    "map": "https://maps.app.goo.gl/s53Lm7y1hWGfvUzs5"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "HOMME PLISSE ISSEY MIYAKE Hankyu Men’s Tokyo Store",
+                                    "time": "20:00",
+                                    "desc": "-20:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=HOMME PLISSE ISSEY MIYAKE Hankyu Men’s Tokyo Store"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "無印良品 銀座",
+                                    "time": "21:00",
+                                    "desc": "11 :00-21:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=無印良品 銀座"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "UNIQLO",
+                                    "time": "21:00",
+                                    "desc": "11 :00-21:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=UNIQLO"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "早餐 - imosen蕎麥麵",
+                                    "time": "7:30",
+                                    "desc": "7:30–14:30",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=早餐 - imosen蕎麥麵"
+                        },
+                        {
+                                    "cat": "住宿",
+                                    "icon": "🛌🏻",
+                                    "title": "上野寶石飯店 Hotel sardonyx ueno",
+                                    "time": "",
+                                    "desc": "先放行李 已支付",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=上野寶石飯店 Hotel sardonyx ueno"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "S-PAL",
+                                    "time": "",
+                                    "desc": "如果前一天有去就可略過 本館 1F 無印 2F Adam et rope 東館 3F Freak’s Store、columbia",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=S-PAL"
+                        },
+                        {
+                                    "cat": "作業",
+                                    "icon": "📋",
+                                    "title": "先寄放行李",
+                                    "time": "",
+                                    "desc": "",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=先寄放行李"
+                        }
             ],
-            10: [ // 02/05(四) 返程
-                { cat: '吃喝', icon: '☕', title: 'February Cafe', time: '08:30', desc: '淺草早餐', map: 'https://www.google.com/maps/search/?api=1&query=February+Cafe+Asakusa' },
-                { cat: '購物', icon: '🐧', title: 'Pensta 上野', time: '', desc: '企鵝周邊', map: 'https://www.google.com/maps/search/?api=1&query=Pensta+Ueno' },
-                { cat: '移動', icon: '🚆', title: 'Skyliner', time: '12:20', desc: '12:20-13:04\n上野 → 成田', map: 'https://www.google.com/maps/search/?api=1&query=Keisei+Ueno+Station' },
-                { cat: '移動', icon: '✈️', title: '航班 CX451', time: '15:20', desc: '15:20 成田T2 → 18:40 桃園', map: 'https://www.google.com/maps/search/?api=1&query=Narita+Airport+Terminal+2' }
+            "10": [
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "FUGLEN ASAKUSA",
+                                    "time": "08:00",
+                                    "desc": "08:00–21:00 已確認無公休",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=FUGLEN ASAKUSA"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "早餐 - February Cafe",
+                                    "time": "08:15",
+                                    "desc": "08:15–17:00 已確認無公休、無法預約",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=早餐 - February Cafe"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "PENSTA ecute上野店 (賣店)",
+                                    "time": "09:00",
+                                    "desc": "3F 改札内 エキュート上野内 09:00–21:00 新宿有去就不用",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=PENSTA ecute上野店 (賣店)"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "Doughnut Mori上野店",
+                                    "time": "09:00",
+                                    "desc": "3F 改札内 09:00-21:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=Doughnut Mori上野店"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "TRUFFLE mini 御徒町店",
+                                    "time": "09:00",
+                                    "desc": "09:00–21:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=TRUFFLE mini 御徒町店"
+                        },
+                        {
+                                    "cat": "購物",
+                                    "icon": "🛍️",
+                                    "title": "KURAMAE CANNELE エキュート上野店",
+                                    "time": "10:00",
+                                    "desc": "3F 改札内 10:00-20:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=KURAMAE CANNELE エキュート上野店"
+                        },
+                        {
+                                    "cat": "吃喝",
+                                    "icon": "🍜",
+                                    "title": "午餐 - 鳥つね湯島天神前店",
+                                    "time": "11:00",
+                                    "desc": "11:00–13:30 17:00–21:00",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=午餐 - 鳥つね湯島天神前店"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "12:20 上野出發",
+                                    "time": "13:01",
+                                    "desc": "13:01 到成田機場",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=12:20 上野出發"
+                        },
+                        {
+                                    "cat": "移動",
+                                    "icon": "🚉",
+                                    "title": "航班 CX451",
+                                    "time": "15:20",
+                                    "desc": "15:20 成田 🇯🇵第二航廈飛 18:40 回台灣第一航廈",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=航班 CX451"
+                        },
+                        {
+                                    "cat": "作業",
+                                    "icon": "📋",
+                                    "title": "13:20 機場check in",
+                                    "time": "",
+                                    "desc": "",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=13:20 機場check in"
+                        },
+                        {
+                                    "cat": "景點",
+                                    "icon": "⭐",
+                                    "title": "淺草寺 雷門",
+                                    "time": "",
+                                    "desc": "7點前無人",
+                                    "map": "https://www.google.com/maps/search/?api=1&query=淺草寺 雷門"
+                        }
             ]
-        };
+};
+
+
         const defaultPacking = [
             {
-                cat: "重要",
-                icon: "🔐",
-                items: [
-                    { text: "護照", checked: true },
-                    { text: "eSim", checked: true },
-                    { text: "機票", checked: true },
-                    { text: "手機、充電線", checked: true },
-                    { text: "台幣現金、錢包、信用卡", checked: false },
-                    { text: "行動電源", checked: true },
-                    { text: "日幣現金、零錢包", checked: true },
-                    { text: "Airpods Pro", checked: true },
-                    { text: "手表、充電線", checked: true },
-                    { text: "家裡鑰匙", checked: true },
-                    { text: "行李秤?", checked: false },
-                    { text: "行李束帶", checked: true },
-                    { text: "行李擴充包", checked: true },
-                    { text: "伊勢丹貴賓卡", checked: true },
-                    { text: "HARUKA / 南海電鐵 車票", checked: true }
+                cat: "基本配備", icon: "🎒", items: [
+                    { text: "護照", checked: false },
+                    { text: "日幣現金", checked: false },
+                    { text: "信用卡", checked: false },
+                    { text: " Visit Japan Web QR碼", checked: false }
                 ]
             },
             {
-                cat: "服裝",
-                icon: "👕",
-                items: [
-                    { text: "衣服 3+1", checked: true },
-                    { text: "褲子 2+1", checked: true },
-                    { text: "內衣 0 / 內褲 4+1", checked: true },
-                    { text: "襪子 4+1", checked: true },
-                    { text: "外套 1", checked: true },
-                    { text: "雨傘 0", checked: true },
-                    { text: "睡衣睡褲 1", checked: false },
-                    { text: "真空夾鏈袋 4", checked: true },
-                    { text: "帽子/手套/圍巾", checked: false }
+                cat: "電子電器", icon: "🔌", items: [
+                    { text: "充電器 / 線", checked: false },
+                    { text: "行動電源", checked: false },
+                    { text: "eSIM / 網卡", checked: false },
+                    { text: "轉接頭", checked: false }
                 ]
             },
             {
-                cat: "藥品美妝",
-                icon: "💊",
-                items: [
-                    { text: "維他命/益生菌/魚油", checked: true },
-                    { text: "化妝水、乳液", checked: true },
-                    { text: "護唇膏", checked: true },
-                    { text: "隱形眼鏡", checked: true },
-                    { text: "防曬、卸妝油", checked: true },
-                    { text: "頭痛藥、感冒藥", checked: true },
-                    { text: "腸胃藥", checked: true },
-                    { text: "護手霜", checked: true },
-                    { text: "口罩", checked: true },
-                    { text: "牙間刷", checked: true },
-                    { text: "濕疹軟膏/嘴破藥", checked: true },
-                    { text: "面紙/濕紙巾", checked: true },
-                    { text: "痠痛貼布/休足", checked: false },
-                    { text: "髮型澎澎水", checked: false }
-                ]
-            },
-            {
-                cat: "3C 與其他",
-                icon: "📸",
-                items: [
-                    { text: "相機、記憶卡、電池、充電器", checked: true },
-                    { text: "筆", checked: true }
+                cat: "衣物相關", icon: "🧥", items: [
+                    { text: "發熱衣", checked: false },
+                    { text: "防寒外套", checked: false },
+                    { text: "圍巾 / 手套", checked: false },
+                    { text: "好走路的鞋", checked: false }
                 ]
             }
         ];
 
         const defaultVouchers = [
             {
-                title: "唐吉訶德 Don Quijote",
-                desc: "免稅 10% + 5%~7% 折扣\n滿 1 萬日圓享 5% off，滿 3 萬享 7% off",
-                img: "don_quijote_coupon_preview_1768673227226.png",
+                title: "Bic Camera 10%+7% 優惠券",
+                desc: "免稅 10% + 優惠 7% (相機、手錶、家電等)",
+                img: "https://cache.biccamera.com/bi-asset/img/common/coupon/top/coupon_tw.png",
                 cat: "購物"
             },
             {
-                title: "Bic Camera 必買工具",
-                desc: "免稅 10% + 3%~7% 折扣\n家電/玩具 7%, 藥妝 5%, 酒類 3%",
-                img: "bic_camera_coupon_preview_1768673243943.png",
-                cat: "電器"
-            },
-            {
-                title: "松本清 Matsumoto Kiyoshi",
-                desc: "免稅 10% + 3%~7% 折扣\n滿 1 萬 3% off, 滿 3 萬 5% off, 滿 5 萬 7% off",
-                img: "matsumoto_kiyoshi_coupon_preview_1768673259971.png",
+                title: "松本清 10%+7% 優惠券",
+                desc: "滿 30,000 日圓以上 7% OFF",
+                img: "https://www.matsumotokiyoshi-tw.com/img/coupon_2023.jpg",
                 cat: "藥妝"
-            },
-            {
-                title: "三井 Outlet Mitsui",
-                desc: "免稅 10% + 最高 10% 折扣券\n需至服務台出示護照領取優惠券",
-                img: "https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?q=80&w=600&auto=format&fit=crop",
-                cat: "購物"
             }
         ];
 
-        // State Init
-        let savedData = JSON.parse(localStorage.getItem('trip_data_2601'));
-        let itinerary, packing, vouchers;
+
+        // --- State Definitions ---
+        var savedData = JSON.parse(localStorage.getItem('trip_data_2601'));
+        var itinerary, packing, vouchers;
+        var currentDay = parseInt(localStorage.getItem('currentDay')) || 1;
+        var db = null;
+        var syncId = 'seaweed-trip';
+        var isGlobalListenersAttached = false;
+        var draggingItem = null;
+        var activeTouchId = null;
+        var longPressTimer = null;
+        var startPos = { x: 0, y: 0 };
+        var dragOccurred = false;
+        var currentDragCard = null;
+        var isDown = false;
+        var startX;
+        var scrollLeft;
+        var isDragging = false;
+        var detailActiveIndex = null;
 
         if (savedData && savedData.itinerary) {
             itinerary = savedData.itinerary;
@@ -1434,8 +2448,6 @@
             packing = defaultPacking;
             vouchers = defaultVouchers;
         }
-
-        let currentDay = parseInt(localStorage.getItem('currentDay')) || 1;
 
         // Content Protection Utility
         function esc(str) {
@@ -1458,7 +2470,6 @@
         }
 
         // Cloud Sync Logic
-        let db = null;
         const defaultCloudConfig = {
             apiKey: "AIzaSyA4plhrX0LjzywroYpZMsHEXYWRcqiSWp4",
             authDomain: "japantrip-a83a3.firebaseapp.com",
@@ -1468,8 +2479,7 @@
             appId: "1:677594143545:web:2e6b9ef07cf3381fda66e8",
             measurementId: "G-19FRE91L3Z"
         };
-        let cloudConfig = defaultCloudConfig;
-        let syncId = 'seaweed-trip';
+        var cloudConfig = defaultCloudConfig;
 
         function initFirebase() {
             if (!cloudConfig) return;
@@ -1549,10 +2559,6 @@
 
         // Drag to Scroll Logic
         const slider = document.getElementById('day-selector');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-        let isDragging = false; // Flag to distinguish click vs drag
 
         slider.addEventListener('mousedown', (e) => {
             isDown = true;
@@ -1599,7 +2605,7 @@
             container.innerHTML = items.map((item, i) => `
                 <div class="activity-card cat-${item.cat} rounded-2xl shadow-sm mb-6 relative group" id="card-${i}">
                     <!-- Card Cover (Notion Style) -->
-                    ${item.img ? `<div class="card-cover" style="background-image: url('${item.img}')"></div>` : ''}
+                    ${item.img ? `<div class="card-cover cursor-pointer" onclick="if(!isCardEditing(${i})) openDetail(${i})" style="background-image: url('${item.img}')"></div>` : ''}
                     
                     <!-- Actions Group -->
                     <div class="card-actions bg-white/80 backdrop-blur rounded-full px-2 py-1 shadow-sm border border-slate-100">
@@ -1611,20 +2617,18 @@
                     <button class="done-btn" onclick="saveCard(${i})">完成變更</button>
                     
                     <!-- Card Body -->
-                    <div class="card-body">
+                    <div class="card-body cursor-pointer" onclick="if(!isCardEditing(${i})) openDetail(${i})">
                         <!-- Header Group: Icon + Category -->
                         <div class="card-header-group ${item.img ? '' : 'no-cover'}">
-                            <div id="icon-${i}" class="card-icon-floater !mt-0" onclick="if(!isCardEditing(${i})) return;">${item.icon}</div>
-                            <span id="cat-${i}" class="cat-badge" onclick="if(!isCardEditing(${i})) return;">${item.cat}</span>
+                            <div id="icon-${i}" class="card-icon-floater !mt-0">${item.icon}</div>
+                            <span id="cat-${i}" class="cat-badge">${item.cat}</span>
                         </div>
 
-                        <div class="cursor-pointer" onclick="if(!isCardEditing(${i})) openDetail(${i})">
-                            <div id="title-${i}" class="font-bold text-lg leading-tight mb-1 editable-field">${esc(item.title)}</div>
-                            <div id="time-${i}" class="text-xs text-slate-400 font-mono font-bold editable-field block mb-3">${esc(item.time || '')}</div>
-                            
-                            <div class="card-detail border-t border-slate-50 pt-3"> 
-                                <div id="desc-${i}" class="text-sm text-slate-600 leading-relaxed editable-field rich-content min-h-[40px]">${item.desc || ''}</div>
-                            </div>
+                        <div id="title-${i}" class="font-bold text-lg leading-tight mb-1 editable-field">${esc(item.title)}</div>
+                        <div id="time-${i}" class="text-xs text-slate-400 font-mono font-bold editable-field block mb-3">${esc(item.time || '')}</div>
+                        
+                        <div class="card-detail border-t border-slate-50 pt-3"> 
+                            <div id="desc-${i}" class="text-sm text-slate-600 leading-relaxed editable-field rich-content min-h-[40px]">${item.desc || ''}</div>
                         </div>
 
                         <!-- Image Inputs (Hidden unless editing) -->
@@ -1715,7 +2719,14 @@
 
         // Rich Text Commands
         function richCmd(cmd, val = null) {
-            document.execCommand(cmd, false, val);
+            if (cmd === 'hiliteColor') {
+                // Compatibility for different browsers
+                if (!document.execCommand('hiliteColor', false, val)) {
+                    document.execCommand('backColor', false, val);
+                }
+            } else {
+                document.execCommand(cmd, false, val);
+            }
         }
 
         function promptInsertImage() {
@@ -1799,7 +2810,6 @@
         }
 
         // Detail Modal Logic
-        let detailActiveIndex = null;
         function openDetail(index) {
             detailActiveIndex = index;
             const item = itinerary[currentDay][index];
@@ -1943,18 +2953,12 @@
             reader.readAsDataURL(file);
         }
 
-        // Global state for dragging to prevent memory leaks and duplicate listeners
-        let isGlobalListenersAttached = false;
-        let draggingItem = null;
-        let activeTouchId = null;
-        let longPressTimer = null;
-        let startPos = { x: 0, y: 0 };
-        let dragOccurred = false;
-        let currentDragCard = null;
+        // Drag & Drop Logic (Optimized 800ms Long-press)
 
         // Drag & Drop Logic (Optimized 800ms Long-press)
         function setupDragHandlers() {
             const container = document.getElementById('day-container');
+            if (!container) return;
             const cards = container.querySelectorAll('.activity-card');
 
             cards.forEach(card => {
@@ -1967,14 +2971,11 @@
                     dragOccurred = false;
                     currentDragCard = card;
 
-                    card.classList.add('pressing');
-
                     longPressTimer = setTimeout(() => {
                         if (window.getSelection) window.getSelection().removeAllRanges();
 
                         draggingItem = card;
                         dragOccurred = true;
-                        card.classList.remove('pressing');
                         card.classList.add('dragging');
                         if (window.navigator.vibrate) window.navigator.vibrate(50);
                     }, 800);
@@ -1990,7 +2991,6 @@
                         if (dist > 15) {
                             clearTimeout(longPressTimer);
                             longPressTimer = null;
-                            card.classList.remove('pressing');
                         }
                         return;
                     }
@@ -2000,16 +3000,10 @@
                         const clientY = touch.clientY;
                         const siblings = [...container.querySelectorAll('.activity-card:not(.dragging)')];
 
-                        // Flexible detection: find the closest sibling rather than just 50/50 split
                         let nextSibling = null;
-                        let minDistance = Infinity;
-
                         for (const sibling of siblings) {
                             const box = sibling.getBoundingClientRect();
                             const mid = box.top + box.height / 2;
-                            const distance = Math.abs(clientY - mid);
-
-                            // If we're closer to a sibling's top or bottom, we insert there
                             if (clientY < mid) {
                                 nextSibling = sibling;
                                 break;
@@ -2023,7 +3017,6 @@
                 };
 
                 const handleEnd = (e) => {
-                    card.classList.remove('pressing');
                     if (longPressTimer) {
                         clearTimeout(longPressTimer);
                         longPressTimer = null;
@@ -2048,18 +3041,6 @@
                     updateOrderFromDOM();
                     setTimeout(() => { dragOccurred = false; }, 100);
                 };
-
-                // Click Guard
-                const clickableArea = card.querySelector('.cursor-pointer');
-                if (clickableArea) {
-                    const originalOnClick = clickableArea.onclick;
-                    clickableArea.onclick = function (e) {
-                        if (dragOccurred) {
-                            return false;
-                        }
-                        if (originalOnClick) originalOnClick.apply(this, arguments);
-                    };
-                }
 
                 card.addEventListener('touchstart', handleStart, { passive: true });
                 card.addEventListener('touchmove', handleMove, { passive: false });
@@ -2224,6 +3205,8 @@
 
             if (tab === 'packing') renderPacking();
             if (tab === 'vouchers') renderVouchers();
+            if (tab === 'shopping') renderShop();
+            if (tab === 'todo') renderTodo();
 
             // Toggle FAB visibility
             const fab = document.getElementById('fab-add');
@@ -2319,8 +3302,9 @@
         function renderPacking() {
             const container = document.getElementById('packing');
             container.innerHTML = `
-                <div class="px-6 pt-6">
-                    <h2 class="text-2xl font-black mb-6">🎒 行李清單</h2>
+                <div class="px-6 pt-6 flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-black">🎒 行李清單</h2>
+                    <button onclick="resetPacking()" class="text-[10px] font-black text-slate-400 hover:text-red-500 transition-colors uppercase tracking-widest bg-slate-100/50 px-2 py-1 rounded-md">全部取消勾選</button>
                 </div>
                 <div class="px-6 pb-20 space-y-6">
                     ${packing.map((cat, catIdx) => `
@@ -2383,43 +3367,277 @@
             renderPacking();
         }
 
-        // Init Checkboxes for shop/todo persistence (Simple version)
-        document.querySelectorAll('input[type="checkbox"]').forEach((checkbox, i) => {
-            const id = `check_${i}`;
-            const label = checkbox.closest('label');
-            const span = label.querySelector('span');
-
-            // Load state
-            if (localStorage.getItem(id) === 'true') {
-                checkbox.checked = true;
-                label.classList.add('strikethrough');
-            }
-            if (span && localStorage.getItem(id + '_text')) {
-                span.innerText = localStorage.getItem(id + '_text');
-            }
-            if (span) {
-                span.contentEditable = true;
-                span.addEventListener('blur', () => {
-                    localStorage.setItem(id + '_text', span.innerText);
+        function resetPacking() {
+            showModal('確定要取消勾選所有行李項目嗎？', () => {
+                packing.forEach(cat => {
+                    cat.items.forEach(item => {
+                        item.checked = false;
+                    });
                 });
-            }
-
-            checkbox.addEventListener('change', function () {
-                localStorage.setItem(id, this.checked);
-                if (this.checked) label.classList.add('strikethrough');
-                else label.classList.remove('strikethrough');
-                updateShopProgress();
-            });
-        });
-
-        function updateShopProgress() {
-            const total = document.querySelectorAll('.shop-item').length;
-            const checked = document.querySelectorAll('.shop-item:checked').length;
-            const progress = document.getElementById('shopProgress');
-            if (progress) progress.innerText = `${checked}/${total}`;
+                saveItinerary();
+                renderPacking();
+            }, true);
         }
 
-        updateShopProgress();
-        itinerary[1] = defaultItinerary[1]; // Force sync Day 1 data for this update
-        renderDay(currentDay);
+        // --- Initial Rendering ---
+        itinerary[1] = defaultItinerary[1]; // Sync Day 1
+
+        const shopping = [
+            {
+                shop: "Montbell", icon: "⛰️", items: [
+                    { text: "圍巾", url: "https://www.montbell.com/jp/ja/products/detail/1118824?fo=0&color=BK", note: "" },
+                    { text: "脖圍", url: "https://www.montbell.com/jp/ja/products/detail/1118823?fo=0&color=NV", note: "" },
+                    { text: "ZEO-LINE 發熱衣", url: "https://www.montbell.com/jp/ja/products/detail/1107704?fo=0&color=BK", note: "" },
+                    { text: "手套", url: "https://www.montbell.com/jp/ja/products/detail/1118625?fo=1&color=BK", note: "" },
+                    { text: "抓絨衣 ⭐️⭐️⭐️", url: "https://www.montbell.com/jp/ja/products/detail/1106753?fo=0&color=IV", note: "" },
+                    { text: "斜肩包", url: "https://www.montbell.com/jp/ja/products/detail/1123970?fo=0&color=NV", note: "" },
+                    { text: "帽子", url: "https://www.montbell.com/jp/ja/products/detail/1128759?fo=0&color=DGY", note: "" },
+                    { text: "收納包", url: "", note: "" }
+                ]
+            },
+            {
+                shop: "Workman", icon: "👕", items: [
+                    { text: "疲勞恢復衣 ⭐️⭐️⭐️", url: "https://workman.jp/shop/e/emedh-lp/", note: "銀座有一間 / 山形站買？" }
+                ]
+            },
+            {
+                shop: "Uniqlo", icon: "👕", items: [
+                    { text: "男女適穿 刷毛休閒寬褲 479847 ⭐️⭐️⭐️", url: "https://www.uniqlo.com/jp/ja/products/E479847-000/00?colorDisplayCode=39&sizeDisplayCode=004", note: "" },
+                    { text: "バレルパンツ Ｃ長褲", url: "https://www.uniqlo.com/jp/ja/products/E484875-000/00?colorDisplayCode=34&sizeDisplayCode=004", note: "" }
+                ]
+            },
+            {
+                shop: "MUJI", icon: "✨", items: [
+                    { text: "TPU巾着", url: "https://www.muji.com/jp/ja/store/cmdty/detail/4550344598153", note: "", checked: true },
+                    { text: "睡眠麻藥 ⭐️⭐️⭐️⭐️⭐️", url: "https://www.muji.com/jp/ja/store/cmdty/detail/4550584359439", note: "", checked: true },
+                    { text: "精油洗手乳 扁柏薰衣草 ⭐️⭐️", url: "https://www.muji.com/jp/ja/store/cmdty/detail/4550584404610", note: "" },
+                    { text: "精油沐浴乳 檜木+薰衣草", url: "https://www.muji.com/jp/ja/store/cmdty/detail/4550584404436", note: "" },
+                    { text: "依蘭及橙香精油護手霜", url: "https://www.muji.com/jp/ja/store/cmdty/detail/4550584404689", note: "" },
+                    { text: "日本國產焙茶拿鐵", url: "", note: "" }
+                ]
+            },
+            {
+                shop: "3COINS", icon: "🪙", items: [
+                    { text: "零錢收納包", url: "", note: "" },
+                    { text: "扣環收納袋", url: "", note: "" },
+                    { text: "化妝包", url: "", note: "" },
+                    { text: "投影機", url: "", note: "" },
+                    { text: "零錢包⭐️⭐️⭐️⭐️⭐️", url: "https://www.palcloset.jp/display/item/2524-M09-000000/?cl=11&b=3coins", note: "" },
+                    { text: "自動壓縮機", url: "https://www.palcloset.jp/display/item/2524-3C7B176-00/?b=3coins", note: "" },
+                    { text: "口袋紙巾 和 配件袋", url: "https://www.palcloset.jp/display/item/2512-3C2B806-00/?b=3coins", note: "" },
+                    { text: "三格洗衣袋", url: "", note: "" }
+                ]
+            },
+            {
+                shop: "唐吉", icon: "🐧", items: [
+                    { text: "暖爐襪🧦 ⭐️⭐️⭐️⭐️⭐️", url: "", note: "" },
+                    { text: "暖爐襪🧦", url: "", note: "價位900-1880日幣" }
+                ]
+            },
+            {
+                shop: "藥妝", icon: "💆🏻", items: [
+                    { text: "B群 / 維他命C, 感冒藥 / EVE, 大猩猩按摩", url: "https://goo.gl/maps/zhQd75Fh1H7gtzQr5", note: "大國藥妝 新宿南口店" },
+                    { text: "第一三共 解熱止痛藥", url: "", note: "" },
+                    { text: "塗抹止痛棒", url: "", note: "" },
+                    { text: "美白牙膏排行清單", url: "", note: "" },
+                    { text: "高露潔 美白牙膏", url: "", note: "" },
+                    { text: "clean dental （クリーンデンタル）牙膏", url: "", note: "" },
+                    { text: "Minon化妝水", url: "", note: "" },
+                    { text: "Minon保濕UV日霜", url: "", note: "" },
+                    { text: "DHC金盞花葉黃素-眼睛", url: "", note: "" },
+                    { text: "DHC綠藻-幫助排便", url: "", note: "" },
+                    { text: "DHC メリロート消腿部疲勞", url: "https://www.threads.net/@yienlee141913/post/DHpswrMSa_F?xmt=AQGzTEXeejk0y-XVprRPuvkR6YiTaZejUMKLtTbw5aCTGO8", note: "" },
+                    { text: "頭皮止汗劑", url: "https://www.cosme.net/products/10268440/", note: "" },
+                    { text: "GUM 牙間刷", url: "", note: "" },
+                    { text: "Biore呼吸感防曬乳", url: "", note: "松本清和Cocokarafine才買得到" },
+                    { text: "藥用洗面乳", url: "", note: "" },
+                    { text: "Kose coen rich Q10護手霜⭐️⭐️⭐️", url: "", note: "" },
+                    { text: "rosy rosa 粉撲", url: "", note: "" },
+                    { text: "DHC GABA", url: "", note: "" },
+                    { text: "AZELAIN 二酸淨痘安瓶", url: "", note: "" },
+                    { text: "me+me水光瞳高保濕眼藥水⭐️⭐️⭐️", url: "", note: "" },
+                    { text: "樂敦製藥 V5護眼舒眠強目素⭐️⭐️⭐️", url: "", note: "" },
+                    { text: "妮維雅 男士藥用化妝水", url: "", note: "" },
+                    { text: "乾燥さん乳霜", url: "", note: "" },
+                    { text: "瀏海定型噴霧 小罐 ⭐️⭐️⭐️", url: "", note: "" },
+                    { text: "KANEBO COMFORT STRETCHY WASH II", url: "https://www.kanebo-global.com/global/zh-tw/skincare/detail/comfort_stretchy_wash_ii/", note: "" },
+                    { text: "敏感肌用防曬乳", url: "", note: "" },
+                    { text: "yunth 妝前乳 clear", url: "", note: "" },
+                    { text: "蜜粉濕紙巾", url: "", note: "" }
+                ]
+            },
+            {
+                shop: "7-11", icon: "🏪", items: [
+                    { text: "萊姆葡萄餅乾 ⭐️⭐️⭐️", url: "", note: "超好ㄘ" },
+                    { text: "巧克力冰", url: "", note: "覺得小普" },
+                    { text: "費南雪", url: "", note: "" },
+                    { text: "開心果巧克力冰", url: "", note: "很甜（？" },
+                    { text: "拔絲地瓜", url: "", note: "" },
+                    { text: "透明布丁", url: "https://youtu.be/4SZ_QrKbytw?si=hqBQEyBqf9s8UHnn&t=828", note: "" },
+                    { text: "現泡鮮奶茶", url: "", note: "" }
+                ]
+            },
+            {
+                shop: "Lawson", icon: "🏪", items: [
+                    { text: "銅鑼燒", url: "", note: "" },
+                    { text: "Premium生乳捲", url: "", note: "" },
+                    { text: "拿鐵口味果昔", url: "", note: "" },
+                    { text: "新圓滾滾炸雞", url: "https://www.instagram.com/reel/DNGBKqAzO9u/?igsh=MTEwMmtmdTQ1OWcxcw==", note: "" },
+                    { text: "宇治抹茶脆筒霜淇淋", url: "", note: "" },
+                    { text: "綠葡萄大福", url: "", note: "" },
+                    { text: "草莓果實感冰（？", url: "", note: "" },
+                    { text: "冷凍可麗露", url: "", note: "" },
+                    { text: "蜂蜜拿鐵", url: "", note: "" },
+                    { text: "濃厚榛果巧克力冰棒", url: "", note: "" },
+                    { text: "奶油麵包（🉑配烤雞吃）", url: "", note: "" }
+                ]
+            },
+            {
+                shop: "全家", icon: "🇸🇱", items: [
+                    { text: "辛普森襪子🧦", url: "", note: "" },
+                    { text: "吉伊卡哇草莓果昔", url: "", note: "" }
+                ]
+            },
+            {
+                shop: "Bic Camera", icon: "🎧", items: [
+                    { text: "WH-1000XM6 耳機 ⭐️⭐️⭐️", url: "https://www.biccamera.com/bc/item/14085203/", note: "" },
+                    { text: "recolte 調理機", url: "https://www.biccamera.com/bc/item/13031047/", note: "" }
+                ]
+            },
+            {
+                shop: "超市/雜項", icon: "🛍️", items: [
+                    { text: "ほりにし 調味粉⭐️⭐️⭐️", url: "", note: "" },
+                    { text: "Biore洗手乳 ⭐️⭐️⭐️", url: "", note: "Aesop平替版（？" },
+                    { text: "酪梨起司口味多力多滋", url: "", note: "" },
+                    { text: "2026年初限定Horoyoi", url: "", note: "" },
+                    { text: "草莓口味 Pocky", url: "", note: "" },
+                    { text: "シュガートーストクリーム Sugar Toast Cream", url: "", note: "" },
+                    { text: "GABA 巧克力", url: "", note: "" },
+                    { text: "香氛蠟燭", url: "", note: "" },
+                    { text: "Freak’s Store 聯名衣", url: "https://www.daytona-park.com/feature/944887#lfLook", note: "" },
+                    { text: "砂糖樹 炭燒巧克力", url: "https://shop.grapestone.co.jp/shops?brand_ids=9", note: "-大丸東京店 -そごう横浜店" },
+                    { text: "Salomon / HOKA / On / ASICS 鞋子", url: "", note: "" }
+                ]
+            },
+            {
+                shop: "@Cosme", icon: "💄", items: [
+                    { text: "腮紅霜", url: "", note: "" },
+                    { text: "エクセル エシリアル セラムコンシーラー", url: "https://www.cosme.net/products/10276759/", note: "遮瑕膏第二名" }
+                ]
+            }
+        ];
+
+        const todos = [
+            { text: "Visit Japan Web 完成", checked: true },
+            { text: "7-11 領取 Lady Gaga 演唱會票", checked: false },
+            { text: "取新幹線票 (QR code)", checked: false },
+            { text: "保險申請 (東京海上日動)", checked: true }
+        ];
+
+        function renderShop() {
+            const container = document.getElementById('shopping');
+            if (!container) return;
+            let totalItems = 0;
+            let checkedItems = 0;
+            container.innerHTML = `
+                <div class="glass-card p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-black">🛒 購物清單</h2>
+                        <span id="shopProgress" class="text-xs font-black text-blue-500 bg-blue-50 px-3 py-1 rounded-full">0/0</span>
+                    </div>
+                    <div class="space-y-6">
+                        ${shopping.map((group, groupIdx) => `
+                            <div class="shop-group">
+                                <div class="flex items-center gap-2 mb-3 px-1">
+                                    <span class="text-lg">${group.icon}</span>
+                                    <h3 class="font-black text-slate-800 text-sm uppercase tracking-wider">${group.shop}</h3>
+                                </div>
+                                <div class="space-y-1">
+                                    ${group.items.map((item, itemIdx) => {
+                totalItems++;
+                if (item.checked) checkedItems++;
+                return `
+                                            <div class="shopping-item-row p-3 bg-white/40 rounded-xl hover:bg-white transition-all group/item ${item.checked ? 'opacity-60' : ''}">
+                                                <div class="flex items-start gap-3">
+                                                    <input type="checkbox" ${item.checked ? 'checked' : ''} 
+                                                           onchange="toggleShopItem(${groupIdx}, ${itemIdx})"
+                                                           class="mt-1 w-5 h-5 rounded-lg border-slate-200 text-blue-500 focus:ring-blue-500 transition-all cursor-pointer">
+                                                    <div class="flex-1 min-w-0">
+                                                        <div class="flex items-center gap-2">
+                                                            <span class="text-sm font-bold text-slate-700 ${item.checked ? 'line-through' : ''}">${esc(item.text)}</span>
+                                                            ${item.url ? `
+                                                                <a href="${item.url}" target="_blank" class="text-blue-400 hover:text-blue-600 transition-colors">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                                    </svg>
+                                                                </a>
+                                                            ` : ''}
+                                                        </div>
+                                                        ${item.note ? `<p class="text-[10px] text-slate-400 font-medium mt-0.5">${esc(item.note)}</p>` : ''}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        `;
+            }).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            const progress = document.getElementById('shopProgress');
+            if (progress) progress.innerText = `${checkedItems}/${totalItems}`;
+        }
+
+        function toggleShopItem(groupIdx, itemIdx) {
+            shopping[groupIdx].items[itemIdx].checked = !shopping[groupIdx].items[itemIdx].checked;
+            if (window.navigator.vibrate) window.navigator.vibrate(20);
+            renderShop();
+        }
+
+        function renderTodo() {
+            const container = document.getElementById('todo');
+            if (!container) return;
+            container.innerHTML = `
+                <div class="glass-card p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-black">✅ 待辦事項</h2>
+                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Action Items</span>
+                    </div>
+                    <div class="space-y-3">
+                        ${todos.map((item, idx) => `
+                            <label class="flex items-center justify-between p-4 ${item.checked ? 'bg-green-50/30 border-green-100/50' : 'bg-white/40 border-white/50'} rounded-2xl border transition-all cursor-pointer hover:bg-white/60">
+                                <span class="text-sm font-bold ${item.checked ? 'text-slate-400 line-through' : 'text-slate-700'}">${esc(item.text)}</span>
+                                <input type="checkbox" ${item.checked ? 'checked' : ''} 
+                                       onchange="toggleTodo(${idx})"
+                                       class="w-6 h-6 rounded-full border-slate-200 text-green-500 focus:ring-green-500 transition-all cursor-pointer">
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleTodo(idx) {
+            todos[idx].checked = !todos[idx].checked;
+            if (window.navigator.vibrate) window.navigator.vibrate(20);
+            renderTodo();
+        }
+
+        // --- Final Execution ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDay(currentDay);
+            renderShop();
+            renderTodo();
+        });
+
+        // Fallback if DOMContentLoaded already fired
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            renderDay(currentDay);
+            renderShop();
+            renderTodo();
+        }
     </script>
+</body>
+
+</html>

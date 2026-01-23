@@ -1,0 +1,713 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>新清單</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="27837953-5144-8055-94f4-da0d8ca46911" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🛒</span></div><h1 class="page-title" dir="auto">新清單</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><table class="collection-content"><thead><tr><th><span class="icon property-icon"><img src="https://www.notion.so/icons/checkmark-square_gray.svg" style="width:14px;height:14px;display:block"/></span>有無買到</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/map-pin_gray.svg" style="width:14px;height:14px;display:block"/></span>店家名稱</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/description_gray.svg" style="width:14px;height:14px;display:block"/></span>文字</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/attachment_gray.svg" style="width:14px;height:14px;display:block"/></span>檔案和媒體</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/link_gray.svg" style="width:14px;height:14px;display:block"/></span>網址</th><th><span class="icon property-icon"><img src="https://www.notion.so/icons/description_gray.svg" style="width:14px;height:14px;display:block"/></span>備註</th></tr></thead><tbody><tr id="2df37953-5144-80e9-bff4-cb8f044427dd"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2df37953514480e9bff4cb8f044427dd?pvs=21"><span class="icon">🐧</span>唐吉</a></td><td class="cell-YnrX">暖爐襪🧦</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E5%94%90%E5%90%89/609175476_17934804282116405_735962581842111996_n.jpg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E5%94%90%E5%90%89/609175476_17934804282116405_735962581842111996_n.jpg" alt="609175476_17934804282116405_735962581842111996_n.jpg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}">價位900-1880日幣</td></tr><tr id="2e537953-5144-80c8-b952-e30d7e087b5b"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e537953514480c8b952e30d7e087b5b?pvs=21">無標題</a></td><td class="cell-YnrX">AZELAIN 二酸淨痘安瓶</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C/IMG_3229.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C/IMG_3229.jpeg" alt="IMG_3229.jpeg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2dd37953-5144-800d-9fb2-e727e6b05a1e"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/Montbell-2dd379535144800d9fb2e727e6b05a1e?pvs=21"><span class="icon">⛰️</span>Montbell</a></td><td class="cell-YnrX">圍巾</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/Montbell/IMG_3043.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/Montbell/IMG_3043.jpeg" alt="IMG_3043.jpeg"/></a></span></td><td class="cell-_e:v"><a href="https://www.montbell.com/jp/ja/products/detail/1118824?fo=0&amp;color=BK" class="url-value">https://www.montbell.com/jp/ja/products/detail/1118824?fo=0&amp;color=BK</a></td><td class="cell-Mks}"></td></tr><tr id="2dd37953-5144-8058-b850-f553d9333e92"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2dd3795351448058b850f553d9333e92?pvs=21">無標題</a></td><td class="cell-YnrX">脖圍</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202dd3-3e92/IMG_3042.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202dd3-3e92/IMG_3042.jpeg" alt="IMG_3042.jpeg"/></a></span></td><td class="cell-_e:v"><a href="https://www.montbell.com/jp/ja/products/detail/1118823?fo=0&amp;color=NV" class="url-value">https://www.montbell.com/jp/ja/products/detail/1118823?fo=0&amp;color=NV</a></td><td class="cell-Mks}"></td></tr><tr id="2e237953-5144-806c-8009-f02a13364c10"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e2379535144806c8009f02a13364c10?pvs=21">無標題</a></td><td class="cell-YnrX">ZEO-LINE 發熱衣</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e23-4c10/IMG_3140.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e23-4c10/IMG_3140.jpeg" alt="IMG_3140.jpeg"/></a></span></td><td class="cell-_e:v"><a href="https://www.montbell.com/jp/ja/products/detail/1107704?fo=0&amp;color=BK" class="url-value">https://www.montbell.com/jp/ja/products/detail/1107704?fo=0&amp;color=BK</a></td><td class="cell-Mks}"></td></tr><tr id="2e337953-5144-8058-8993-efc3293f2634"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e337953514480588993efc3293f2634?pvs=21">無標題</a></td><td class="cell-YnrX">手套</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e33-2634/IMG_3155.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e33-2634/IMG_3155.jpeg" alt="IMG_3155.jpeg"/></a></span></td><td class="cell-_e:v"><a href="https://www.montbell.com/jp/ja/products/detail/1118625?fo=1&amp;color=BK" class="url-value">https://www.montbell.com/jp/ja/products/detail/1118625?fo=1&amp;color=BK</a></td><td class="cell-Mks}"></td></tr><tr id="2e937953-5144-80a4-be78-fd17c23bf8f5"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e937953514480a4be78fd17c23bf8f5?pvs=21">無標題</a></td><td class="cell-YnrX">斜肩包</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e93-f8f5/1123970_bk.webp"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e93-f8f5/1123970_bk.webp" alt="1123970_bk.webp"/></a></span></td><td class="cell-_e:v"><a href="https://www.montbell.com/jp/ja/products/detail/1123970?fo=0&amp;color=NV" class="url-value">https://www.montbell.com/jp/ja/products/detail/1123970?fo=0&amp;color=NV</a></td><td class="cell-Mks}"></td></tr><tr id="2e337953-5144-80e1-9d57-eb1a43657b29"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e337953514480e19d57eb1a43657b29?pvs=21">無標題</a></td><td class="cell-YnrX">抓絨衣 <mark class="highlight-teal">⭐️⭐️⭐️</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e33-7b29/IMG_3156.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e33-7b29/IMG_3156.jpeg" alt="IMG_3156.jpeg"/></a></span></td><td class="cell-_e:v"><a href="https://www.montbell.com/jp/ja/products/detail/1106753?fo=0&amp;color=IV" class="url-value">https://www.montbell.com/jp/ja/products/detail/1106753?fo=0&amp;color=IV</a></td><td class="cell-Mks}"></td></tr><tr id="2e937953-5144-8085-b6c8-c177c3972ec0"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e93795351448085b6c8c177c3972ec0?pvs=21">無標題</a></td><td class="cell-YnrX">帽子</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e93-2ec0/1128759_dgy.webp"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e93-2ec0/1128759_dgy.webp" alt="1128759_dgy.webp"/></a></span></td><td class="cell-_e:v"><a href="https://www.montbell.com/jp/ja/products/detail/1128759?fo=0&amp;color=DGY" class="url-value">https://www.montbell.com/jp/ja/products/detail/1128759?fo=0&amp;color=DGY</a></td><td class="cell-Mks}"></td></tr><tr id="2e937953-5144-80b5-9ca1-e8834001e7e7"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e937953514480b59ca1e8834001e7e7?pvs=21">無標題</a></td><td class="cell-YnrX">收納包</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e93-e7e7/IMG_3380.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e93-e7e7/IMG_3380.jpeg" alt="IMG_3380.jpeg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2e737953-5144-805e-be2c-d9311a08b42f"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/Workman-2e7379535144805ebe2cd9311a08b42f?pvs=21"><span class="icon">👕</span>Workman</a></td><td class="cell-YnrX">疲勞恢復衣<mark class="highlight-teal">⭐️⭐️⭐️<br/></mark><a href="https://workman.jp/shop/g/g2300022342101/">https://workman.jp/shop/g/g2300022342101/</a><br/><a href="https://workman.jp/shop/g/g2300012030216/">https://workman.jp/shop/g/g2300012030216/</a></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/Workman/IMG_1065.jpg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/Workman/IMG_1065.jpg" alt="IMG_1065.jpg"/></a></span><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/Workman/o1080144015667306869.jpg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/Workman/o1080144015667306869.jpg" alt="o1080144015667306869.jpg"/></a></span></td><td class="cell-_e:v"><a href="https://workman.jp/shop/e/emedh-lp/" class="url-value">https://workman.jp/shop/e/emedh-lp/</a></td><td class="cell-Mks}">銀座有一間<br/>山形站買？</td></tr><tr id="29d37953-5144-8075-a55d-ef5ff57e91b4"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/29d3795351448075a55def5ff57e91b4?pvs=21"><span class="icon">🇸🇱</span>全家</a></td><td class="cell-YnrX"><mark class="highlight-teal">辛普森襪子🧦</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E5%85%A8%E5%AE%B6/IMG_9877.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E5%85%A8%E5%AE%B6/IMG_9877.jpeg" alt="IMG_9877.jpeg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="28537953-5144-8041-9762-c538204539ad"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/Uniqlo-28537953514480419762c538204539ad?pvs=21"><span class="icon">👕</span>Uniqlo</a></td><td class="cell-YnrX"><mark class="highlight-teal">男女適穿 刷毛休閒寬褲 479847 ⭐️⭐️⭐️</mark></td><td class="cell-Waz`"></td><td class="cell-_e:v"><a href="https://www.uniqlo.com/jp/ja/products/E479847-000/00?colorDisplayCode=39&amp;sizeDisplayCode=004" class="url-value">https://www.uniqlo.com/jp/ja/products/E479847-000/00?colorDisplayCode=39&amp;sizeDisplayCode=004</a></td><td class="cell-Mks}"></td></tr><tr id="2d837953-5144-8049-8785-e4a4971d529f"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2d837953514480498785e4a4971d529f?pvs=21"><span class="icon">👟</span>鞋子</a></td><td class="cell-YnrX"><mark class="highlight-teal"><a href="https://www.notion.so/2d937953514480dcaeebe596a6351d6a?pvs=21">Salomon</a></mark> <mark class="highlight-yellow">XT-6</mark><br/><mark class="highlight-teal"><a href="https://www.notion.so/2d937953514480dcaeebe596a6351d6a?pvs=21">Salomon</a></mark> SCS Pro<br/>-<br/><mark class="highlight-teal"><a href="https://www.notion.so/2d937953514480828c14c97799fde355?pvs=21">HOKA</a></mark><mark class="highlight-teal"> </mark><mark class="highlight-yellow"><a href="https://www.hoka.com/en/us/all-gender-footwear/mafate-speed-2/1126851.html?dwvar_1126851_color=BCSTL">Mafate Speed2</a></mark>(無防水)<br/><mark class="highlight-teal"><a href="https://www.notion.so/2d937953514480828c14c97799fde355?pvs=21">HOKA</a></mark><mark class="highlight-teal"> </mark>Mafate Speed4 lite<br/><mark class="highlight-teal">HOKA </mark><mark class="highlight-yellow"><a href="https://www.hoka.com/en/us/all-gender-footwear/mafate-three2/1141572.html?dwvar_1141572_color=CTRN">Mafate Three2</a></mark> <a href="https://www.ispo.com.tw/SalePage/Index/10635258">連結</a><br/><mark class="highlight-teal">HOKA</mark> <mark class="highlight-yellow">Bondi 9  / </mark><a href="https://www.hoka.com/en/us/all-gender-footwear/stealth%2Ftech-bondi-8-caged/197634737034.html">Tech bondi 8 Caged</a><br/><mark class="highlight-teal">HOKA</mark> B3LS<br/><mark class="highlight-teal">HOKA</mark> <mark class="highlight-yellow">Project Transport</mark><br/><mark class="highlight-teal">HOKA</mark> Kaha3 有Gore-tex<br/>-<br/><mark class="highlight-teal">On</mark> <a href="https://www.on.com/ja-jp/products/cloudmonster-2-m-3me1012/mens/black-frost-shoes-3ME10121197">Cloudmonster2</a><br/><mark class="highlight-teal">On</mark> <a href="https://www.on.com/ja-jp/products/cloud-6-wp-3mf1006/mens/black-black-shoes-3MF10061043">Cloud 6 Waterproof</a><br/>-<br/><mark class="highlight-teal">ASICS </mark>GEL-TRABUCO 13 GTX<br/><mark class="highlight-teal">ASICS</mark>  <a href="https://www.jellysportshop.com/products/1011b681-002">GT-1000 11 GTX </a><br/><mark class="highlight-teal">ASICS </mark><mark class="highlight-default"><a href="https://www.asics.com/jp/ja-jp/gel-kayano-14/p/1203A537-109.html">GEL-KAYANO 14</a></mark><br/>-<br/><mark class="highlight-teal">Norda </mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E9%9E%8B%E5%AD%90/SOA6-1HT005_L.jpg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E9%9E%8B%E5%AD%90/SOA6-1HT005_L.jpg" alt="SOA6-1HT005_L.jpg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27837953-5144-8066-90f7-f70e4840d4c2"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/3COINS-278379535144806690f7f70e4840d4c2?pvs=21"><span class="icon">🪙</span>3COINS</a></td><td class="cell-YnrX">零錢收納包</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/3COINS/%E6%88%AA%E5%9C%96_2025-07-18_%E6%99%9A%E4%B8%8A10.31.56.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/3COINS/%E6%88%AA%E5%9C%96_2025-07-18_%E6%99%9A%E4%B8%8A10.31.56.png" alt="截圖 2025-07-18 晚上10.31.56.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2ea37953-5144-80e6-a3b7-d054484c6e19"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2ea37953514480e6a3b7d054484c6e19?pvs=21">無標題</a></td><td class="cell-YnrX">バレルパンツ Ｃ長褲</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202ea3-6e19/goods_484875_sub13_3x4.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202ea3-6e19/goods_484875_sub13_3x4.jpeg" alt="goods_484875_sub13_3x4.jpeg"/></a></span></td><td class="cell-_e:v"><a href="https://www.uniqlo.com/jp/ja/products/E484875-000/00?colorDisplayCode=34&amp;sizeDisplayCode=004" class="url-value">https://www.uniqlo.com/jp/ja/products/E484875-000/00?colorDisplayCode=34&amp;sizeDisplayCode=004</a></td><td class="cell-Mks}"></td></tr><tr id="2d337953-5144-8074-aa2f-ebf34d4fcfa0"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2d33795351448074aa2febf34d4fcfa0?pvs=21">無標題</a></td><td class="cell-YnrX">三格洗衣袋</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202d33-cfa0/IMG_2527.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202d33-cfa0/IMG_2527.jpeg" alt="IMG_2527.jpeg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-80e3-bf95-eb4ce8564e9d"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27937953514480e3bf95eb4ce8564e9d?pvs=21">無標題</a></td><td class="cell-YnrX">扣環收納袋</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-4e9d/%E6%88%AA%E5%9C%96_2025-07-18_%E6%99%9A%E4%B8%8A10.32.12.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-4e9d/%E6%88%AA%E5%9C%96_2025-07-18_%E6%99%9A%E4%B8%8A10.32.12.png" alt="截圖 2025-07-18 晚上10.32.12.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-80fc-b55c-d3e81fe74afb"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27937953514480fcb55cd3e81fe74afb?pvs=21">無標題</a></td><td class="cell-YnrX">化妝包</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-4afb/%E6%88%AA%E5%9C%96_2025-07-18_%E6%99%9A%E4%B8%8A10.32.38.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-4afb/%E6%88%AA%E5%9C%96_2025-07-18_%E6%99%9A%E4%B8%8A10.32.38.png" alt="截圖 2025-07-18 晚上10.32.38.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2bb37953-5144-8062-855f-f5c68f92b392"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2bb3795351448062855ff5c68f92b392?pvs=21">無標題</a></td><td class="cell-YnrX">投影機</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202bb3-b392/IMG_1318.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202bb3-b392/IMG_1318.jpeg" alt="IMG_1318.jpeg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2bd37953-5144-800c-819d-cbc86efe8e82"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2bd379535144800c819dcbc86efe8e82?pvs=21">無標題</a></td><td class="cell-YnrX"><mark class="highlight-teal">零錢包⭐️⭐️⭐️⭐️⭐️</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202bd3-8e82/IMG_1372.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202bd3-8e82/IMG_1372.jpeg" alt="IMG_1372.jpeg"/></a></span></td><td class="cell-_e:v"><a href="https://www.palcloset.jp/display/item/2524-M09-000000/?cl=11&amp;b=3coins" class="url-value">https://www.palcloset.jp/display/item/2524-M09-000000/?cl=11&amp;b=3coins</a></td><td class="cell-Mks}">零錢包</td></tr><tr id="2be37953-5144-80d9-81af-ef225e5c1abd"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2be37953514480d981afef225e5c1abd?pvs=21">無標題</a></td><td class="cell-YnrX">自動壓縮機</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202be3-1abd/682708_2847460_1.jpg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202be3-1abd/682708_2847460_1.jpg" alt="682708_2847460_1.jpg"/></a></span></td><td class="cell-_e:v"><a href="https://www.palcloset.jp/display/item/2524-3C7B176-00/?b=3coins" class="url-value">https://www.palcloset.jp/display/item/2524-3C7B176-00/?b=3coins</a></td><td class="cell-Mks}"></td></tr><tr id="2be37953-5144-8025-9768-d26872e280ff"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2be37953514480259768d26872e280ff?pvs=21">無標題</a></td><td class="cell-YnrX">口袋紙巾 和 配件袋</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202be3-80ff/626395_2662215_1.jpg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202be3-80ff/626395_2662215_1.jpg" alt="626395_2662215_1.jpg"/></a></span></td><td class="cell-_e:v"><a href="https://www.palcloset.jp/display/item/2512-3C2B806-00/?b=3coins" class="url-value">https://www.palcloset.jp/display/item/2512-3C2B806-00/?b=3coins</a></td><td class="cell-Mks}"></td></tr><tr id="28e37953-5144-8017-8e72-e023ae2bf1a7"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/28e37953514480178e72e023ae2bf1a7?pvs=21"><span class="icon">🛍️</span>超市</a></td><td class="cell-YnrX">ほりにし 調味粉<mark class="highlight-teal">⭐️⭐️⭐️</mark></td><td class="cell-Waz`"></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2eb37953-5144-803a-932e-f2722e57ee83"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2eb379535144803a932ef2722e57ee83?pvs=21">無標題</a></td><td class="cell-YnrX">GABA 巧克力</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202eb3-ee83/%E6%87%82%E5%90%83%E6%90%AD%E5%90%83_foodyAmigo-%E7%BE%8E%E9%A3%9F_%E6%97%85%E9%81%8A_%E4%BC%B4%E6%89%8B%E7%A6%AE%E9%96%8B%E7%AE%B1_-_%E5%90%8D%E5%8F%A4%E5%B1%8B%E4%BC%B4%E6%89%8B%E7%A6%AE_%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%99%90%E5%AE%9A%E7%9A%84%E5%AE%A2%E7%BE%8E%E5%A4%9A%E5%B0%8F%E5%80%89%E7%B4%85%E8%B1%86%E5%90%90%E5%8F%B8%E9%A4%85%E4%B9%BE_%E8%9D%A6%E4%BB%99%E8%B2%9D%E4%B9%8B%E9%87%8C_%E6%A1%82%E6%96%B0%E5%A0%82_%E7%82%B8%E6%B5%B7%E8%80%81%E9%85%A5_%E5%9D%82%E8%A7%92%E7%B8%BD%E6%9C%AC%E9%8B%AA_%E6%B5%B7%E8%80%81%E4%BB%99%E8%B2%9D_%E9%9D%92%E6%9F%B3%E7%B8%BD%E6%9C%AC%E5%AE%B6_%E9%9D%92%E8%9B%99%E9%A5%85%E9%A0%AD_%E7%B6%B2%E8%B7%AF%E6%8E%A8%E8%96%A6%E8%97%A5.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202eb3-ee83/%E6%87%82%E5%90%83%E6%90%AD%E5%90%83_foodyAmigo-%E7%BE%8E%E9%A3%9F_%E6%97%85%E9%81%8A_%E4%BC%B4%E6%89%8B%E7%A6%AE%E9%96%8B%E7%AE%B1_-_%E5%90%8D%E5%8F%A4%E5%B1%8B%E4%BC%B4%E6%89%8B%E7%A6%AE_%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%99%90%E5%AE%9A%E7%9A%84%E5%AE%A2%E7%BE%8E%E5%A4%9A%E5%B0%8F%E5%80%89%E7%B4%85%E8%B1%86%E5%90%90%E5%8F%B8%E9%A4%85%E4%B9%BE_%E8%9D%A6%E4%BB%99%E8%B2%9D%E4%B9%8B%E9%87%8C_%E6%A1%82%E6%96%B0%E5%A0%82_%E7%82%B8%E6%B5%B7%E8%80%81%E9%85%A5_%E5%9D%82%E8%A7%92%E7%B8%BD%E6%9C%AC%E9%8B%AA_%E6%B5%B7%E8%80%81%E4%BB%99%E8%B2%9D_%E9%9D%92%E6%9F%B3%E7%B8%BD%E6%9C%AC%E5%AE%B6_%E9%9D%92%E8%9B%99%E9%A5%85%E9%A0%AD_%E7%B6%B2%E8%B7%AF%E6%8E%A8%E8%96%A6%E8%97%A5.png" alt="懂吃搭吃 foodyAmigo-美食 旅遊 伴手禮開箱 - 名古屋伴手禮 名古屋限定的客美多小倉紅豆吐司餅乾 蝦仙貝之里 桂新堂 炸海老酥 坂角總本鋪 海老仙貝 青柳總本家 青蛙饅頭 網路推薦藥.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2e937953-5144-8006-96a4-f86a0c07854a"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e9379535144800696a4f86a0c07854a?pvs=21">無標題</a></td><td class="cell-YnrX">酪梨起司口味多力多滋</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e93-854a/Screenshot_2026-01-16_at_1.16.14_am.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e93-854a/Screenshot_2026-01-16_at_1.16.14_am.png" alt="Screenshot 2026-01-16 at 1.16.14 am.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2e937953-5144-80df-b086-d03df3e12be4"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e937953514480dfb086d03df3e12be4?pvs=21">無標題</a></td><td class="cell-YnrX">2026年初限定Horoyoi</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e93-2be4/Screenshot_2026-01-16_at_1.11.20_am.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e93-2be4/Screenshot_2026-01-16_at_1.11.20_am.png" alt="Screenshot 2026-01-16 at 1.11.20 am.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2e937953-5144-80ba-b2fb-c1be648d416b"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e937953514480bab2fbc1be648d416b?pvs=21">無標題</a></td><td class="cell-YnrX">草莓口味 Pocky</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e93-416b/Screenshot_2026-01-16_at_1.17.36_am.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e93-416b/Screenshot_2026-01-16_at_1.17.36_am.png" alt="Screenshot 2026-01-16 at 1.17.36 am.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2e937953-5144-808f-85aa-ece9cf9e73cc"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e9379535144808f85aaece9cf9e73cc?pvs=21">無標題</a></td><td class="cell-YnrX">シュガートーストクリーム Sugar Toast Cream</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e93-73cc/Screenshot_2026-01-16_at_1.19.43_am.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e93-73cc/Screenshot_2026-01-16_at_1.19.43_am.png" alt="Screenshot 2026-01-16 at 1.19.43 am.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2ce37953-5144-809d-91db-d21225af78bd"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/Cosme-2ce379535144809d91dbd21225af78bd?pvs=21"><span class="icon">💄</span>@Cosme</a></td><td class="cell-YnrX"><strong><a href="https://www.cosme.net/brands/656/">エクセル<br/></a></strong><strong><a href="https://www.cosme.net/products/10276759/">エシリアル セラムコンシーラー</a></strong><strong> </strong></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/@Cosme/%E6%88%AA%E5%9C%96_2025-12-19_%E4%B8%8B%E5%8D%882.24.21.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/@Cosme/%E6%88%AA%E5%9C%96_2025-12-19_%E4%B8%8B%E5%8D%882.24.21.png" alt="截圖 2025-12-19 下午2.24.21.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}">遮瑕膏第二名<br/><a href="https://www.cosme.net/categories/item/1013/ranking/">其他排行</a><br/>Loft可能也有</td></tr><tr id="2cd37953-5144-8086-921f-cb434c2eb9f9"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2cd3795351448086921fcb434c2eb9f9?pvs=21">🎁 伴手禮</a></td><td class="cell-YnrX">砂糖樹 炭燒巧克力</td><td class="cell-Waz`"></td><td class="cell-_e:v"><a href="https://shop.grapestone.co.jp/shops?brand_ids=9" class="url-value">https://shop.grapestone.co.jp/shops?brand_ids=9</a></td><td class="cell-Mks}">-大丸東京店　バターステイツ<br/>-シュガーバターの木 そごう横浜店</td></tr><tr id="2bf37953-5144-8076-9e33-de84fa46cdcc"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/Bic-camera-2bf37953514480769e33de84fa46cdcc?pvs=21"><span class="icon">🎧</span>Bic camera</a></td><td class="cell-YnrX">WH-1000XM6 耳機 <mark class="highlight-teal">⭐️⭐️⭐️</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/Bic%20camera/00000014085203_A01.webp"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/Bic%20camera/00000014085203_A01.webp" alt="00000014085203_A01.webp"/></a></span></td><td class="cell-_e:v"><a href="https://www.biccamera.com/bc/item/14085203/" class="url-value">https://www.biccamera.com/bc/item/14085203/</a></td><td class="cell-Mks}"></td></tr><tr id="2c037953-5144-80d7-bdfd-c3113262d6da"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2c037953514480d7bdfdc3113262d6da?pvs=21">無標題</a></td><td class="cell-YnrX"><strong>recolte </strong>調理機</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202c03-d6da/00000013031047_A01.webp"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202c03-d6da/00000013031047_A01.webp" alt="00000013031047_A01.webp"/></a></span></td><td class="cell-_e:v"><a href="https://www.biccamera.com/bc/item/13031047/" class="url-value">https://www.biccamera.com/bc/item/13031047/</a></td><td class="cell-Mks}"></td></tr><tr id="27837953-5144-8040-8c9e-cd0ca26a39f5"><td class="cell-ukh^"><div class="checkbox checkbox-on"></div></td><td class="cell-title"><a href="https://www.notion.so/MUJI-27837953514480408c9ecd0ca26a39f5?pvs=21"><span class="icon">✨</span>MUJI</a></td><td class="cell-YnrX"><a href="https://www.muji.com/jp/ja/store/cmdty/detail/4550344598153">TPU巾着</a></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/MUJI/4550344598153_org.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/MUJI/4550344598153_org.jpeg" alt="4550344598153_org.jpeg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27e37953-5144-80b2-aa6d-ff0d08f109ee"><td class="cell-ukh^"><div class="checkbox checkbox-on"></div></td><td class="cell-title"><a href="https://www.notion.so/27e37953514480b2aa6dff0d08f109ee?pvs=21">無標題</a></td><td class="cell-YnrX">睡眠麻藥 <mark class="highlight-teal">⭐️⭐️⭐️⭐️⭐️</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027e3-09ee/IMG_8564.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027e3-09ee/IMG_8564.jpeg" alt="IMG_8564.jpeg"/></a></span></td><td class="cell-_e:v"><a href="https://www.muji.com/jp/ja/store/cmdty/detail/4550584359439" class="url-value">https://www.muji.com/jp/ja/store/cmdty/detail/4550584359439</a></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-8085-8b16-d1f451af57dd"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27937953514480858b16d1f451af57dd?pvs=21">無標題</a></td><td class="cell-YnrX"><mark class="highlight-teal">精油洗手乳 扁柏薰衣草 ⭐️⭐️</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-57dd/4550584404610_org.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-57dd/4550584404610_org.jpeg" alt="4550584404610_org.jpeg"/></a></span></td><td class="cell-_e:v"><a href="https://www.muji.com/jp/ja/store/cmdty/detail/4550584404610" class="url-value">https://www.muji.com/jp/ja/store/cmdty/detail/4550584404610</a></td><td class="cell-Mks}"></td></tr><tr id="28537953-5144-8073-9574-e9a074b78c50"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/28537953514480739574e9a074b78c50?pvs=21">無標題</a></td><td class="cell-YnrX"><mark class="highlight-teal">精油沐浴乳 檜木+薰衣草</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202853-8c50/4550584404436_org.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202853-8c50/4550584404436_org.jpeg" alt="4550584404436_org.jpeg"/></a></span></td><td class="cell-_e:v"><a href="https://www.muji.com/jp/ja/store/cmdty/detail/4550584404436" class="url-value">https://www.muji.com/jp/ja/store/cmdty/detail/4550584404436</a></td><td class="cell-Mks}"></td></tr><tr id="27c37953-5144-8025-af73-df2a3c8db76f"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27c3795351448025af73df2a3c8db76f?pvs=21">無標題</a></td><td class="cell-YnrX"><mark class="highlight-teal">依蘭及橙香精油護手霜</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-b76f/4550584404689_org.jpg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-b76f/4550584404689_org.jpg" alt="4550584404689_org.jpg"/></a></span></td><td class="cell-_e:v"><a href="https://www.muji.com/jp/ja/store/cmdty/detail/4550584404689" class="url-value">https://www.muji.com/jp/ja/store/cmdty/detail/4550584404689</a></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-80dd-98d5-ec9442344920"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27937953514480dd98d5ec9442344920?pvs=21">無標題</a></td><td class="cell-YnrX">日本國產焙茶拿鐵</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-4920/%E6%88%AA%E5%9C%96_2025-03-05_%E6%99%9A%E4%B8%8A10.28.38.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-4920/%E6%88%AA%E5%9C%96_2025-03-05_%E6%99%9A%E4%B8%8A10.28.38.png" alt="截圖 2025-03-05 晚上10.28.38.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27c37953-5144-80d0-9463-ee37ee90bd2c"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27c37953514480d09463ee37ee90bd2c?pvs=21">無標題</a></td><td class="cell-YnrX">藥用洗面乳</td><td class="cell-Waz`"></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2c137953-5144-80a0-b4b6-d6cb5d0e1936"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2c137953514480a0b4b6d6cb5d0e1936?pvs=21">無標題</a></td><td class="cell-YnrX">腮紅霜</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202c13-1936/IMG_1558.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202c13-1936/IMG_1558.jpeg" alt="IMG_1558.jpeg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2ed37953-5144-80fb-a8dd-f25c7f84522b"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2ed37953514480fba8ddf25c7f84522b?pvs=21">無標題</a></td><td class="cell-YnrX">香氛蠟燭</td><td class="cell-Waz`"></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-80bd-b12c-ce04986d993a"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/Lawson-27937953514480bdb12cce04986d993a?pvs=21"><span class="icon">🏪</span>Lawson</a></td><td class="cell-YnrX">銅鑼燒</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/Lawson/image.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/Lawson/image.png" alt="image.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2de37953-5144-8040-8a36-f5e873c35d79"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2de37953514480408a36f5e873c35d79?pvs=21">無標題</a></td><td class="cell-YnrX">濃厚榛果巧克力冰棒</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202de3-5d79/IMG_3087.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202de3-5d79/IMG_3087.jpeg" alt="IMG_3087.jpeg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2de37953-5144-80bf-9ccc-fe2ebdf0056e"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2de37953514480bf9cccfe2ebdf0056e?pvs=21">無標題</a></td><td class="cell-YnrX">奶油麵包（🉑配烤雞吃）</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202de3-056e/IMG_3088.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202de3-056e/IMG_3088.jpeg" alt="IMG_3088.jpeg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2ba37953-5144-80ad-bd2d-f0c38c7fa4c8"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2ba37953514480adbd2df0c38c7fa4c8?pvs=21">無標題</a></td><td class="cell-YnrX">Freak’s Store 聯名衣</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202ba3-a4c8/%E6%88%AA%E5%9C%96_2025-11-29_16.32.50.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202ba3-a4c8/%E6%88%AA%E5%9C%96_2025-11-29_16.32.50.png" alt="截圖 2025-11-29 16.32.50.png"/></a></span></td><td class="cell-_e:v"><a href="https://www.daytona-park.com/feature/944887#lfLook" class="url-value">https://www.daytona-park.com/feature/944887#lfLook</a></td><td class="cell-Mks}"></td></tr><tr id="2de37953-5144-8066-bc12-f577fc088781"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2de3795351448066bc12f577fc088781?pvs=21">無標題</a></td><td class="cell-YnrX">蜂蜜拿鐵</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202de3-8781/IMG_3086.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202de3-8781/IMG_3086.jpeg" alt="IMG_3086.jpeg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2a637953-5144-80c4-a605-dc03c41cdb24"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2a637953514480c4a605dc03c41cdb24?pvs=21">無標題</a></td><td class="cell-YnrX">冷凍可麗露</td><td class="cell-Waz`"></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-80f6-a82d-d39c5075b8bb"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27937953514480f6a82dd39c5075b8bb?pvs=21">無標題</a></td><td class="cell-YnrX">Premium生乳捲</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-b8bb/image.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-b8bb/image.png" alt="image.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27c37953-5144-80cf-996f-edc22bbb3a8a"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27c37953514480cf996fedc22bbb3a8a?pvs=21">無標題</a></td><td class="cell-YnrX">新圓滾滾炸雞</td><td class="cell-Waz`"></td><td class="cell-_e:v"><a href="https://www.instagram.com/reel/DNGBKqAzO9u/?igsh=MTEwMmtmdTQ1OWcxcw==" class="url-value">https://www.instagram.com/reel/DNGBKqAzO9u/?igsh=MTEwMmtmdTQ1OWcxcw==</a></td><td class="cell-Mks}"></td></tr><tr id="28037953-5144-80b1-8c7b-c6177d671ae9"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/28037953514480b18c7bc6177d671ae9?pvs=21">無標題</a></td><td class="cell-YnrX">透明布丁</td><td class="cell-Waz`"></td><td class="cell-_e:v"><a href="https://youtu.be/4SZ_QrKbytw?si=hqBQEyBqf9s8UHnn&amp;t=828" class="url-value">https://youtu.be/4SZ_QrKbytw?si=hqBQEyBqf9s8UHnn&amp;t=828</a></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-8097-8940-eb71b2bb2246"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/7-11-27937953514480978940eb71b2bb2246?pvs=21"><span class="icon">🏪</span>7-11</a></td><td class="cell-YnrX"><mark class="highlight-teal">萊姆葡萄餅乾 ⭐️⭐️⭐️</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/7-11/IMG_1259.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/7-11/IMG_1259.jpeg" alt="IMG_1259.jpeg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}">超好ㄘ</td></tr><tr id="27c37953-5144-805e-89ad-c7a9fff0b0ab"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27c379535144805e89adc7a9fff0b0ab?pvs=21">無標題</a></td><td class="cell-YnrX"><mark class="highlight-teal">開心果巧克力冰</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-b0ab/Screenshot_2025-09-28_at_16.03.06_2.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-b0ab/Screenshot_2025-09-28_at_16.03.06_2.png" alt="Screenshot 2025-09-28 at 16.03.06 2.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}">很甜（？</td></tr><tr id="2d637953-5144-80e6-993b-fcad78d8c10c"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2d637953514480e6993bfcad78d8c10c?pvs=21">無標題</a></td><td class="cell-YnrX">現泡鮮奶茶</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202d63-c10c/IMG_2629.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202d63-c10c/IMG_2629.jpeg" alt="IMG_2629.jpeg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27c37953-5144-809a-985e-d93857bdbcf1"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27c379535144809a985ed93857bdbcf1?pvs=21">無標題</a></td><td class="cell-YnrX">拔絲地瓜</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-bcf1/Screenshot_2025-09-28_at_16.05.49.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-bcf1/Screenshot_2025-09-28_at_16.05.49.png" alt="Screenshot 2025-09-28 at 16.05.49.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2c837953-5144-803e-adc4-c935f4080c77"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2c8379535144803eadc4c935f4080c77?pvs=21">無標題</a></td><td class="cell-YnrX">吉伊卡哇草莓果昔</td><td class="cell-Waz`"></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-801e-b3e3-d89df3866ba7"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/279379535144801eb3e3d89df3866ba7?pvs=21">無標題</a></td><td class="cell-YnrX">巧克力冰</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-6ba7/image.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-6ba7/image.png" alt="image.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}">覺得小普</td></tr><tr id="27937953-5144-803e-ba0a-c0723bd559bb"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/279379535144803eba0ac0723bd559bb?pvs=21">無標題</a></td><td class="cell-YnrX">費南雪</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-59bb/image.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-59bb/image.png" alt="image.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27c37953-5144-80a7-b8b8-c5b0b7ac74f2"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27c37953514480a7b8b8c5b0b7ac74f2?pvs=21">無標題</a></td><td class="cell-YnrX">拿鐵口味果昔</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-74f2/Screenshot_2025-09-28_at_16.06.26.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-74f2/Screenshot_2025-09-28_at_16.06.26.png" alt="Screenshot 2025-09-28 at 16.06.26.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27c37953-5144-80bf-9cf9-ffce2569eb12"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27c37953514480bf9cf9ffce2569eb12?pvs=21">無標題</a></td><td class="cell-YnrX">宇治抹茶脆筒霜淇淋</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-eb12/Screenshot_2025-09-28_at_16.13.42.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-eb12/Screenshot_2025-09-28_at_16.13.42.png" alt="Screenshot 2025-09-28 at 16.13.42.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27c37953-5144-8020-a249-fb8e325cabc4"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27c3795351448020a249fb8e325cabc4?pvs=21">無標題</a></td><td class="cell-YnrX">綠葡萄大福</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-abc4/IMG_1493.jpg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-abc4/IMG_1493.jpg" alt="IMG_1493.jpg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27c37953-5144-80ad-a90a-cddbed32ee3e"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27c37953514480ada90acddbed32ee3e?pvs=21">無標題</a></td><td class="cell-YnrX">草莓果實感冰（？</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-ee3e/IMG_1492.jpg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-ee3e/IMG_1492.jpg" alt="IMG_1492.jpg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2dd37953-5144-80e3-b890-dee37c52efce"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2dd37953514480e3b890dee37c52efce?pvs=21">無標題</a></td><td class="cell-YnrX">暖爐襪🧦 <mark class="highlight-teal">⭐️⭐️⭐️⭐️⭐️</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202dd3-efce/IMG_3041.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202dd3-efce/IMG_3041.jpeg" alt="IMG_3041.jpeg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27837953-5144-807e-81a1-c2b730be0312"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/278379535144807e81a1c2b730be0312?pvs=21"><span class="icon">💆🏻</span>藥妝</a></td><td class="cell-YnrX">B群 / 維他命C<br/>感冒藥 / EVE<br/>大猩猩按摩</td><td class="cell-Waz`"></td><td class="cell-_e:v"></td><td class="cell-Mks}"><a href="https://goo.gl/maps/zhQd75Fh1H7gtzQr5">大國藥妝 新宿南口店</a><br/>08:05–23:00</td></tr><tr id="2eb37953-5144-8026-a216-d70e810f4ed3"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2eb3795351448026a216d70e810f4ed3?pvs=21">無標題</a></td><td class="cell-YnrX">妮維雅 男士藥用化妝水</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202eb3-4ed3/%E6%87%B6%E6%95%A3%E6%97%A5%E8%A8%98_Lazy_TV_-_%E6%97%A5%E6%9C%AC%E5%B9%B4%E5%BA%A6%E5%BF%85%E8%B2%B7%E5%A5%BD%E7%89%A9%E6%8E%A8%E8%96%A6%EF%BD%9C%E8%97%A5%E5%A6%9D%E3%80%81%E8%B6%85%E5%B8%82%E7%98%8B%E7%8B%82%E5%9B%9E%E8%B3%BC%E6%B8%85%E5%96%AE%E4%B8%80%E6%AC%A1%E7%9C%8B%EF%BD%9C%E6%87%B6%E6%95%A3%E6%97%A5%E8%A8%98_zQGNmwmDWpU_-_1185x667_-_3m42s.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202eb3-4ed3/%E6%87%B6%E6%95%A3%E6%97%A5%E8%A8%98_Lazy_TV_-_%E6%97%A5%E6%9C%AC%E5%B9%B4%E5%BA%A6%E5%BF%85%E8%B2%B7%E5%A5%BD%E7%89%A9%E6%8E%A8%E8%96%A6%EF%BD%9C%E8%97%A5%E5%A6%9D%E3%80%81%E8%B6%85%E5%B8%82%E7%98%8B%E7%8B%82%E5%9B%9E%E8%B3%BC%E6%B8%85%E5%96%AE%E4%B8%80%E6%AC%A1%E7%9C%8B%EF%BD%9C%E6%87%B6%E6%95%A3%E6%97%A5%E8%A8%98_zQGNmwmDWpU_-_1185x667_-_3m42s.png" alt="懶散日記 Lazy TV - 日本年度必買好物推薦🏆｜藥妝、超市瘋狂回購清單一次看｜懶散日記 [zQGNmwmDWpU - 1185x667 - 3m42s].png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2e637953-5144-8054-80c2-da6fc4806b91"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e6379535144805480c2da6fc4806b91?pvs=21">無標題</a></td><td class="cell-YnrX">me+me水光瞳高保濕眼藥水<mark class="highlight-teal">⭐️⭐️⭐️</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e63-6b91/P5038312255268_1_121153552.jpg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e63-6b91/P5038312255268_1_121153552.jpg" alt="P5038312255268_1_121153552.jpg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2e637953-5144-801f-888c-e4c5e8eb86d1"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e6379535144801f888ce4c5e8eb86d1?pvs=21">無標題</a></td><td class="cell-YnrX"><strong>樂敦製藥 V5護眼舒眠強目素</strong><mark class="highlight-teal">⭐️⭐️⭐️</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e63-86d1/202305_20279251-2a5b-4d2e-b18b-b4de4e1a1658.webp"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e63-86d1/202305_20279251-2a5b-4d2e-b18b-b4de4e1a1658.webp" alt="202305_20279251-2a5b-4d2e-b18b-b4de4e1a1658.webp"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2e037953-5144-8002-8e8e-db91d0e981d2"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e037953514480028e8edb91d0e981d2?pvs=21">無標題</a></td><td class="cell-YnrX">Kose coen rich Q10護手霜<mark class="highlight-teal">⭐️⭐️⭐️</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e03-81d2/6893466_01_011_R_m.webp"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e03-81d2/6893466_01_011_R_m.webp" alt="6893466_01_011_R_m.webp"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2e037953-5144-8081-a9ef-fcf6bf98877e"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e03795351448081a9effcf6bf98877e?pvs=21">無標題</a></td><td class="cell-YnrX">rosy rosa 粉撲</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e03-877e/12148015_O_m.webp"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202e03-877e/12148015_O_m.webp" alt="12148015_O_m.webp"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-80c1-8184-e34428386d11"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27937953514480c18184e34428386d11?pvs=21">無標題</a></td><td class="cell-YnrX"><mark class="highlight-teal">GUM 牙間刷</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-6d11/Untitled.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-6d11/Untitled.png" alt="Untitled.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-8094-9521-c343983450a3"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27937953514480949521c343983450a3?pvs=21">無標題</a></td><td class="cell-YnrX"><a href="https://www.kanebo-global.com/global/zh-tw/skincare/detail/comfort_stretchy_wash_ii/">KANEBO<br/>COMFORT STRETCHY WASH II </a></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-50a3/image.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-50a3/image.png" alt="image.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-8090-b5f6-c76fb651246d"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2793795351448090b5f6c76fb651246d?pvs=21">無標題</a></td><td class="cell-YnrX">敏感肌用防曬乳</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-246d/image.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-246d/image.png" alt="image.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-8000-9ac8-db56ba6c4ddf"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27937953514480009ac8db56ba6c4ddf?pvs=21">無標題</a></td><td class="cell-YnrX">yunth 妝前乳 clear</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-4ddf/image.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-4ddf/image.png" alt="image.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27837953-5144-8077-92f0-c224652aa486"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/278379535144807792f0c224652aa486?pvs=21">無標題</a></td><td class="cell-YnrX"><mark class="highlight-teal">瀏海定型噴霧 小罐 ⭐️⭐️⭐️</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202783-a486/IMG_7753.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202783-a486/IMG_7753.jpeg" alt="IMG_7753.jpeg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-804e-92f3-cfc6d2424df4"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/279379535144804e92f3cfc6d2424df4?pvs=21">無標題</a></td><td class="cell-YnrX">蜜粉濕紙巾</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-4df4/image.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-4df4/image.png" alt="image.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-8073-9daa-d31e49c3f6e8"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27937953514480739daad31e49c3f6e8?pvs=21">無標題</a></td><td class="cell-YnrX">第一三共 解熱止痛藥</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-f6e8/Kevin%E8%80%81%E5%B8%AB%E7%9A%84%E6%99%82%E5%B0%9A%E7%BE%8E%E5%A6%9D%E9%A0%BB%E9%81%93_-_%E3%80%90%E6%8A%BD%E7%8D%8E%E3%80%91%E5%85%AC%E9%96%8B%E7%A7%81%E4%BA%BA%E8%A3%9C%E8%B2%A8%E6%B8%85%E5%96%AE%E6%97%A5%E6%9C%AC%E6%9D%BE%E6%9C%AC%E6%B8%85%E5%BF%85%E8%B2%B7%E8%97%A5%E5%A6%9D%EF%BD%9C_%E6%B7%A1%E6%96%91%E7%BE%8E%E7%99%BD%E4%B8%B8%EF%BD%9C%E6%B4%97%E9%A1%8F%E5%87%9D%E8%86%A0%EF%BD%9C%E5%B0%8F%E7%B4%85%E7%AE%A1%E7%89%99%E8%86%8F%EF%BD%9C%E9%AB%98%E9%98%B2%E6%9B%AC%E6%8A%97%E7%9A%BA%E6%97%A5%E9%9C%9C%EF%BD%9C%E6%88%90%E4%BA%BA%E7%97%98%E7%97%98%E8%97%A5%EF%BD%9C%E9%85%B8%E7%97%9B%E8%B2%BC%E5%B8%83_ll_Kevin_(2).png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-f6e8/Kevin%E8%80%81%E5%B8%AB%E7%9A%84%E6%99%82%E5%B0%9A%E7%BE%8E%E5%A6%9D%E9%A0%BB%E9%81%93_-_%E3%80%90%E6%8A%BD%E7%8D%8E%E3%80%91%E5%85%AC%E9%96%8B%E7%A7%81%E4%BA%BA%E8%A3%9C%E8%B2%A8%E6%B8%85%E5%96%AE%E6%97%A5%E6%9C%AC%E6%9D%BE%E6%9C%AC%E6%B8%85%E5%BF%85%E8%B2%B7%E8%97%A5%E5%A6%9D%EF%BD%9C_%E6%B7%A1%E6%96%91%E7%BE%8E%E7%99%BD%E4%B8%B8%EF%BD%9C%E6%B4%97%E9%A1%8F%E5%87%9D%E8%86%A0%EF%BD%9C%E5%B0%8F%E7%B4%85%E7%AE%A1%E7%89%99%E8%86%8F%EF%BD%9C%E9%AB%98%E9%98%B2%E6%9B%AC%E6%8A%97%E7%9A%BA%E6%97%A5%E9%9C%9C%EF%BD%9C%E6%88%90%E4%BA%BA%E7%97%98%E7%97%98%E8%97%A5%EF%BD%9C%E9%85%B8%E7%97%9B%E8%B2%BC%E5%B8%83_ll_Kevin_(2).png" alt="Kevin老師的時尚美妝頻道 - 【抽獎🎁】🔍公開私人補貨清單🇯🇵日本松本清必買藥妝👉｜ 淡斑美白丸｜洗顏凝膠｜小紅管牙膏｜高防曬抗皺日霜｜成人痘痘藥｜酸痛貼布 ll Kevin (2).png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-80f3-82f6-da5bbc35920a"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27937953514480f382f6da5bbc35920a?pvs=21">無標題</a></td><td class="cell-YnrX">塗抹止痛棒</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-920a/Kevin%E8%80%81%E5%B8%AB%E7%9A%84%E6%99%82%E5%B0%9A%E7%BE%8E%E5%A6%9D%E9%A0%BB%E9%81%93_-_%E3%80%90%E6%8A%BD%E7%8D%8E%E3%80%91%E5%85%AC%E9%96%8B%E7%A7%81%E4%BA%BA%E8%A3%9C%E8%B2%A8%E6%B8%85%E5%96%AE%E6%97%A5%E6%9C%AC%E6%9D%BE%E6%9C%AC%E6%B8%85%E5%BF%85%E8%B2%B7%E8%97%A5%E5%A6%9D%EF%BD%9C_%E6%B7%A1%E6%96%91%E7%BE%8E%E7%99%BD%E4%B8%B8%EF%BD%9C%E6%B4%97%E9%A1%8F%E5%87%9D%E8%86%A0%EF%BD%9C%E5%B0%8F%E7%B4%85%E7%AE%A1%E7%89%99%E8%86%8F%EF%BD%9C%E9%AB%98%E9%98%B2%E6%9B%AC%E6%8A%97%E7%9A%BA%E6%97%A5%E9%9C%9C%EF%BD%9C%E6%88%90%E4%BA%BA%E7%97%98%E7%97%98%E8%97%A5%EF%BD%9C%E9%85%B8%E7%97%9B%E8%B2%BC%E5%B8%83_ll_Kevin%E6%83%B3.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-920a/Kevin%E8%80%81%E5%B8%AB%E7%9A%84%E6%99%82%E5%B0%9A%E7%BE%8E%E5%A6%9D%E9%A0%BB%E9%81%93_-_%E3%80%90%E6%8A%BD%E7%8D%8E%E3%80%91%E5%85%AC%E9%96%8B%E7%A7%81%E4%BA%BA%E8%A3%9C%E8%B2%A8%E6%B8%85%E5%96%AE%E6%97%A5%E6%9C%AC%E6%9D%BE%E6%9C%AC%E6%B8%85%E5%BF%85%E8%B2%B7%E8%97%A5%E5%A6%9D%EF%BD%9C_%E6%B7%A1%E6%96%91%E7%BE%8E%E7%99%BD%E4%B8%B8%EF%BD%9C%E6%B4%97%E9%A1%8F%E5%87%9D%E8%86%A0%EF%BD%9C%E5%B0%8F%E7%B4%85%E7%AE%A1%E7%89%99%E8%86%8F%EF%BD%9C%E9%AB%98%E9%98%B2%E6%9B%AC%E6%8A%97%E7%9A%BA%E6%97%A5%E9%9C%9C%EF%BD%9C%E6%88%90%E4%BA%BA%E7%97%98%E7%97%98%E8%97%A5%EF%BD%9C%E9%85%B8%E7%97%9B%E8%B2%BC%E5%B8%83_ll_Kevin%E6%83%B3.png" alt="Kevin老師的時尚美妝頻道 - 【抽獎🎁】🔍公開私人補貨清單🇯🇵日本松本清必買藥妝👉｜ 淡斑美白丸｜洗顏凝膠｜小紅管牙膏｜高防曬抗皺日霜｜成人痘痘藥｜酸痛貼布 ll Kevin想.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-80d3-ab00-d04295063d7c"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27937953514480d3ab00d04295063d7c?pvs=21">無標題</a></td><td class="cell-YnrX"><mark class="highlight-teal">美白牙膏排行清單</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-3d7c/messageImage_1730707432044.jpg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-3d7c/messageImage_1730707432044.jpg" alt="messageImage_1730707432044.jpg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-806c-88e8-f95e0e41422f"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/279379535144806c88e8f95e0e41422f?pvs=21">無標題</a></td><td class="cell-YnrX">高露潔 美白牙膏</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-422f/image.jpeg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-422f/image.jpeg" alt="image.jpeg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-80a5-b71a-c393611a6abb"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27937953514480a5b71ac393611a6abb?pvs=21">無標題</a></td><td class="cell-YnrX"><mark class="highlight-teal"><strong>clean dental （クリーンデンタル）牙膏</strong></mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-6abb/325173023_711807127055159_8540899525465332883_n.jpg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-6abb/325173023_711807127055159_8540899525465332883_n.jpg" alt="325173023_711807127055159_8540899525465332883_n.jpg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-80c3-acc5-ccbe3aa950d7"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27937953514480c3acc5ccbe3aa950d7?pvs=21">無標題</a></td><td class="cell-YnrX">Minon化妝水</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-50d7/Kevin%E8%80%81%E5%B8%AB%E7%9A%84%E6%99%82%E5%B0%9A%E7%BE%8E%E5%A6%9D%E9%A0%BB%E9%81%93_-_%E3%80%90%E6%8A%BD%E7%8D%8E%E3%80%91%E5%85%AC%E9%96%8B%E7%A7%81%E4%BA%BA%E8%A3%9C%E8%B2%A8%E6%B8%85%E5%96%AE%E6%97%A5%E6%9C%AC%E6%9D%BE%E6%9C%AC%E6%B8%85%E5%BF%85%E8%B2%B7%E8%97%A5%E5%A6%9D%EF%BD%9C_%E6%B7%A1%E6%96%91%E7%BE%8E%E7%99%BD%E4%B8%B8%EF%BD%9C%E6%B4%97%E9%A1%8F%E5%87%9D%E8%86%A0%EF%BD%9C%E5%B0%8F%E7%B4%85%E7%AE%A1%E7%89%99%E8%86%8F%EF%BD%9C%E9%AB%98%E9%98%B2%E6%9B%AC%E6%8A%97%E7%9A%BA%E6%97%A5%E9%9C%9C%EF%BD%9C%E6%88%90%E4%BA%BA%E7%97%98%E7%97%98%E8%97%A5%EF%BD%9C%E9%85%B8%E7%97%9B%E8%B2%BC%E5%B8%83_ll_Kevin_(5).png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-50d7/Kevin%E8%80%81%E5%B8%AB%E7%9A%84%E6%99%82%E5%B0%9A%E7%BE%8E%E5%A6%9D%E9%A0%BB%E9%81%93_-_%E3%80%90%E6%8A%BD%E7%8D%8E%E3%80%91%E5%85%AC%E9%96%8B%E7%A7%81%E4%BA%BA%E8%A3%9C%E8%B2%A8%E6%B8%85%E5%96%AE%E6%97%A5%E6%9C%AC%E6%9D%BE%E6%9C%AC%E6%B8%85%E5%BF%85%E8%B2%B7%E8%97%A5%E5%A6%9D%EF%BD%9C_%E6%B7%A1%E6%96%91%E7%BE%8E%E7%99%BD%E4%B8%B8%EF%BD%9C%E6%B4%97%E9%A1%8F%E5%87%9D%E8%86%A0%EF%BD%9C%E5%B0%8F%E7%B4%85%E7%AE%A1%E7%89%99%E8%86%8F%EF%BD%9C%E9%AB%98%E9%98%B2%E6%9B%AC%E6%8A%97%E7%9A%BA%E6%97%A5%E9%9C%9C%EF%BD%9C%E6%88%90%E4%BA%BA%E7%97%98%E7%97%98%E8%97%A5%EF%BD%9C%E9%85%B8%E7%97%9B%E8%B2%BC%E5%B8%83_ll_Kevin_(5).png" alt="Kevin老師的時尚美妝頻道 - 【抽獎🎁】🔍公開私人補貨清單🇯🇵日本松本清必買藥妝👉｜ 淡斑美白丸｜洗顏凝膠｜小紅管牙膏｜高防曬抗皺日霜｜成人痘痘藥｜酸痛貼布 ll Kevin (5).png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-8091-af72-f98302567d44"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2793795351448091af72f98302567d44?pvs=21">無標題</a></td><td class="cell-YnrX">Minon保濕UV日霜</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-7d44/Kevin%E8%80%81%E5%B8%AB%E7%9A%84%E6%99%82%E5%B0%9A%E7%BE%8E%E5%A6%9D%E9%A0%BB%E9%81%93_-_%E3%80%90%E6%8A%BD%E7%8D%8E%E3%80%91%E5%85%AC%E9%96%8B%E7%A7%81%E4%BA%BA%E8%A3%9C%E8%B2%A8%E6%B8%85%E5%96%AE%E6%97%A5%E6%9C%AC%E6%9D%BE%E6%9C%AC%E6%B8%85%E5%BF%85%E8%B2%B7%E8%97%A5%E5%A6%9D%EF%BD%9C_%E6%B7%A1%E6%96%91%E7%BE%8E%E7%99%BD%E4%B8%B8%EF%BD%9C%E6%B4%97%E9%A1%8F%E5%87%9D%E8%86%A0%EF%BD%9C%E5%B0%8F%E7%B4%85%E7%AE%A1%E7%89%99%E8%86%8F%EF%BD%9C%E9%AB%98%E9%98%B2%E6%9B%AC%E6%8A%97%E7%9A%BA%E6%97%A5%E9%9C%9C%EF%BD%9C%E6%88%90%E4%BA%BA%E7%97%98%E7%97%98%E8%97%A5%EF%BD%9C%E9%85%B8%E7%97%9B%E8%B2%BC%E5%B8%83_ll_Kevin_(4).png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-7d44/Kevin%E8%80%81%E5%B8%AB%E7%9A%84%E6%99%82%E5%B0%9A%E7%BE%8E%E5%A6%9D%E9%A0%BB%E9%81%93_-_%E3%80%90%E6%8A%BD%E7%8D%8E%E3%80%91%E5%85%AC%E9%96%8B%E7%A7%81%E4%BA%BA%E8%A3%9C%E8%B2%A8%E6%B8%85%E5%96%AE%E6%97%A5%E6%9C%AC%E6%9D%BE%E6%9C%AC%E6%B8%85%E5%BF%85%E8%B2%B7%E8%97%A5%E5%A6%9D%EF%BD%9C_%E6%B7%A1%E6%96%91%E7%BE%8E%E7%99%BD%E4%B8%B8%EF%BD%9C%E6%B4%97%E9%A1%8F%E5%87%9D%E8%86%A0%EF%BD%9C%E5%B0%8F%E7%B4%85%E7%AE%A1%E7%89%99%E8%86%8F%EF%BD%9C%E9%AB%98%E9%98%B2%E6%9B%AC%E6%8A%97%E7%9A%BA%E6%97%A5%E9%9C%9C%EF%BD%9C%E6%88%90%E4%BA%BA%E7%97%98%E7%97%98%E8%97%A5%EF%BD%9C%E9%85%B8%E7%97%9B%E8%B2%BC%E5%B8%83_ll_Kevin_(4).png" alt="Kevin老師的時尚美妝頻道 - 【抽獎🎁】🔍公開私人補貨清單🇯🇵日本松本清必買藥妝👉｜ 淡斑美白丸｜洗顏凝膠｜小紅管牙膏｜高防曬抗皺日霜｜成人痘痘藥｜酸痛貼布 ll Kevin (4).png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="2e237953-5144-80b6-9f94-e71da6b246c1"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2e237953514480b69f94e71da6b246c1?pvs=21">無標題</a></td><td class="cell-YnrX">DHC GABA</td><td class="cell-Waz`"></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-805b-be0d-efae945b88cf"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/279379535144805bbe0defae945b88cf?pvs=21">無標題</a></td><td class="cell-YnrX">DHC金盞花葉黃素-眼睛</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-88cf/image.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-88cf/image.png" alt="image.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-8050-93e9-fc4b2d9e84f4"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/279379535144805093e9fc4b2d9e84f4?pvs=21">無標題</a></td><td class="cell-YnrX">DHC綠藻-幫助排便</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-84f4/image.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-84f4/image.png" alt="image.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-80cb-adc9-e629efa83719"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27937953514480cbadc9e629efa83719?pvs=21">無標題</a></td><td class="cell-YnrX"><a href="https://www.threads.net/@yienlee141913/post/DHpswrMSa_F?xmt=AQGzTEXeejk0y-XVprRPuvkR6YiTaZejUMKLtTbw5aCTGO8">DHC メリロート消腿部疲勞</a></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-3719/486210684_17903536176104211_6606619817215056524_n.jpg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-3719/486210684_17903536176104211_6606619817215056524_n.jpg" alt="486210684_17903536176104211_6606619817215056524_n.jpg"/></a></span></td><td class="cell-_e:v"><a href="https://www.threads.net/@yienlee141913/post/DHpswrMSa_F?xmt=AQGzTEXeejk0y-XVprRPuvkR6YiTaZejUMKLtTbw5aCTGO8" class="url-value">https://www.threads.net/@yienlee141913/post/DHpswrMSa_F?xmt=AQGzTEXeejk0y-XVprRPuvkR6YiTaZejUMKLtTbw5aCTGO8</a></td><td class="cell-Mks}"></td></tr><tr id="27937953-5144-80e3-b4d2-e203195899d5"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27937953514480e3b4d2e203195899d5?pvs=21">無標題</a></td><td class="cell-YnrX"><a href="https://www.cosme.net/products/10268440/">薬用制汗フレッシュショット</a><br/>頭皮止汗劑</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-99d5/skuimg_1027508_xl.jpg"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202793-99d5/skuimg_1027508_xl.jpg" alt="skuimg_1027508_xl.jpg"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr><tr id="27c37953-5144-806f-ba44-f6458ffa9bbc"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/27c379535144806fba44f6458ffa9bbc?pvs=21">無標題</a></td><td class="cell-YnrX">Biore呼吸感防曬乳</td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-9bbc/%E6%88%AA%E5%9C%96_2025-09-28_15.24.55.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%2027c3-9bbc/%E6%88%AA%E5%9C%96_2025-09-28_15.24.55.png" alt="截圖 2025-09-28 15.24.55.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}">松本清和Cocokarafine才買得到</td></tr><tr id="29937953-5144-803a-aa9c-e846a69d7148"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/299379535144803aaa9ce846a69d7148?pvs=21">無標題</a></td><td class="cell-YnrX">Biore洗手乳 <mark class="highlight-teal">⭐️⭐️⭐️</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202993-7148/IMG_9754.webp"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202993-7148/IMG_9754.webp" alt="IMG_9754.WEBP"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}">Aesop平替版（？</td></tr><tr id="2ec37953-5144-80c1-8234-da8662d99138"><td class="cell-ukh^"><div class="checkbox checkbox-off"></div></td><td class="cell-title"><a href="https://www.notion.so/2ec37953514480c18234da8662d99138?pvs=21">無標題</a></td><td class="cell-YnrX"><mark class="highlight-teal">乾燥さん乳霜</mark></td><td class="cell-Waz`"><span style="margin-inline-end:6px"><a href="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202ec3-9138/Screenshot_2026-01-18_at_4.24.19_pm.png"><img style="width:20px;max-height:24px" src="%E6%96%B0%E6%B8%85%E5%96%AE/%E7%84%A1%E6%A8%99%E9%A1%8C%202ec3-9138/Screenshot_2026-01-18_at_4.24.19_pm.png" alt="Screenshot 2026-01-18 at 4.24.19 pm.png"/></a></span></td><td class="cell-_e:v"></td><td class="cell-Mks}"></td></tr></tbody></table><br/><br/></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
